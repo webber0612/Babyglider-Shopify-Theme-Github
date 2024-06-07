@@ -445,18 +445,17 @@
                     ➕
                   </a>
                 </td>
-                <td class="collection-title" colspan="6"> <div class="row">
+                <td class="collection-title" colspan="6"> 
                     {{ collection }} 
                    {%- assign product = line_item.product -%}
                    {%- assign collection_handle = product.collections[0].handle -%}
                    {%- assign shopify_collection = collections[collection_handle] -%}
                    {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                     <span class="badge bg-secondary">
+                     <span class="badge rounded-pill bg-secondary">
                        ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
-
-              </div></td>
+                  </td>
                       </tr>
               <tbody id="collapse{{ forloop.index }}" class="collapse">
             {% endif %}
