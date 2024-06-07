@@ -445,18 +445,22 @@
                     ➕
                   </a>
                 </td>
-                <td class="collection-title" colspan="5">
-                  {{ collection }}
-                  {%- assign product = line_item.product -%}
-                  {%- assign collection_handle = product.collections.first.handle -%}
-                  {%- assign shopify_collection = collections[collection_handle] -%}
-                  {% if shopify_collection and shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                    <span class="badge bg-secondary">
-                      ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
-                    </span>
-                  {% endif %}
-                </td>
-              </tr>
+                <td class="collection-title" colspan="6"> <div class="row">
+                  <div class="col-8"> 
+                    {{ collection }} 
+                  </div>
+                  <div class="col-4 text-end">  
+                   {%- assign product = line_item.product -%}
+                   {%- assign collection_handle = product.collections[0].handle -%}
+                   {%- assign shopify_collection = collections[collection_handle] -%}
+                   {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                     <span class="badge text-bg-secondary">
+                       ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                     </span>
+                   {% endif %}
+                 </div>
+              </div></td>
+                      </tr>
               <tbody id="collapse{{ forloop.index }}" class="collapse">
             {% endif %}
             <tr>
