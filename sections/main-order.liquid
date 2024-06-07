@@ -452,7 +452,7 @@
                    {%- assign collection_handle = product.collections[0].handle -%}
                    {%- assign shopify_collection = collections[collection_handle] -%}
                    {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                     <span class="badge text-bg-secondary">
+                     <span class="badge bg-secondary">
                        ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
