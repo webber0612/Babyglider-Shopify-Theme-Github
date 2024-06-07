@@ -486,68 +486,9 @@
         {% if current_collection != '' %}
           </tbody>
         {% endif %}
-      </tbody>
-
-      <tbody>
-        {% assign pre_order_items = sorted_items
-          | where: 'product.collections.first.title', 'contains', '[Pre-Order]'
-        %}
 
         {% assign current_collection = '' %}
-        {% for line_item in pre_order_items %}
-          {% assign collection = line_item.product.collections[0].title %}
-          {% if collection != current_collection %}
-            {% if current_collection != '' %}
-              </tbody>
-            {% endif %}
-
-            {% assign current_collection = collection %}
-
-            <tr>
-              <td class="text-center">
-                <a
-                  class="btn btn-primary toggle-button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse{{ forloop.index }}"
-                  href="#collapse{{ forloop.index }}"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapse{{ forloop.index }}"
-                >
-                  ➕
-                </a>
-              </td>
-              <td class="collection-title p-0 align-middle fs-3" colspan="6"> 
-                <div class="text-start">
-                  <h2>Stock On Hand</h2>
-                 </div>
-                </td>
-          </tr>
-            <tbody id="collapse{{ forloop.index }}" class="collapse">
-          {% endif %}
-
-          <tr>
-            <td></td>
-            <td>
-              <img
-                src="{{ line_item.image | image_url: width: 100, height: 100 }}"
-                alt="{{ line_item.title }}"
-                width="100"
-                height="100"
-                class="clickable-img"
-                data-bs-toggle="modal"
-                data-bs-target="#imageModal"
-                data-img-src="{{ line_item.image | image_url }}"
-                data-img-alt="{{ line_item.title }}"
-              >
-            </td>
-            <td>{{ line_item.product.title }}</td>
-            <td>{{ line_item.price | money }}</td>
-            <td>{{ line_item.quantity }}</td>
-            <td>{{ line_item.line_price | money }}</td>
-          </tr>
-        {% endfor %}
-
+        
         {% if current_collection != '' %}
           </tbody>
         {% endif %}
@@ -558,7 +499,7 @@
             {%- if displayed_stock_on_hand == false -%}
               <tr>
                 <td></td>
-                <td class="collection-title" colspan="5">Stock On Hand</td>
+                <td class="collection-title p-0 align-middle fs-3" colspan="5">Stock On Hand</td>
               </tr>
               {%- assign displayed_stock_on_hand = true -%}
             {%- endif -%}
