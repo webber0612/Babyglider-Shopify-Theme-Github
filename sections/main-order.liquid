@@ -446,10 +446,8 @@
                   </a>
                 </td>
                 <td class="collection-title w-100 text-start" colspan="6"> <div class="row">
-                  <div class="col-8"> 
                     {{ collection }} 
-                  </div>
-                  <div class="col-4 text-start">  
+
                    {%- assign product = line_item.product -%}
                    {%- assign collection_handle = product.collections[0].handle -%}
                    {%- assign shopify_collection = collections[collection_handle] -%}
@@ -458,7 +456,7 @@
                        ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
-                 </div>
+
               </div></td>
                       </tr>
               <tbody id="collapse{{ forloop.index }}" class="collapse">
