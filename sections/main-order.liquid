@@ -707,8 +707,17 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-          {{ 'product-photo.jpg' | image_tag: alt: 'Product Photo', width: 500 }}
-        </div>
+          <img
+          src="{{ line_item.image | image_url: width: 100, height: 100 }}"
+          alt="{{ line_item.title }}"
+          width="100"
+          height="100"
+          class="img-fluid clickable-img"
+          data-bs-toggle="modal"
+          data-bs-target="#imageModal"
+          data-img-src="{{ line_item.image | image_url }}"
+          data-img-alt="{{ line_item.title }}"
+        >        </div>
       </div>
     </div>
   </div>
