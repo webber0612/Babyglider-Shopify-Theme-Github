@@ -226,93 +226,6 @@
        background: white;
        }
 
-       /* 摺疊表格 */
-       .order-summary-table {
-       table-layout: fixed;
-       width: 100%;
-       }
-
-       .order-summary-table th,
-       .order-summary-table td {
-
-       overflow: hidden;
-       text-overflow: ellipsis;
-       vertical-align: middle !important; /* 垂直置中 */
-       border-left: none;
-       border-right: none;
-
-       }
-
-       /* 移除 tbody 內 "非" collection title 的欄位 padding */
-       .order-summary-table tbody > tr > td:not(.collection-title) {
-       padding: 0 !important;
-       }
-
-       /* 調整特定欄位寬度及文字對齊 */
-       .order-summary-table th:nth-child(2),
-       .order-summary-table th:nth-child(4),
-       .order-summary-table th:nth-child(5),
-       .order-summary-table th:nth-child(6) {
-       width: 80px;
-       text-align: center !important;
-       }
-       /* 調整特定欄位寬度及文字對齊 */
-       .order-summary-table td:nth-child(5) {
-       text-align: center ;
-       }
-       /* 調整特定欄位寬度及文字對齊 */
-       .order-summary-table td:nth-child(4) {
-       text-align: right ;
-       }
-       /* 調整特定欄位寬度及文字對齊 */
-       .order-summary-table td:nth-child(6) {
-       text-align: right ;
-
-       }
-       .order-summary-table th:nth-child(3) {
-       width: calc(100% - 320px);
-       padding-left: 20px;
-       }
-
-       /* 表格標題欄高度及樣式 */
-       .order-summary-table th {
-       height: 4rem;
-       padding-right: 0 !important;
-       }
-
-       /* 摺疊欄高度及文字樣式 */
-       .order-summary-table .collection-title {
-       text-align: left !important;
-       font-size: 24px;
-       padding-left: 20px;
-       padding-bottom:2rem !important;
-       padding-top:2rem !important;
-
-       }
-
-       /* 摺疊內容樣式 */
-       .collapse td {
-       max-width: 200px;
-       overflow: auto;
-       }
-
-       /* 容器樣式 */
-       /* .container {
-       margin: 0;
-       padding: 0;
-       max-width: none;
-       width: 100%;
-       }
-  */
-       /* 摺疊按鈕樣式 */
-       .toggle-button {
-       padding-top: 2rem !important;
-       padding-bottom: 2rem !important;
-       padding-left: 0 !important;
-       padding-right: 0 !important;
-       text-decoration: none !important; /* 移除底線 */
-       }
-
        /* 移除 btn hover 和 active 樣式 */
        .btn:hover,
        .btn:active {
@@ -332,32 +245,9 @@
        }
 
        .order-summary-table img:hover {
-       opacity: 0.7; /* 變淡 */
+       opacity: 0.5; /* 變淡 */
        }
 
-       /* 放大鏡圖示 */
-       .order-summary-table img:hover::after {
-       content: '';
-       background-image: url('https://cdn.shopify.com/s/files/1/0871/8991/3879/files/magnifying-glass.png'); /* 放大鏡圖示 */
-       background-size: cover;
-       background-repeat: no-repeat;
-       background-position: center;
-       position: absolute;
-       top: 50%;
-       left: 50%;
-       transform: translate(-50%, -50%);
-       width: 30px; /* 圖示大小 */
-       height: 30px;
-       }
-
-       /* 自訂 Badge 樣式 */
-       /* .badge {
-       background-color:lightblue !important; /* 淡粉色 */
-       color: #333; /* 深灰色 */
-       border-radius: 10px; /* 更大的圓角 */
-       padding: 0.5rem 2rem; /* 調整內邊距 */
-       font-size:2rem;
-       } */
 {%- endstyle -%}
 
 <script>
