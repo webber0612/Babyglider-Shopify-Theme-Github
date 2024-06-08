@@ -248,6 +248,12 @@
        opacity: 0.5; /* 變淡 */
        }
 
+       .order-summary-table, /* 针对表格 */
+.order-summary-table th, /* 针对表格的表头 */
+.order-summary-table td { /* 针对表格的单元格 */
+  padding: 0; 
+}
+
 {%- endstyle -%}
 
 <script>
@@ -412,7 +418,7 @@
   {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
   {% assign current_collection = null %}
     <h2>{{ order.name }} Order List</h2>
-    <table class="table table-responsive" style="padding: 0%;">
+    <table class="order-summary-table table-responsive" style="padding: 0%;">
       <thead>
         <tr class="test-center align-middle">
           <th style="width: 40px;"></th>
