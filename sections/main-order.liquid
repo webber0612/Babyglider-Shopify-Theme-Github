@@ -311,42 +311,43 @@
       {% assign order_progress = 100 %}
       {% endcase %}
 
-      document.addEventListener('DOMContentLoaded', function () {
-    const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+      document.addEventListener('DOMContentLoaded', function () {
+    const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
 
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const targetId = button.getAttribute('data-bs-target');
-            const targetTbody = document.querySelector(targetId);
-            const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-bs-target');
+            const targetTbody = document.querySelector(targetId);
+            const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
 
-            if (targetTbody) {
-                targetTbody.classList.toggle('show');
+            if (targetTbody) {
+                targetTbody.classList.toggle('show');
 
-                // 检查 targetTbody 是否完成折叠动画
-                targetTbody.addEventListener('transitionend', function() {
-                    if (targetTbody.classList.contains('show')) {
-                        collectionTitle.removeAttribute('colspan');
-                    } else {
-                        collectionTitle.setAttribute('colspan', '5'); // 在折叠完成后设置 colspan
-                    }
-                }, { once: true }); // 只监听一次 transitionend 事件，避免多次执行
-            } else {
-                console.error(`Element with ID ${targetId} not found.`);
-            }
-        });
-    });
-    });
-        var imageModal = document.getElementById('imageModal');
-        imageModal.addEventListener('show.bs.modal', function (event) {
-          var button = event.relatedTarget;
-          var imgSrc = button.getAttribute('data-img-src');
-          var imgAlt = button.getAttribute('data-img-alt');
+                // 检查 targetTbody 是否完成折叠动画
+                targetTbody.addEventListener('transitionend', function() {
+                    if (targetTbody.classList.contains('show')) {
+                        collectionTitle.removeAttribute('colspan');
+                    } else {
+                        collectionTitle.setAttribute('colspan', '5'); // 在折叠完成后设置 colspan
+                    }
+                }, { once: true }); // 只监听一次 transitionend 事件，避免多次执行
+            } else {
+                console.error(`Element with ID ${targetId} not found.`);
+            }
+        });
+    });
+        var imageModal = document.getElementById('imageModal');
+        imageModal.addEventListener('show.bs.modal', function (event) {
+          var button = event.relatedTarget;
+          var imgSrc = button.getAttribute('data-img-src');
+          var imgAlt = button.getAttribute('data-img-alt');
 
-          var modalImg = imageModal.querySelector('.modal-body img');
-          modalImg.src = imgSrc;
-          modalImg.alt = imgAlt;
-        });
+          var modalImg = imageModal.querySelector('.modal-body img');
+          modalImg.src = imgSrc;
+          modalImg.alt = imgAlt;
+        });
+
+      });
 </script>
 
 <div class="customer order section-{{ section.id }}-padding">
