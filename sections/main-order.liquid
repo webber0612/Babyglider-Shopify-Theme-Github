@@ -287,6 +287,60 @@
 }
 
 
+/* 小屏幕样式 */
+@media (max-width: 749px) {
+  .order-summary-table {
+    display: block; /* 表格变为块级元素 */
+  }
+
+  .order-summary-table thead,
+  .order-summary-table td:first-child {
+    display: none; /* 隐藏表头和第一列（折叠按钮） */
+  }
+
+  .order-summary-table tr {
+    display: flex; /* 每行变为 flex 容器 */
+    flex-wrap: wrap; /* 允许换行 */
+    margin-bottom: 1rem; /* 行间距 */
+  }
+
+  .order-summary-table td {
+    width: 100%; /* 每列占据整行宽度 */
+    margin-bottom: 0.5rem; /* 单元格间距 */
+    text-align: left; /* 文本左对齐 */
+  }
+
+  /* 图片列 */
+  .order-summary-table td:nth-child(2) {
+    width: 50%;
+  }
+
+  /* 产品标题列 */
+  .order-summary-table td:nth-child(3) {
+    width: 50%;
+  }
+
+  /* 价格、数量、总价合并为一行 */
+  .order-summary-table td:nth-child(4),
+  .order-summary-table td:nth-child(5),
+  .order-summary-table td:nth-child(6) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .order-summary-table td:nth-child(4)::before {
+    content: "Price x ";
+  }
+
+  .order-summary-table td:nth-child(5)::after {
+    content: " = ";
+  }
+
+  .order-summary-table td:nth-child(6)::before {
+    content: "Total: ";
+  }
+}
 
 
 
