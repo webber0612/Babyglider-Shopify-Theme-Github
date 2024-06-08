@@ -248,7 +248,9 @@
        .order-summary-table img:hover {
        opacity: 0.5; /* 變淡 */
        }
-
+.MainContent {
+  max-width:100%;
+}
 {%- endstyle -%}
 
 <script>
@@ -310,7 +312,7 @@
       });
 </script>
 
-<div class="customer order section-{{ section.id }}-padding" style="max-width: 100%;">
+<div class="customer order section-{{ section.id }}-padding">
   <svg style="display:none">
     <symbol id="icon-discount" viewBox="0 0 12 12">
       <path fill-rule="evenodd" clip-rule="evenodd"
