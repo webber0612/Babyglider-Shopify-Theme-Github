@@ -291,6 +291,10 @@
 @media (max-width: 749px) {
   /* ...其他样式... */
 
+  .order-summary-table thead {
+    display: none; /* 隐藏表头 */
+  }
+
   .order-summary-table tr:first-child { /* 只针对第一行 */
     display: flex;
     flex-direction: row;
@@ -308,6 +312,11 @@
   /* 第一个单元格宽度固定为 40px */
   .order-summary-table td:first-child {
     width: 40px; /* 或者您想要的宽度 */
+  }
+
+  /* 第二个单元格宽度固定为 100px */
+  .order-summary-table td:nth-child(2) {
+    width: 100px; /* 或者您想要的宽度 */
   }
 }
 
