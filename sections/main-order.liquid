@@ -289,53 +289,26 @@
 
 /* 小屏幕样式 */
 @media (max-width: 749px) {
-  .order-summary-table {
-    display: block;
-  }
+  /* ...其他样式... */
 
-  .order-summary-table thead {
-    display: none;
-  }
-  
-  .order-summary-table td:first-child,
-  .order-summary-table tr {
+  .order-summary-table tr:first-child { /* 只针对第一行 */
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    flex-wrap: nowrap; /* 不允许换行 */
     margin-bottom: 1rem;
   }
 
-  .order-summary-table td:nth-child(2),
-  .order-summary-table td:nth-child(3) { 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-    margin-bottom: 1rem;
+  /* 所有 td 元素默认宽度为 auto */
+  .order-summary-table td {
+    width: auto;
+    margin-bottom: 0.5rem;
+    text-align: left;
   }
 
-
-  /* 价格、数量、总价合并为一行 */
-  .order-summary-table td:nth-child(4),
-  .order-summary-table td:nth-child(5),
-  .order-summary-table td:nth-child(6) {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    margin-bottom: 1rem;
+  /* 第一个单元格宽度固定为 40px */
+  .order-summary-table td:first-child {
+    width: 40px; /* 或者您想要的宽度 */
   }
-
-  /* .order-summary-table td:nth-child(4)::before {
-    content: "Price x ";
-  }
-
-  .order-summary-table td:nth-child(5)::after {
-    content: " = ";
-  }
-
-  .order-summary-table td:nth-child(6)::before {
-    content: "Total: ";
-  }  */
-
 }
 
 
