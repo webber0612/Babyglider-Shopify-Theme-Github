@@ -294,32 +294,35 @@
   border-bottom: 1px solid #dee2e6; /* 添加底部边框 */
 }
 
-.order-summary-table tbody tr:last-child td { /* 移除最后一行底部的边框 */
-  border-bottom: none;
-}
+/* 小屏幕样式 */
+@media (max-width: 749px) {
+  .order-summary-table {
+    display: block;
+  }
 
   .order-summary-table thead,
   .order-summary-table td:first-child {
-    display: none; /* 隐藏表头和第一列（折叠按钮） */
+    display: none;
   }
 
   .order-summary-table tr {
-    display: flex; /* 每行变为 flex 容器 */
-    flex-wrap: wrap; /* 允许换行 */
-    margin-bottom: 1rem; /* 行间距 */
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
 
   .order-summary-table td {
-    width: 100%; /* 每列占据整行宽度 */
-    margin-bottom: 0.5rem; /* 单元格间距 */
-    text-align: left; /* 文本左对齐 */
+    width: 100%;
+    margin-bottom: 0.5rem;
+    text-align: left;
   }
 
-  .order-summary-table td:nth-child(2), /* 图片列 */
-  .order-summary-table td:nth-child(3) { /* 产品标题列 */
-    width: 50%; /* 各占一半宽度 */
-    display: inline-flex; /* 使用 inline-flex 排列 */
-    align-items: center; /* 垂直居中 */
+  /* 图片和产品标题列合并 */
+  .order-summary-table td:nth-child(2),
+  .order-summary-table td:nth-child(3) {
+    width: 50%;
+    display: inline-flex;
+    align-items: center;
   }
 
   /* 价格、数量、总价合并为一行 */
