@@ -301,6 +301,12 @@
     padding:0 !important;
   }
 
+    /* 第二个单元格宽度固定为 100px */
+    .order-summary-table td:nth-child(2) {
+    width: 80px; /* 或者您想要的宽度 */
+    text-align:center;
+  }
+
   .order-summary-table tr:first-child { /* 只针对第一行 */
     display: flex;
     flex-direction: row;
@@ -322,12 +328,7 @@
 
   }
 
-  /* 第二个单元格宽度固定为 100px */
-  .order-summary-table td:nth-child(2) {
-    width: 100%; /* 或者您想要的宽度 */
-    text-align:left;
 
-  }
 }
 
 
