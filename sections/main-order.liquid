@@ -412,7 +412,7 @@
   {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
   {% assign current_collection = null %}
     <h2>{{ order.name }} Order List</h2>
-    <table class="table table-responsive">
+    <table class="table table-responsive" style="padding: 0%;">
       <thead>
         <tr class="test-center align-middle">
           <th style="width: 40px;"></th>
