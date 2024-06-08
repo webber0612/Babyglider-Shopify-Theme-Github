@@ -288,6 +288,35 @@
 
 
 
+/* 定義展開和收合動畫 */
+@keyframes expand {
+    from {
+        max-height: 0;
+    }
+    to {
+        max-height: 500px; /* 可以根據需要調整 */
+    }
+}
+
+@keyframes collapse {
+    from {
+        max-height: 500px; /* 必須與展開動畫中的值匹配 */
+    }
+    to {
+        max-height: 0;
+    }
+}
+
+/* 為目標元素應用動畫 */
+.expand {
+    overflow: hidden;
+    animation: expand 0.5s ease-out forwards;
+}
+
+.collapse {
+    overflow: hidden;
+    animation: collapse 0.5s ease-out forwards;
+}
 
 
 {%- endstyle -%}
@@ -333,9 +362,13 @@
             // 檢查當前狀態，然後切換 class
             if (targetTbody.classList.contains('show')) {
                 targetTbody.classList.remove('show');
+                targetTbody.classList.remove('expand');
+                targetTbody.classList.add('collapse');
                 collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
             } else {
+                targetTbody.classList.remove('collapse');
                 targetTbody.classList.add('show');
+                targetTbody.classList.add('expand');
                 collectionTitle.removeAttribute('colspan');
             }
         });
@@ -344,7 +377,7 @@
     // 處理過渡完成事件
     const targetTbodies = document.querySelectorAll('[id^="targetTbody"]');
     targetTbodies.forEach(targetTbody => {
-        targetTbody.addEventListener('transitionend', function() {
+        targetTbody.addEventListener('animationend', function() {
             const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
             const collectionTitle = button.closest('tr').querySelector('.collection-title');
             if (targetTbody.classList.contains('show')) {
