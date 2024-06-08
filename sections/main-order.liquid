@@ -248,11 +248,17 @@
        opacity: 0.5; /* 變淡 */
        }
 
-/* 在您的 order-list.css 文件中 */
-.order-summary-table {
-  padding: 0;
-  /* ...其他订单摘要表格的样式 */
+       @media screen and (min-width: 750px) {
+    .customer th, .customer td:first-of-type {
+        text-align: left;
+        padding-left: 0;
+        padding-right: 2.2rem;
+    }
 }
+
+
+
+
 
 {%- endstyle -%}
 
