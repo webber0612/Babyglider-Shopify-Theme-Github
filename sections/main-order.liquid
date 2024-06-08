@@ -311,7 +311,7 @@
       {% assign order_progress = 100 %}
       {% endcase %}
 
-document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('DOMContentLoaded', function () {
     const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
 
     toggleButtons.forEach(button => {
@@ -368,6 +368,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var modalImg = imageModal.querySelector('.modal-body img');
         modalImg.src = imgSrc;
         modalImg.alt = imgAlt;
+    });
+
+    // 初始展開所有目標表格
+    const collapsibleElements = document.querySelectorAll('.collapse');
+    collapsibleElements.forEach(element => {
+        element.classList.add('show');
+        element.classList.add('expand');
     });
 });
 
