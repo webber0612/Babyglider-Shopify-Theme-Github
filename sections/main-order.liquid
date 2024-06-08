@@ -313,20 +313,18 @@
     margin-bottom: 1rem;
   }
 
-  .order-summary-table td:nth-child(3) {
-    width: calc(100% - 100px - 1rem); /* 宽度为 100% 减去图片宽度和间距 */
-  }
 
   /* 价格、数量、总价合并为一行 */
   .order-summary-table td:nth-child(4),
   .order-summary-table td:nth-child(5),
   .order-summary-table td:nth-child(6) {
     display: flex;
-    align-items: center;
-    width: 100%;
+    flex-direction:row;
+    flex-wrap: nowrap;
+    margin-bottom: 1rem;
   }
 
-  .order-summary-table td:nth-child(4)::before {
+  /* .order-summary-table td:nth-child(4)::before {
     content: "Price x ";
   }
 
@@ -336,7 +334,7 @@
 
   .order-summary-table td:nth-child(6)::before {
     content: "Total: ";
-  } 
+  }  */
 
 }
 
