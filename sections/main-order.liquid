@@ -320,15 +320,28 @@
             const targetTbody = document.querySelector(targetId);
             const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
 
-            if (targetTbody) {
-                targetTbody.classList.toggle('show');
-            } else {
+            if (!targetTbody) {
                 console.error(`Element with ID ${targetId} not found.`);
+                return;
+            }
+
+            // 如果目標元素已經在過渡過程中，不進行操作
+            if (targetTbody.classList.contains('collapsing')) {
+                return;
+            }
+
+            // 檢查當前狀態，然後切換 class
+            if (targetTbody.classList.contains('show')) {
+                targetTbody.classList.remove('show');
+                collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
+            } else {
+                targetTbody.classList.add('show');
+                collectionTitle.removeAttribute('colspan');
             }
         });
     });
 
-    // 獨立的事件監聽器只設置一次
+    // 處理過渡完成事件
     const targetTbodies = document.querySelectorAll('[id^="targetTbody"]');
     targetTbodies.forEach(targetTbody => {
         targetTbody.addEventListener('transitionend', function() {
@@ -337,7 +350,7 @@
             if (targetTbody.classList.contains('show')) {
                 collectionTitle.removeAttribute('colspan');
             } else {
-                collectionTitle.setAttribute('colspan', '5'); // 在折叠完成后设置 colspan
+                collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
             }
         });
     });
