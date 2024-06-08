@@ -248,29 +248,24 @@
        opacity: 0.5; /* 變淡 */
        }
 
-/* Order Summary Table Styles */
-.order-summary-table {
-  padding: 0; /* 移除整个表格的 padding */
-}
+  @media screen and (min-width: 750px) {
+  /* 在 order-summary-table.css 文件中 */
+  .order-summary-table thead th, /* 针对订单列表的表头 */
+  .order-summary-table tbody td { /* 针对订单列表的单元格 */
+    padding: 0;
+  }
 
-.order-summary-table th,
-.order-summary-table td {
-  padding: 0; /* 移除所有表头和单元格的 padding */
-}
-
-/* 针对屏幕宽度大于等于 750px 的情况 */
-@media screen and (min-width: 750px) {
   /* 1, 2, 4, 5, 6 列的 th 元素文本居中 */
-  .order-summary-table thead th:nth-child(1),
-  .order-summary-table thead th:nth-child(2),
-  .order-summary-table thead th:nth-child(4),
-  .order-summary-table thead th:nth-child(5),
-  .order-summary-table thead th:nth-child(6) {
+  .order thead th:nth-child(1),
+  .order thead th:nth-child(2),
+  .order thead th:nth-child(4),
+  .order thead th:nth-child(5),
+  .order thead th:nth-child(6) {
     text-align: center;
   }
 
   /* 第三列的 th 元素文本靠左 */
-  .order-summary-table thead th:nth-child(3) {
+  .order thead th:nth-child(3) {
     text-align: left;
   }
 
@@ -279,12 +274,16 @@
   .order-summary-table td:first-of-type {
     padding-left: 0;
   }
-
-  /* 针对订单列表表格第一列的单元格 */
   .order-summary-table tbody td:first-of-type {
-    padding-top: 0;
-    padding-right: 0; /* 覆盖 customer.css 中的 padding-right */
+  padding-top: 0;
+}
+
+.order-summary-table .customer td:first-of-type {
+    padding-right: 0; 
   }
+
+
+
 }
 
 
