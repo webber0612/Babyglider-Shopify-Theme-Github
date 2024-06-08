@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <th class="py-4 fs-4" style="width: 100px;">Total</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="collapse{{ forloop.index }}" class="show">
         {% assign current_collection = '' %}
         {% for line_item in sorted_items %}
           {% assign collection = line_item.product.collections[0].title %}
