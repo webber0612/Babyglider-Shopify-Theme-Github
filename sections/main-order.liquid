@@ -323,7 +323,6 @@
   .order-summary-table td:nth-child(3) { /* 产品标题列 */
     width: 50%; /* 各占一半宽度 */
     display: inline-flex; /* 使用 inline-flex 排列 */
-    flex-direction: row;
     align-items: center; /* 垂直居中 */
   }
 
@@ -331,10 +330,9 @@
   .order-summary-table td:nth-child(4),
   .order-summary-table td:nth-child(5),
   .order-summary-table td:nth-child(6) {
-    width: 20%; /* 各占一半宽度 */
-    display: inline-flex; /* 使用 inline-flex 排列 */
-    flex-direction: row;
-    align-items: center; /* 垂直居中 */
+    display: flex;
+    align-items: center;
+    width: 100%;
   }
 
   .order-summary-table td:nth-child(4)::before {
