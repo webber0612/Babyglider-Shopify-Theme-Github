@@ -465,13 +465,13 @@
             {% endif %}
             <tr>
               <td></td>
-              <td>
+              <td class="text-center align-middle">
                 <img
                   src="{{ line_item.image | image_url: width: 100, height: 100 }}"
                   alt="{{ line_item.title }}"
                   width="100"
                   height="100"
-                  class="clickable-img text-center align-middle"
+                  class="clickable-img"
                   data-bs-toggle="modal"
                   data-bs-target="#imageModal"
                   data-img-src="{{ line_item.image | image_url }}"
