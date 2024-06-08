@@ -457,12 +457,12 @@
     <table class="order-summary-table table-responsive" style="padding: 0%;">
       <thead>
         <tr class="text-center align-middle">
-          <th class="py-3" style="width: 40px;"></th>
-          <th class="py-3" style="width: 100px;">Image</th>
-          <th class="py-3" >Product Info</th>
-          <th class="py-3" style="width: 100px;">Price</th>
-          <th class="py-3" style="width: 40px;">Qty</th>
-          <th class="py-3" style="width: 100px;">Total</th>
+          <th class="py-5" style="width: 40px;"></th>
+          <th class="py-5" style="width: 100px;">Image</th>
+          <th class="py-5" >Product Info</th>
+          <th class="py-5" style="width: 100px;">Price</th>
+          <th class="py-5" style="width: 40px;">Qty</th>
+          <th class="py-5" style="width: 100px;">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -520,10 +520,10 @@
                   data-img-alt="{{ line_item.title }}"
                 >
               </td>
-              <td class="ps-2 align-middle">{{ line_item.product.title }}</td>
-              <td class="pe-2 align-middle">{{ line_item.price | money }}</td>
-              <td class="text-center align-middle">{{ line_item.quantity }}</td>
-              <td class="pe-2 align-middle">{{ line_item.line_price | money }}</td>
+              <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
+              <td class="pe-5 align-middle">{{ line_item.price | money }}</td>
+              <td class="text-center align-middle">x{{ line_item.quantity }}</td>
+              <td class="pe-5 align-middle">{{ line_item.line_price | money }}</td>
             </tr>
           {% endif %}
         {% endfor %}
