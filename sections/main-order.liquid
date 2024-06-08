@@ -292,11 +292,13 @@
   /* ...其他样式... */
 
   .order-summary-table thead,
-  .order-summary-table td:before {
+  .order-summary-table td:before,
+  .order-summary-table tbody td:last-of-type {
     display: none; /* 隐藏表头 */
   }
 
   .order-summary-table td{
+    vertical-align:center;
     padding:0 !important;
   }
 
