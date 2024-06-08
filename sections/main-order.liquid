@@ -310,10 +310,9 @@
     text-align: left;
   }
 
-  /* 图片和产品标题合并 */
-  .order-summary-table td:nth-child(2) {
-    display: flex;
-    align-items: center;
+  .order-summary-table td:nth-child(2) { /* 图片列 */
+    width: 80px;
+    margin-right: 1rem; /* 图片与文字间距 */
   }
 
   .order-summary-table td:nth-child(2) img {
@@ -322,7 +321,7 @@
   }
 
   .order-summary-table td:nth-child(3) {
-    display: none;
+    width: calc(100% - 100px - 1rem); /* 宽度为 100% 减去图片宽度和间距 */
   }
 
   /* 价格、数量、总价合并为一行 */
