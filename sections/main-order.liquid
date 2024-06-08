@@ -454,7 +454,7 @@
                    {%- assign collection_handle = product.collections[0].handle -%}
                    {%- assign shopify_collection = collections[collection_handle] -%}
                    {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                     <span class="badge rounded-pill bg-secondary text-center align-middle">
+                     <span class="badge rounded-pill text-white bg-primary text-center align-middle">
                        ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
@@ -471,7 +471,7 @@
                   alt="{{ line_item.title }}"
                   width="100"
                   height="100"
-                  class="clickable-img"
+                  class="clickable-img text-center align-middle"
                   data-bs-toggle="modal"
                   data-bs-target="#imageModal"
                   data-img-src="{{ line_item.image | image_url }}"
