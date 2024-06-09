@@ -304,11 +304,22 @@
     padding:0 !important;
   }
 
-  .order-summary-table tr:first-child { /* 只针对第一行 */
+  /* 将第一行的前三个单元格合并为一行 */
+  .order-summary-table tr:first-child td:nth-child(-n+3) {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap; /* 不允许换行 */
   }
+
+    /* 将第一行的后三个单元格合并为一行 */
+    .order-summary-table tr:first-child td:nth-child(n+4) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%; /* 确保占据整行宽度 */
+    margin-top: 0.5rem; /* 添加与上一行之间的间距 */
+  }
+
 
   /* 所有 td 元素默认宽度为 auto */
   .order-summary-table td {
