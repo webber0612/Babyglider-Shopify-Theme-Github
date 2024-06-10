@@ -1046,73 +1046,83 @@
   </div>
 </div>
  {% endcomment %}
- {% assign pre_order_items = order.line_items | where: "product.collections.first.title", "contains [Pre-Order]" | sort: "product.collections[0].title" %}
- {% assign stock_on_hand_items = order.line_items | where: "product.collections.first.title", "not contains [Pre-Order]" | sort: "product.collections[0].title" %}
  
- {%- for type in 'pre_order', 'stock_on_hand' -%}
-   {%- assign items = pre_order_items -%}
-   {%- assign heading = 'Pre-Order' -%}
-   {%- if type == 'stock_on_hand' -%}
-     {%- assign items = stock_on_hand_items -%}
-     {%- assign heading = 'Stock On Hand' -%}
-   {%- endif -%}
-     {% comment %} PC Table {% endcomment %}
-     <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
-       <thead>
-         <tr class="text-center align-middle">
-           <th class="py-4 fs-4" style="width: 40px;"></th>
-           <th class="py-4 fs-4" style="width: 100px;">Image</th>
-           <th class="py-4 fs-4 ps-3" >Product Info</th>
-           <th class="py-4 fs-4" style="width: 100px;">Price</th>
-           <th class="py-4 fs-4" style="width: 40px;">Qty</th>
-           <th class="py-4 fs-4" style="width: 100px;">Total</th>
-         </tr>
-       </thead>
-       <tbody>
-         {%- for line_item in items -%}
-           {%- assign collection = line_item.product.collections[0].title -%}
-           {%- render 'order-item-row', line_item: line_item, collection: collection, forloop: forloop, is_pre_order: (type == 'pre_order') %}
-         {%- endfor %}
-       </tbody>
-     </table>
- 
-     {% comment %} Mobile Table {% endcomment %}
-     <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
-       <thead>
-         <tr>
-           <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
-           <th class="py-4 fs-4 text-start">Image / Product Info</th>
-           <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
-         </tr>
-       </thead>
-       <tbody>
-         {%- assign current_collection = '' -%}
-         {%- for line_item in items -%}
-           {%- assign collection = line_item.product.collections[0].title -%}
-           {%- render 'order-item-row', line_item: line_item, collection: collection, forloop: forloop, is_pre_order: (type == 'pre_order') %}
-         {%- endfor %}
-       </tbody>
-     </table>
- {% endfor %}
- 
- 
- {% comment %} 模态框结构 {% endcomment %}
- <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered">
-     <div class="modal-content">
-       <div class="modal-body">
-         <img 
-           src="" 
-           alt=""
-           width="100%"
-           height="auto"
-           class="img-fluid"
-           id="modalImage"
-         >
-       </div>
-     </div>
-   </div>
- </div>
+ {% comment %} 
+表格分为两个部分：
+- 预购商品
+- 現貨商品
+{% endcomment %}
+
+{% assign pre_order_items = order.line_items | where: "product.collections.first.title", "contains [Pre-Order]" | sort: "product.collections[0].title" %}
+{% assign stock_on_hand_items = order.line_items | where: "product.collections.first.title", "not contains [Pre-Order]" | sort: "product.collections[0].title" %}
+
+{%- for type in 'pre_order', 'stock_on_hand' -%}
+  {%- assign items = pre_order_items -%}
+  {%- assign heading = 'Pre-Order' -%}
+  {%- if type == 'stock_on_hand' -%}
+    {%- assign items = stock_on_hand_items -%}
+    {%- assign heading = 'Stock On Hand' -%}
+  {%- endif -%}
+  
+  {% comment %} PC Table {% endcomment %}
+  <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
+    <thead>
+      <tr class="text-center align-middle">
+        <th class="py-4 fs-4" style="width: 40px;"></th>
+        <th class="py-4 fs-4" style="width: 100px;">Image</th>
+        <th class="py-4 fs-4 ps-3" >Product Info</th>
+        <th class="py-4 fs-4" style="width: 100px;">Price</th>
+        <th class="py-4 fs-4" style="width: 40px;">Qty</th>
+        <th class="py-4 fs-4" style="width: 100px;">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in items -%}
+        {%- assign collection = line_item.product.collections[0].title -%}
+        {%- render 'order-item-row', line_item: line_item, collection: collection, forloop: forloop, is_pre_order: (type == 'pre_order') %}
+      {%- endfor %}
+    </tbody>
+  </table>
+
+  {% comment %} Mobile Table {% endcomment %}
+  <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
+    <thead>
+      <tr>
+        <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
+        <th class="py-4 fs-4 text-start">Image / Product Info</th>
+        <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- assign current_collection = '' -%}
+      {%- for line_item in items -%}
+        {%- assign collection = line_item.product.collections[0].title -%}
+        {%- render 'order-item-row', line_item: line_item, collection: collection, forloop: forloop, is_pre_order: (type == 'pre_order') %}
+      {%- endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+
+{% comment %} 模态框结构 {% endcomment %}
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img 
+          src="" 
+          alt=""
+          width="100%"
+          height="auto"
+          class="img-fluid"
+          id="modalImage"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+
  
  {% schema %}
   {
