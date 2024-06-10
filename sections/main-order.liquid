@@ -374,6 +374,15 @@ width: 50%;
               targetTbody.classList.add('expand');
               collectionTitle.removeAttribute('colspan');
             }
+
+            // 更新按钮文本
+            const targetId = button.getAttribute('data-bs-target');
+            const targetTbody = document.querySelector(targetId);
+            if (targetTbody.classList.contains('show')) {
+              button.textContent = '➖'; // 展开时显示 "-"
+            } else {
+              button.textContent = '➕'; // 折叠时显示 "+"
+            }
           });
         });
 
@@ -400,26 +409,6 @@ width: 50%;
           var modalImg = imageModal.querySelector('.modal-body img');
           modalImg.src = imgSrc;
           modalImg.alt = imgAlt;
-        });
-
-        const toggleButtons = document.querySelectorAll('.toggle-button');
-
-        toggleButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            // 获取按钮关联的折叠元素
-            const target = this.getAttribute('data-bs-target');
-            const collapse = new bootstrap.Collapse(target); // 初始化折叠组件
-      
-            // 切换折叠状态
-            collapse.toggle();
-      
-            // 更新按钮文本
-            if (collapse._isShown()) {
-              this.textContent = '➖'; // 展开时显示 "-"
-            } else {
-              this.textContent = '➕'; // 折叠时显示 "+"
-            }
-          });
         });
             });
 
@@ -558,7 +547,7 @@ width: 50%;
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
             aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
-            ➕
+            ➖
           </a>
         </td>
         <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
@@ -991,7 +980,7 @@ width: 50%;
           <a class="btn btn-primary toggle-button text-decoration-none align-middle" style="padding-top:1rem;"
             data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}"
             role="button" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
-            ➕
+            ➖
           </a>
           <Span div class="text text-start py-3">
             {{ collection }}
