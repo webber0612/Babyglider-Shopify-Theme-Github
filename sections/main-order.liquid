@@ -551,7 +551,89 @@ width: 50%;
               width="100" height="100" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
               data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
           </td>
-          <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
+          {% comment %} <td class="ps-3 align-middle">{{ line_item.product.title }}</td> {% endcomment %}
+          <td class="ps-3 align-middle"> id="Row{{ line_item.key }}" headers="ColumnProduct" role="rowheader" scope="row"
+            data-label="{{ 'customer.order.product' | t }}">
+            <div>
+              {%- if line_item.url != blank -%}
+              <!-- 如果產品有URL，顯示為可點擊鏈接 -->
+              <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+              {%- else -%}
+              <!-- 否則顯示為普通文本 -->
+              <p>{{ line_item.title }}</p>
+              {%- endif -%}
+              {%- assign property_size = line_item.properties | size -%}
+              {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+              <div class="properties">
+                {%- unless line_item.product.has_only_default_variant -%}
+                <!-- 如果產品有變體，顯示變體名稱 -->
+                <span>
+                  {{ line_item.variant.title }}
+                </span>
+                {%- endunless -%}
+                {%- unless line_item.selling_plan_allocation == null -%}
+                <!-- 如果有銷售計劃，顯示計劃名稱 -->
+                <span>
+                  {{ line_item.selling_plan_allocation.selling_plan.name }}
+                </span>
+                {%- endunless -%}
+                {%- if property_size != 0 -%}
+                <!-- 顯示產品屬性 -->
+                {%- for property in line_item.properties -%}
+                {% assign property_first_char = property.first | slice: 0 %}
+                {%- if property.last != blank and property_first_char != '_' -%}
+                <span>{{ property.first }}:</span>
+                <span>
+                  {%- if property.last contains '/uploads/' -%}
+                  <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                  {%- else -%}
+                  {{ property.last }}
+                  {%- endif -%}
+                </span>
+                {%- endif -%}
+                {%- endfor -%}
+                {%- endif -%}
+              </div>
+              {%- endunless -%}
+
+              {%- if line_item.line_level_discount_allocations != blank -%}
+              <!-- 如果有折扣，顯示折扣信息 -->
+              <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                <li>
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                    <use href="#icon-discount" />
+                  </svg>
+                  {{- discount_allocation.discount_application.title }} (-
+                  {{- discount_allocation.amount | money -}}
+                  )
+                </li>
+                {%- endfor -%}
+              </ul>
+              {%- endif -%}
+
+              {%- if line_item.fulfillment -%}
+              <div class="fulfillment">
+                {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                <!-- 顯示履行日期 -->
+                <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+
+                {%- if line_item.fulfillment.tracking_url -%}
+                <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
+                <a href="{{ line_item.fulfillment.tracking_url }}">
+                  {{ 'customer.order.track_shipment' | t }}
+                </a>
+                {%- endif -%}
+                <span>
+                  {{ line_item.fulfillment.tracking_company }}
+                  {%- if line_item.fulfillment.tracking_number -%}
+                  #{{ line_item.fulfillment.tracking_number }}
+                  {%- endif -%}
+                </span>
+              </div>
+              {%- endif -%}
+            </div>
+          </td>
           <td class="pe-4 align-middle">{{ line_item.price | money }}</td>
           <td class="text-center align-middle">x{{ line_item.quantity }}</td>
           <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td>
@@ -689,7 +771,7 @@ width: 50%;
           </div>
         </td>
       </tr>
-      
+
       {% endunless %}
       {% endfor %}
       </tbody>
@@ -913,111 +995,4 @@ width: 50%;
               {{ 'customer.order.discount' | t }}
               <span class="cart-discount">
                 <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                  <use href="#icon-discount" />
-                </svg>
-                {{- discount_application.title -}}
-              </span>
-            </td>
-            <td headers="RowDiscount" role="cell" data-label="{{ 'customer.order.discount' | t }}">
-              <div>
-                <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                <span class="cart-discount">
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_application.title -}}
-                </span>
-              </div>
-            </td>
-            {%- endfor -%}
-          </tr>
-          {%- endif -%}
-          {%- for shipping_method in order.shipping_methods -%}
-          <tr role="row">
-            <!-- 顯示運費 -->
-            <td id="RowShipping" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
-            </td>
-            <td headers="RowShipping" role="cell"
-              data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
-              {{ shipping_method.price | money }}
-            </td>
-          </tr>
-          {%- endfor -%}
-          {%- for tax_line in order.tax_lines -%}
-          <tr role="row">
-            <!-- 顯示稅金 -->
-            <td id="RowTax" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
-              {{ tax_line.rate | times: 100 }}%)
-            </td>
-            <td headers="RowTax" role="cell"
-              data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
-              {{ tax_line.price | money }}
-            </td>
-          </tr>
-          {%- endfor -%}
-          {%- if order.total_duties -%}
-          <tr role="row">
-            <!-- 顯示關稅 -->
-            <td id="RowDuties" role="rowheader" scope="row" colspan="4">{{ 'customer.order.total_duties' | t }}</td>
-            <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
-              {{ order.total_duties | money }}
-            </td>
-          </tr>
-          {%- endif -%}
-          {%- if order.total_refunded_amount > 0 -%}
-          <tr role="row">
-            <!-- 顯示退款總額 -->
-            <td id="RowTotalRefund" role="rowheader" scope="row" colspan="3">
-              {{ 'customer.order.total_refunded' | t }}
-            </td>
-            <td headers="RowTotalRefund" role="cell" colspan="2" data-label="{{ 'customer.order.total_refunded' | t }}">
-              -{{ order.total_refunded_amount | money_with_currency }}
-            </td>
-          </tr>
-          {%- endif -%}
-          <tr role="row">
-            <!-- 顯示訂單總額 -->
-            <td id="RowTotal" role="rowheader" scope="row" colspan="3">{{ 'customer.order.total' | t }}</td>
-            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
-              {{ order.total_net_amount | money_with_currency }}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-  {% endcomment %}
-
-  {% schema %}
-  {
-  "name": "t:sections.main-order.name",
-  "settings": [
-  {
-  "type": "header",
-  "content": "t:sections.all.padding.section_padding_heading"
-  },
-  {
-  "type": "range",
-  "id": "padding_top",
-  "min": 0,
-  "max": 100,
-  "step": 4,
-  "unit": "px",
-  "label": "t:sections.all.padding.padding_top",
-  "default": 36
-  },
-  {
-  "type": "range",
-  "id": "padding_bottom",
-  "min": 0,
-  "max": 100,
-  "step": 4,
-  "unit": "px",
-  "label": "t:sections.all.padding.padding_bottom",
-  "default": 36
-  }
-  ]
-  }
-  {% endschema %}
+                  <use hr
