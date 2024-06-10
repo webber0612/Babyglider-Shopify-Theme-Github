@@ -316,9 +316,7 @@ width: 50%;
     {%- endstyle -%}
 
     <script>
-
-        console.log({{ shipping_method.title }});
-      
+     
       {% assign order_status = order.metafields.custom.order_status %}
       {% assign order_progress = 0 %}
 
@@ -918,8 +916,6 @@ width: 50%;
               {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
             </td>
             <td headers="RowShipping" role="cell"
-              {{ shipping_method | json }}
-              {{ shipping_method.title | json }}
               data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
               {{ shipping_method.price | money }}
             </td>
@@ -1299,9 +1295,7 @@ width: 50%;
         {%- endif -%}
         <tr>
           <td colspan="2" class="order-shipping">
-            {{ shipping_method | json }}
-            {{ shipping_method.title | json }}
-            <h4>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h4>
+            <h4>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</h4>
             <p class="text-end">{{ shipping_method.price | money }}</p>
           </td>
         </tr>
