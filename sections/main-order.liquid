@@ -882,98 +882,77 @@ width: 50%;
       {% endunless %}
       {% endfor %}
       </tbody>
-      <tfoot role="rowgroup">
-        <div class="w-100">
-          <tr role="row">
-            <div>
-            <!-- 訂單小計 -->
-            <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.subtotal' | t }}
-            </td>
-            <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
-              {{ order.line_items_subtotal_price | money }}
-            </td>
-          </div>
-          </tr>
-          {%- if order.cart_level_discount_applications != blank -%}
-          <tr role="row">
-            {%- for discount_application in order.cart_level_discount_applications -%}
-            <td id="RowDiscount" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.discount' | t }}
-              <span class="cart-discount">
-                <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                  <use href="#icon-discount" />
-                </svg>
-                {{- discount_application.title -}}
-              </span>
-            </td>
-            <td headers="RowDiscount" role="cell" data-label="{{ 'customer.order.discount' | t }}">
-              <div>
-                <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                <span class="cart-discount">
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_application.title -}}
-                </span>
-              </div>
-            </td>
-            {%- endfor -%}
-          </tr>
-          {%- endif -%}
-          {%- for shipping_method in order.shipping_methods -%}
-          <tr role="row">
-            <!-- 顯示運費 -->
-            <td id="RowShipping" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
-            </td>
-            <td headers="RowShipping" role="cell"
-              data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
-              {{ shipping_method.price | money }}
-            </td>
-          </tr>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="order-subtotal">
+            <p>{{ 'customer.order.subtotal' | t }}</p>
+            <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
+          </td>
+        </tr>
+        {%- if order.cart_level_discount_applications != blank -%}
+          {%- for discount_application in order.cart_level_discount_applications -%}
+            <tr>
+              <td colspan="2" class="order-discount">
+                <p>
+                  {{ 'customer.order.discount' | t }}
+                  <span class="cart-discount">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                      <use href="#icon-discount" />
+                    </svg>
+                    {{- discount_application.title -}}
+                  </span>
+                </p>
+                <p class="text-end">
+                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                  <span class="cart-discount">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                      <use href="#icon-discount" />
+                    </svg>
+                    {{- discount_application.title -}}
+                  </span>
+                </p>
+              </td>
+            </tr>
           {%- endfor -%}
-          {%- for tax_line in order.tax_lines -%}
-          <tr role="row">
-            <!-- 顯示稅金 -->
-            <td id="RowTax" role="rowheader" scope="row" colspan="4">
-              {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
-              {{ tax_line.rate | times: 100 }}%)
-            </td>
-            <td headers="RowTax" role="cell"
-              data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
-              {{ tax_line.price | money }}
-            </td>
-          </tr>
-          {%- endfor -%}
-          {%- if order.total_duties -%}
-          <tr role="row">
-            <!-- 顯示關稅 -->
-            <td id="RowDuties" role="rowheader" scope="row" colspan="4">{{ 'customer.order.total_duties' | t }}</td>
-            <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
-              {{ order.total_duties | money }}
+        {%- endif -%}
+        <tr>
+          <td colspan="2" class="order-shipping">
+            <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
+            <p class="text-end">{{ order.shipping_method.price | money }}</p>
+          </td>
+        </tr>
+        {%- if order.tax_line.title != blank -%}
+          <tr>
+            <td colspan="2" class="order-tax">
+              <p>
+                {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
+              </p>
+              <p class="text-end">{{ order.tax_line.price | money }}</p>
             </td>
           </tr>
-          {%- endif -%}
-          {%- if order.total_refunded_amount > 0 -%}
-          <tr role="row">
-            <!-- 顯示退款總額 -->
-            <td id="RowTotalRefund" role="rowheader" scope="row" colspan="3">
-              {{ 'customer.order.total_refunded' | t }}
-            </td>
-            <td headers="RowTotalRefund" role="cell" colspan="2" data-label="{{ 'customer.order.total_refunded' | t }}">
-              -{{ order.total_refunded_amount | money_with_currency }}
+        {% endif %}
+        {%- if order.total_duties != blank -%}
+          <tr>
+            <td colspan="2" class="order-customs-duty">
+              <p>{{ 'customer.order.total_duties' | t }}</p>
+              <p class="text-end">{{ order.total_duties | money }}</p>
             </td>
           </tr>
-          {%- endif -%}
-          <tr role="row">
-            <!-- 顯示訂單總額 -->
-            <td id="RowTotal" role="rowheader" scope="row" colspan="3">{{ 'customer.order.total' | t }}</td>
-            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
-              {{ order.total_net_amount | money_with_currency }}
+        {% endif %}
+        {%- if order.total_refunded_amount != 0 -%}
+          <tr>
+            <td colspan="2" class="order-refund">
+              <p>{{ 'customer.order.total_refunded' | t }}</p>
+              <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
             </td>
           </tr>
-        </div>
+        {% endif %}
+        <tr>
+          <td colspan="2" class="order-total">
+            <p class="fs-1">{{ 'customer.order.total' | t }}</p>
+            <p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p>
+          </td>
+        </tr>
       </tfoot>
 
     </table>
