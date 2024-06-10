@@ -282,11 +282,6 @@ width: 50%;
     .order-summary-table .customer td:first-of-type {
     padding-right: 0;
     }
-    .order-summary-table tfoot tr{
-      text-align:center;
-
-    }
-
     }
 
     /* 在 order-summary-table.css 文件中 */
@@ -890,6 +885,7 @@ width: 50%;
       <tfoot role="rowgroup">
         <div class="w-100">
           <tr role="row">
+            <div>
             <!-- 訂單小計 -->
             <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
               {{ 'customer.order.subtotal' | t }}
@@ -897,6 +893,7 @@ width: 50%;
             <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
               {{ order.line_items_subtotal_price | money }}
             </td>
+          </div>
           </tr>
           {%- if order.cart_level_discount_applications != blank -%}
           <tr role="row">
