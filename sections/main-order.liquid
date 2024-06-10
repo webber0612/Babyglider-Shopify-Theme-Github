@@ -664,7 +664,6 @@
               <tbody id="collapse{{ forloop.index }}" class="collapse">
             {% endif %}
             <tr>
-              <td></td>
               <td class="p-0 text-start align-middle">
                 <img
                   src="{{ line_item.image | image_url: width: 75, height: 75 }}"
@@ -678,7 +677,7 @@
                   data-img-alt="{{ line_item.title }}"
                 >
               {{ line_item.product.title }}</td>
-              <td class="pe-4 align-middle text-end">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</td>
+              <td class="p-0 align-middle text-end">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</td>
             </tr>
           {% endif %}
         {% endfor %}
