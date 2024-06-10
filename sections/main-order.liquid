@@ -435,6 +435,9 @@ width: 50%;
               <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
               </p>
               {% if order_status != null %}
+                {% if order_status != Cancelled %}
+                  <p class="badge bg-danger text-white">Currentlly Status : {{ order_status }}</p>
+                {%endif %}
               <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
               <br>
               {% endif %}
