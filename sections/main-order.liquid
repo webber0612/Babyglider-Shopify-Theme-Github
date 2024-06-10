@@ -865,6 +865,7 @@ width: 50%;
       {% endfor %}
       </tbody>
       <tfoot role="rowgroup">
+        <div class="w-100">
         <tr role="row">
           <!-- 訂單小計 -->
           <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
@@ -952,6 +953,7 @@ width: 50%;
             {{ order.total_net_amount | money_with_currency }}
           </td>
         </tr>
+      </div>
       </tfoot>
 
     </table>
@@ -1251,6 +1253,7 @@ width: 50%;
       {% endfor %}
       </tbody>
       <tfoot role="rowgroup">
+        <div class="w-100">
         <tr role="row">
           <!-- 訂單小計 -->
           <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
@@ -1338,6 +1341,7 @@ width: 50%;
             {{ order.total_net_amount | money_with_currency }}
           </td>
         </tr>
+        </div>
       </tfoot>
 
     </table>
