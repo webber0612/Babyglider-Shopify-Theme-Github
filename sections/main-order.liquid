@@ -1259,7 +1259,7 @@ width: 50%;
             <div>
               <!-- 訂單小計 -->
               訂單小計
-              <td id="RowSubtotal" role="rowheader" scope="row" colspan="4">
+              <td id="RowSubtotal" role="rowheader" scope="row" colspan="2">
                 {{ 'customer.order.subtotal' | t }}
               </td>
               <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
@@ -1271,7 +1271,7 @@ width: 50%;
           <tr role="row">
             <div>
               {%- for discount_application in order.cart_level_discount_applications -%}
-              <td id="RowDiscount" role="rowheader" scope="row" colspan="4">
+              <td id="RowDiscount" role="rowheader" scope="row" colspan="2">
                 {{ 'customer.order.discount' | t }}
                 <span class="cart-discount">
                   <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
@@ -1298,20 +1298,19 @@ width: 50%;
           {%- for shipping_method in order.shipping_methods -%}
           <tr role="row">
               <!-- 顯示運費 -->
-            <td id="RowShipping" role="rowheader" scope="row" colspan="4">
-              <div class="text-start align-middle">
-                {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
-              </div>
-              <div class="text-end align-middle">
-                {{ shipping_method.price | money }}
-              </div>
+            <td id="RowShipping" role="rowheader" scope="row" colspan="2">
+              {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
+            </td>
+            <td headers="RowShipping" role="cell"
+              data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
+              {{ shipping_method.price | money }}
             </td>
           </tr>
           {%- endfor -%}
           {%- for tax_line in order.tax_lines -%}
           <tr role="row">
             <!-- 顯示稅金 -->
-            <td id="RowTax" role="rowheader" scope="row" colspan="4">
+            <td id="RowTax" role="rowheader" scope="row" colspan="2">
               {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
               {{ tax_line.rate | times: 100 }}%)
             </td>
@@ -1324,7 +1323,7 @@ width: 50%;
           {%- if order.total_duties -%}
           <tr role="row">
             <!-- 顯示關稅 -->
-            <td id="RowDuties" role="rowheader" scope="row" colspan="4">{{ 'customer.order.total_duties' | t }}</td>
+            <td id="RowDuties" role="rowheader" scope="row" colspan="2">{{ 'customer.order.total_duties' | t }}</td>
             <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
               {{ order.total_duties | money }}
             </td>
@@ -1333,7 +1332,7 @@ width: 50%;
           {%- if order.total_refunded_amount > 0 -%}
           <tr role="row">
             <!-- 顯示退款總額 -->
-            <td id="RowTotalRefund" role="rowheader" scope="row" colspan="3">
+            <td id="RowTotalRefund" role="rowheader" scope="row" colspan="2">
               {{ 'customer.order.total_refunded' | t }}
             </td>
             <td headers="RowTotalRefund" role="cell" colspan="2" data-label="{{ 'customer.order.total_refunded' | t }}">
@@ -1343,7 +1342,7 @@ width: 50%;
           {%- endif -%}
           <tr role="row">
             <!-- 顯示訂單總額 -->
-            <td id="RowTotal" role="rowheader" scope="row" colspan="3">{{ 'customer.order.total' | t }}</td>
+            <td id="RowTotal" role="rowheader" scope="row" colspan="2">{{ 'customer.order.total' | t }}</td>
             <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
               {{ order.total_net_amount | money_with_currency }}
             </td>
