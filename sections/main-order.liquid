@@ -628,14 +628,14 @@
                   >
                     ➕
                   </a>
-                  <div class="text-start py-3">123
+                  <div class="text-start py-3">
                     {{ collection }} 
                    {%- assign product = line_item.product -%}
                    {%- assign collection_handle = product.collections[0].handle -%}
                    {%- assign shopify_collection = collections[collection_handle] -%}
                    {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
                      <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-                       ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                       123ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
                    </div>
