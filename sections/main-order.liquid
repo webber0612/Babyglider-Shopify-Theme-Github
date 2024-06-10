@@ -283,20 +283,6 @@
   }
 }
 
-/* 小屏幕样式 */
-@media (max-width: 750px) {
-  /* ...其他样式... */
-
-  .order-summary-table tr {
-    display: flex; /* 将行转换为 flex 容器 */
-    flex-direction: row; /* 设置主轴方向为水平 */
-    flex-wrap: nowrap; /* 禁止换行 */
-    padding:0;
-  }
-
-  /* ...其他样式... */
-}
-
 {%- endstyle -%}
 
 <script>
@@ -629,34 +615,32 @@
                 </tbody>
               {% endif %}
               {% assign current_collection = collection %}
-<tr>
-  <td class="text-center align-middle" style="padding-right:0;">
-    <a 
-      class="btn btn-primary toggle-button text-decoration-none"
-      data-bs-toggle="collapse"
-      data-bs-target="#collapse{{ forloop.index }}"
-      href="#collapse{{ forloop.index }}"
-      role="button"
-      aria-expanded="true"
-      aria-controls="collapse{{ forloop.index }}"
-    >
-      ➕
-    </a>
-  </td>
-  <td class="collection-title p-0 align-middle fs-3" colspan="2" style="background-color:lightgoldenrodyellow;"> 
-    <div class="d-flex align-items-center"> <div class="text-start py-3">
-        {{ collection }} 
-        {%- assign product = line_item.product -%}
-        {%- assign collection_handle = product.collections[0].handle -%}
-        {%- assign shopify_collection = collections[collection_handle] -%}
-        {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-          <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-            ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
-          </span>
-        {% endif %}
-      </div></div>
-  </td>
-</tr>
+              <tr>
+                <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
+                  <a
+                    class="btn btn-primary toggle-button text-decoration-none"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ forloop.index }}"
+                    href="#collapse{{ forloop.index }}"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="collapse{{ forloop.index }}"
+                  >
+                    ➕
+                  </a>
+                  <div class="text-start py-3">
+                    {{ collection }} 
+                   {%- assign product = line_item.product -%}
+                   {%- assign collection_handle = product.collections[0].handle -%}
+                   {%- assign shopify_collection = collections[collection_handle] -%}
+                   {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                     <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+                       ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                     </span>
+                   {% endif %}
+                   </div>
+                  </td>
+                      </tr>
               <tbody id="collapse{{ forloop.index }}" class="collapse">
             {% endif %}
             <tr>
@@ -1054,19 +1038,4 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
-}
-{% endschema %} 
+ 
