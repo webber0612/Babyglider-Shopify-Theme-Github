@@ -368,13 +368,13 @@ width: 50%;
               targetTbody.classList.remove('expand');
               targetTbody.classList.add('collapse');
               collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-              button.textContent = "➕"
+              button.textContent = button.getAttribute('data-collapsed-text');
             } else {
               targetTbody.classList.remove('collapse');
               targetTbody.classList.add('show');
               targetTbody.classList.add('expand');
               collectionTitle.removeAttribute('colspan');
-              button.textContent = '➖'
+              button.textContent = button.getAttribute('data-expanded-text');
             }
           });
         });
@@ -539,7 +539,7 @@ width: 50%;
         <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
-            aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
+            aria-expanded="true" aria-controls="collapse{{ forloop.index }} data-collapsed-text="➕" data-expanded-text="➖">➕</a>
         </td>
         <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
           <div class="text-start py-3" colspan="6">
