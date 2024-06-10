@@ -299,6 +299,14 @@
   .order-summary-table td:nth-child(4) {
   text-align: right;
   }
+    /* ...其他样式... */
+    .order-summary-table tr {
+    display: flex; /* 将行转换为 flex 容器 */
+  }
+
+  .order-summary-table td:nth-child(2) { /* 价格、数量、总价所在的单元格 */
+    flex-grow: 1;
+  }
 }
 
 
