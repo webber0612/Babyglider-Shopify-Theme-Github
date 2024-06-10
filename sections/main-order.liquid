@@ -1260,107 +1260,78 @@ width: 50%;
       {% endfor %}
       </tbody>
       <tfoot>
-        {% comment %} Order Subtotal {% endcomment %}
-        <div class="order-subtotal">
-          {% comment %} Order Subtotal Tital {% endcomment %}
-          <a>
-            <h2>{{ 'customer.order.subtotal' | t }}</h2>
-          </a>
-          {% comment %} Order Subtotal Value {% endcomment %}
-           <a>
-            <h2>{{ order.line_items_subtotal_price | money }}</h2>
-           </a>
-        </div>
-        {% comment %} Discount {% endcomment %}
+        <tr>
+          <td colspan="2" class="order-subtotal">
+            <h4>{{ 'customer.order.subtotal' | t }}</h4>
+            <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
+          </td>
+        </tr>
         {%- if order.cart_level_discount_applications != blank -%}
-          <div class="order-discount">
-            {%- for discount_application in order.cart_level_discount_applications -%}
-              {% comment %} Discount Title {% endcomment %}
-              <a>
-                {{ 'customer.order.discount' | t }}
-                <span class="cart-discount">
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_application.title -}}
-                </span>
-              </a>
-              {% comment %} Discount Value {% endcomment %}
-              <a>
-                <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                <span class="cart-discount">
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_application.title -}}
-                </span>
-              </a>
-            {%- endfor -%}
-          </div>
+          {%- for discount_application in order.cart_level_discount_applications -%}
+            <tr>
+              <td colspan="2" class="order-discount">
+                <h4>
+                  {{ 'customer.order.discount' | t }}
+                  <span class="cart-discount">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                      <use href="#icon-discount" />
+                    </svg>
+                    {{- discount_application.title -}}
+                  </span>
+                </h4>
+                <p class="text-end">
+                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                  <span class="cart-discount">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                      <use href="#icon-discount" />
+                    </svg>
+                    {{- discount_application.title -}}
+                  </span>
+                </p>
+              </td>
+            </tr>
+          {%- endfor -%}
         {%- endif -%}
-        {% comment %} Shipping {% endcomment %}
-        <div class="order-shipping">
-          {% comment %} Shipping Method {% endcomment %}
-          <a>
-            <h3>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h3>
-          </a>
-          {% comment %} Shipping fee {% endcomment %}
-          <a>
-            <h3>{{ shipping_method.price | money }}</h3>
-          </a>
-        </div>
-        {% comment %} Tax {% endcomment %}
+        <tr>
+          <td colspan="2" class="order-shipping">
+            <h4>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h4>
+            <p class="text-end">{{ shipping_method.price | money }}</p>
+          </td>
+        </tr>
         {%- if tax_line.title != blank -%}
-          <div class="order-tax">
-          {% comment %} Tax Name {% endcomment %}
-            <a>
-              {{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
-            </a>
-          {% comment %} Tax Value {% endcomment %}
-            <a>
-              {{ tax_line.price | money }}
-            </a>
-          </div>
+          <tr>
+            <td colspan="2" class="order-tax">
+              <h4>
+                {{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
+              </h4>
+              <p class="text-end">{{ tax_line.price | money }}</p>
+            </td>
+          </tr>
         {% endif %}
-        {% comment %} Customs Duty {% endcomment %}
         {%- if order.total_duties != blank -%}
-          <div class="order-customs-duty">
-            {% comment %} Customs Duty Title {% endcomment %}
-            <a>
-              {{ 'customer.order.total_duties' | t }}
-            </a>
-            {% comment %} Customs Duty Value {% endcomment %}
-            <a>
-              {{ order.total_duties | money }}
-            </a>
-          </div>
+          <tr>
+            <td colspan="2" class="order-customs-duty">
+              <h4>{{ 'customer.order.total_duties' | t }}</h4>
+              <p class="text-end">{{ order.total_duties | money }}</p>
+            </td>
+          </tr>
         {% endif %}
-        {% comment %} Refound {% endcomment %}
         {%- if order.total_refunded_amount != blank -%}
-          <div class="order-refound">
-            {% comment %} Order Refound Title {% endcomment %}
-            <a>
-              {{ 'customer.order.total_refunded' | t }}
-            </a>
-            {% comment %} Order Refound Value {% endcomment %}
-            <a>
-              -{{ order.total_refunded_amount | money_with_currency }}
-            </a>
-          </div>
+          <tr>
+            <td colspan="2" class="order-refund">
+              <h4>{{ 'customer.order.total_refunded' | t }}</h4>
+              <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
+            </td>
+          </tr>
         {% endif %}
-        {% comment %} Order Total {% endcomment %}
-        <div class="order-total">
-          {% comment %} Order Total Title {% endcomment %}
-          <a>
-            {{ 'customer.order.total' | t }}
-          </a>
-          {% comment %} Order Total Value {% endcomment %}
-          <a>
-            {{ order.total_net_amount | money_with_currency }}
-          </a>
-        </div>
+        <tr>
+          <td colspan="2" class="order-total">
+            <h4>{{ 'customer.order.total' | t }}</h4>
+            <p class="text-end">{{ order.total_net_amount | money_with_currency }}</p>
+          </td>
+        </tr>
       </tfoot>
-    </table>
+          </table>
 
     <!-- 模態框結構 -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
