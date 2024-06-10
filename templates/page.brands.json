@@ -1,1 +1,84 @@
-{"sections":{"image_banner_tekjWj":{"type":"image-banner","disabled":true,"custom_css":["a {display: flex; justify-content: center; align-items: center; \/* 垂直居中 *\/ background-color: white; padding-top: 0; padding-bottom: 0;}","a img {width: 60%; height: auto; object-fit: contain;}"],"settings":{"image":"shopify:\/\/shop_images\/550_LOGO_Babygliderph.jpg","image_overlay_opacity":0,"image_height":"adapt","desktop_content_position":"top-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":true,"show_text_below":true}},"custom_liquid_BRKHzn":{"type":"custom-liquid","settings":{"custom_liquid":"<div class=\"page-width\">\n  <nav aria-label=\"Breadcrumb\" class=\"breadcrumb\">\n    <a href=\"\/\">BabygliderPH<\/a>\n    {% if product.collections.size > 0 %}\n      <span>&gt;<\/span>\n      <a href=\"{{ product.collections.first.url }}\">{{ product.collections.first.title }}<\/a>\n    {% endif %}\n  <\/nav>\n<\/div>\n\n\n\n<style>\n.breadcrumb {\n  white-space: nowrap; \/* 确保不断行 *\/\n  font-size: 16px; \/* 根据需要调整字体大小 *\/\n}\n\n.breadcrumb a {\n  text-decoration: none; \/* 去除链接下划线 *\/\n  color: #337ab7; \/* 设置链接颜色 *\/\n  margin: 0 5px; \/* 在链接和符号之间添加适当的空间 *\/\n}\n\n.breadcrumb span {\n  margin: 0 5px; \/* 在符号两侧添加空间 *\/\n}\n<\/style>","color_scheme":"scheme-2","padding_top":16,"padding_bottom":0}},"rich_text_jTm6XP":{"type":"rich-text","blocks":{"heading_bCFL3c":{"type":"heading","settings":{"heading":"Brands","heading_size":"h0"}}},"block_order":["heading_bCFL3c"],"settings":{"desktop_content_position":"left","content_alignment":"left","color_scheme":"scheme-2","full_width":true,"padding_top":16,"padding_bottom":16}},"main":{"type":"main-page","disabled":true,"custom_css":[],"settings":{"padding_top":0,"padding_bottom":0}},"custom_liquid_f6Rxit":{"type":"custom-liquid","settings":{"custom_liquid":"<div class=\"page-width\">\n  {% assign sorted_collections = collections | sort: 'title' %}\n  {% assign current_letter = nil %}\n\n  {% for collection in sorted_collections %}\n    {% assign first_character = collection.title | slice: 0, 1 %}\n    {% assign second_character = collection.title | slice: 1, 1 %}\n\n    {% if first_character == \"-\" %}\n      {% if second_character != current_letter %}\n        {% assign current_letter = second_character %}\n        <div class=\"letter-group\" style=\"width: 100%;\"> <div class=\"letter-section\">\n            <h1>{{ current_letter }}<\/h1>\n          <\/div>\n        <div class=\"collection-card-wrapper\"> \n      {% endif %}\n\n      <div class=\"collection-card\" style=\"width: 250px; height: 250px;\">\n        {% assign featured_product = collection.products.first %}\n        <a href=\"{{ collection.url }}\" class=\"collection-card-link\">\n          {% if featured_product %}\n            <img src=\"{{ featured_product.featured_image | img_url: '250x250' }}\" alt=\"{{ collection.title }}\">\n          {% else %}\n            <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0871\/8991\/3879\/files\/QuestionMark.png\" alt=\"{{ collection.title }}\">\n          {% endif %}\n          <h2>{{ collection.title }}<\/h2>\n        <\/a>\n      <\/div>\n\n      {% if forloop.last %}\n        <\/div>\n      <\/div>\n      {% endif %}\n    {% endif %}\n  {% endfor %}\n<\/div>\n\n<style>\n\n\n.letter-group {\n  width: 100%;\n}\n\n.letter-section h1 {\n  margin-bottom: 6px; \/* 调整字母标题和卡片之间的间距 *\/\n}\n\n.collection-card-wrapper {\n  display: flex;\n  flex-wrap: wrap; \/* 允许自动换行 *\/\n  gap: 20px; \/* 卡片之间的间距 *\/\n}\n\n.collection-card {\n  width: 250px;\n  height: auto !important;\n  background-color: white;\n  border-radius: 10px;\n  overflow: hidden;\n}\n\n.collection-card-link {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-decoration: none;\n  \n}\n\n.collection-card-link h2 {\n  margin-top: 5px;\n  margin-bottom : 5px;\n  text-align: center;\n}\n\n.collection-card img {\n  width: 100%;\n  height: auto;\n  border-radius: 10px;\n}\n<\/style>\n\n<script>\nvar carousels = document.querySelectorAll('.image-carousel');\nif (carousels) {\n    carousels.forEach(function(carousel) {\n        var images = carousel.querySelectorAll('.carousel-image');\n        var currentIndex = 0;\n        var autoplayInterval; \/\/ 定义变量保存自动播放定时器\n\n        \/\/ 自动播放函数\n        function startAutoplay() {\n            autoplayInterval = setInterval(function() {\n                images[currentIndex].style.display = 'none';\n                currentIndex = (currentIndex + 1) % images.length;\n                images[currentIndex].style.display = 'block';\n            }, 5000); \/\/ 每 5 秒播放一次\n        }\n\n        \/\/ 开始自动播放\n        startAutoplay();\n    });\n}\n<\/script>","color_scheme":"scheme-1","padding_top":0,"padding_bottom":0}}},"order":["image_banner_tekjWj","custom_liquid_BRKHzn","rich_text_jTm6XP","main","custom_liquid_f6Rxit"]}
+{
+  "sections": {
+    "image_banner_tekjWj": {
+      "type": "image-banner",
+      "disabled": true,
+      "custom_css": [
+        "a {display: flex; justify-content: center; align-items: center; \/* 垂直居中 *\/ background-color: white; padding-top: 0; padding-bottom: 0;}",
+        "a img {width: 60%; height: auto; object-fit: contain;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/550_LOGO_Babygliderph.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "top-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "custom_liquid_BRKHzn": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\">\n  <nav aria-label=\"Breadcrumb\" class=\"breadcrumb\">\n    <a href=\"\/\">BabygliderPH<\/a>\n    {% if product.collections.size > 0 %}\n      <span>&gt;<\/span>\n      <a href=\"{{ product.collections.first.url }}\">{{ product.collections.first.title }}<\/a>\n    {% endif %}\n  <\/nav>\n<\/div>\n\n\n\n<style>\n.breadcrumb {\n  white-space: nowrap; \/* 确保不断行 *\/\n  font-size: 16px; \/* 根据需要调整字体大小 *\/\n}\n\n.breadcrumb a {\n  text-decoration: none; \/* 去除链接下划线 *\/\n  color: #337ab7; \/* 设置链接颜色 *\/\n  margin: 0 5px; \/* 在链接和符号之间添加适当的空间 *\/\n}\n\n.breadcrumb span {\n  margin: 0 5px; \/* 在符号两侧添加空间 *\/\n}\n<\/style>",
+        "color_scheme": "scheme-2",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "rich_text_jTm6XP": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_bCFL3c": {
+          "type": "heading",
+          "settings": {
+            "heading": "Brands",
+            "heading_size": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_bCFL3c"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_f6Rxit": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"page-width\">\n  {% assign sorted_collections = collections | sort: 'title' %}\n  {% assign current_letter = nil %}\n\n  {% for collection in sorted_collections %}\n    {% assign first_character = collection.title | slice: 0, 1 %}\n    {% assign second_character = collection.title | slice: 1, 1 %}\n\n    {% if first_character == \"-\" %}\n      {% if second_character != current_letter %}\n        {% assign current_letter = second_character %}\n        <div class=\"letter-group\" style=\"width: 100%;\"> <div class=\"letter-section\">\n            <h1>{{ current_letter }}<\/h1>\n          <\/div>\n        <div class=\"collection-card-wrapper\"> \n      {% endif %}\n\n      <div class=\"collection-card\" style=\"width: 250px; height: 250px;\">\n        {% assign featured_product = collection.products.first %}\n        <a href=\"{{ collection.url }}\" class=\"collection-card-link\">\n          {% if featured_product %}\n            <img src=\"{{ featured_product.featured_image | img_url: '250x250' }}\" alt=\"{{ collection.title }}\">\n          {% else %}\n            <img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0871\/8991\/3879\/files\/QuestionMark.png\" alt=\"{{ collection.title }}\">\n          {% endif %}\n          <h2>{{ collection.title }}<\/h2>\n        <\/a>\n      <\/div>\n\n      {% if forloop.last %}\n        <\/div>\n      <\/div>\n      {% endif %}\n    {% endif %}\n  {% endfor %}\n<\/div>\n\n<style>\n\n\n.letter-group {\n  width: 100%;\n}\n\n.letter-section h1 {\n  margin-bottom: 6px; \/* 调整字母标题和卡片之间的间距 *\/\n}\n\n.collection-card-wrapper {\n  display: flex;\n  flex-wrap: wrap; \/* 允许自动换行 *\/\n  gap: 20px; \/* 卡片之间的间距 *\/\n}\n\n.collection-card {\n  width: 250px;\n  height: auto !important;\n  background-color: white;\n  border-radius: 10px;\n  overflow: hidden;\n}\n\n.collection-card-link {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-decoration: none;\n  \n}\n\n.collection-card-link h2 {\n  margin-top: 5px;\n  margin-bottom : 5px;\n  text-align: center;\n}\n\n.collection-card img {\n  width: 100%;\n  height: auto;\n  border-radius: 10px;\n}\n<\/style>\n\n<script>\nvar carousels = document.querySelectorAll('.image-carousel');\nif (carousels) {\n    carousels.forEach(function(carousel) {\n        var images = carousel.querySelectorAll('.carousel-image');\n        var currentIndex = 0;\n        var autoplayInterval; \/\/ 定义变量保存自动播放定时器\n\n        \/\/ 自动播放函数\n        function startAutoplay() {\n            autoplayInterval = setInterval(function() {\n                images[currentIndex].style.display = 'none';\n                currentIndex = (currentIndex + 1) % images.length;\n                images[currentIndex].style.display = 'block';\n            }, 5000); \/\/ 每 5 秒播放一次\n        }\n\n        \/\/ 开始自动播放\n        startAutoplay();\n    });\n}\n<\/script>",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    }
+  },
+  "order": [
+    "image_banner_tekjWj",
+    "custom_liquid_BRKHzn",
+    "rich_text_jTm6XP",
+    "main",
+    "custom_liquid_f6Rxit"
+  ]
+}
