@@ -437,8 +437,9 @@ width: 50%;
               {% if order_status != null %}
                 {% if order_status != Cancelled %}
                   <p class="badge bg-danger text-white">Currentlly Status : {{ order_status }}</p>
-                {%endif %}
-              <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
+                {% else %}
+                  <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
+                {% endif %}
               <br>
               {% endif %}
 
