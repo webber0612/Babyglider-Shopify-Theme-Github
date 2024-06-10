@@ -396,6 +396,18 @@ width: 50%;
 
     </script>
 
+{% capture table_header %}
+<tr class="text-center align-middle">
+  <th class="py-4 fs-4" style="width: 40px;"></th>
+  <th class="py-4 fs-4" style="width: 100px;">Image</th>
+  <th class="py-4 fs-4 ps-3">Product Info</th>
+  <th class="py-4 fs-4" style="width: 100px;">Price</th>
+  <th class="py-4 fs-4" style="width: 40px;">Qty</th>
+  <th class="py-4 fs-4" style="width: 100px;">Total</th>
+</tr>
+{% endcapture %}
+
+
   <div class="customer order section-{{ section.id }}-padding">
     <svg style="display:none">
       <symbol id="icon-discount" viewBox="0 0 12 12">
@@ -501,14 +513,8 @@ width: 50%;
     {% comment %} PC Table {% endcomment %}
     <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
       <thead>
-        <tr class="text-center align-middle">
-          <th class="py-4 fs-4" style="width: 40px;"></th>
-          <th class="py-4 fs-4" style="width: 100px;">Image</th>
-          <th class="py-4 fs-4 ps-3">Product Info</th>
-          <th class="py-4 fs-4" style="width: 100px;">Price</th>
-          <th class="py-4 fs-4" style="width: 40px;">Qty</th>
-          <th class="py-4 fs-4" style="width: 100px;">Total</th>
-        </tr>
+        {% assign table_header_content = table_header %}
+        {{ table_header_content }}
       </thead>
       <tbody>
         {% assign current_collection = '' %}
