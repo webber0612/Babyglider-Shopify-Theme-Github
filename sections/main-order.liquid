@@ -1259,97 +1259,107 @@ width: 50%;
       {% endunless %}
       {% endfor %}
       </tbody>
-      <tfoot role="rowgroup">
-        <div class="w-100">
-          {%- if order.cart_level_discount_applications != blank -%}
-            <tr role="row">
-              <div>
-                {%- for discount_application in order.cart_level_discount_applications -%}
-                  <td id="RowDiscount" role="rowheader" scope="row" colspan="2">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                      <a>
-                        {{ 'customer.order.discount' | t }}
-                        <span class="cart-discount">
-                          <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                            <use href="#icon-discount" />
-                          </svg>
-                          {{- discount_application.title -}}
-                        </span>
-                      </a>
-                      <a>
-                        <div>
-                          <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                          <span class="cart-discount">
-                            <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                              <use href="#icon-discount" />
-                            </svg>
-                            {{- discount_application.title -}}
-                          </span>
-                        </div>
-                      </a>
-                    </div>
-                  </td>
-                {%- endfor -%}
-              </div>
-            </tr>
-          {%- endif -%}
-                    {%- for shipping_method in order.shipping_methods -%}
-          <tr role="row">
-            <div>
-              <!-- 顯示運費 -->
-            <td id="RowShipping" role="rowheader" scope="row" colspan="2">
-              <a>
-                <h3>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h3>
-              </a>
-              <a>
-                <h3>{{ shipping_method.price | money }}</h3>
-              </a>
-            </td>
-          </div>
-          </tr>
-          {%- endfor -%}
-          {%- for tax_line in order.tax_lines -%}
-          <tr role="row">
-            <!-- 顯示稅金 -->
-            <td id="RowTax" role="rowheader" scope="row" colspan="2">
-              {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
-              {{ tax_line.rate | times: 100 }}%)
-            </td>
-            <td headers="RowTax" role="cell"
-              data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">
-              {{ tax_line.price | money }}
-            </td>
-          </tr>
-          {%- endfor -%}
-          {%- if order.total_duties -%}
-          <tr role="row">
-            <!-- 顯示關稅 -->
-            <td id="RowDuties" role="rowheader" scope="row" colspan="2">{{ 'customer.order.total_duties' | t }}</td>
-            <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
-              {{ order.total_duties | money }}
-            </td>
-          </tr>
-          {%- endif -%}
-          {%- if order.total_refunded_amount > 0 -%}
-          <tr role="row">
-            <!-- 顯示退款總額 -->
-            <td id="RowTotalRefund" role="rowheader" scope="row" colspan="2">
-              {{ 'customer.order.total_refunded' | t }}
-            </td>
-            <td headers="RowTotalRefund" role="cell" colspan="2" data-label="{{ 'customer.order.total_refunded' | t }}">
-              -{{ order.total_refunded_amount | money_with_currency }}
-            </td>
-          </tr>
-          {%- endif -%}
-          <tr role="row">
-            <!-- 顯示訂單總額 -->
-            <td id="RowTotal" role="rowheader" scope="row" colspan="2">{{ 'customer.order.total' | t }}</td>
-            <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
-              {{ order.total_net_amount | money_with_currency }}
-            </td>
-          </tr>
+      <div class="order-tfoot">
+        {% comment %} Order Subtotal {% endcomment %}
+        <div class="order-subtotal">
+          {% comment %} Order Subtotal Tital {% endcomment %}
+          <a>
+            <h2>{{ 'customer.order.subtotal' | t }}</h2>
+          </a>
+          {% comment %} Order Subtotal Value {% endcomment %}
+           <a>
+            <h2>{{ order.line_items_subtotal_price | money }}</h2>
+           </a>
         </div>
-      </tfoot>
+        {% comment %} Discount {% endcomment %}
+        {%- if order.cart_level_discount_applications != blank -%}
+          <div class="order-discount">
+            {%- for discount_application in order.cart_level_discount_applications -%}
+              {% comment %} Discount Title {% endcomment %}
+              <a>
+                {{ 'customer.order.discount' | t }}
+                <span class="cart-discount">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                    <use href="#icon-discount" />
+                  </svg>
+                  {{- discount_application.title -}}
+                </span>
+              </a>
+              {% comment %} Discount Value {% endcomment %}
+              <a>
+                <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                <span class="cart-discount">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                    <use href="#icon-discount" />
+                  </svg>
+                  {{- discount_application.title -}}
+                </span>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {% comment %} Shipping {% endcomment %}
+        <div class="order-shipping">
+          {% comment %} Shipping Method {% endcomment %}
+          <a>
+            <h3>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h3>
+          </a>
+          {% comment %} Shipping fee {% endcomment %}
+          <a>
+            <h3>{{ shipping_method.price | money }}</h3>
+          </a>
+        </div>
+        {% comment %} Tax {% endcomment %}
+        {%- if tax_line.title != blank -%}
+          <div class="order-tax">
+          {% comment %} Tax Name {% endcomment %}
+            <a>
+              {{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
+            </a>
+          {% comment %} Tax Value {% endcomment %}
+            <a>
+              {{ tax_line.price | money }}
+            </a>
+          </div>
+        {% endif %}
+        {% comment %} Customs Duty {% endcomment %}
+        {%- if order.total_duties != blank -%}
+          <div class="order-customs-duty">
+            {% comment %} Customs Duty Title {% endcomment %}
+            <a>
+              {{ 'customer.order.total_duties' | t }}
+            </a>
+            {% comment %} Customs Duty Value {% endcomment %}
+            <a>
+              {{ order.total_duties | money }}
+            </a>
+          </div>
+        {% endif %}
+        {% comment %} Refound {% endcomment %}
+        {%- if order.total_refunded_amount != blank -%}
+          <div class="order-refound">
+            {% comment %} Order Refound Title {% endcomment %}
+            <a>
+              {{ 'customer.order.total_refunded' | t }}
+            </a>
+            {% comment %} Order Refound Value {% endcomment %}
+            <a>
+              -{{ order.total_refunded_amount | money_with_currency }}
+            </a>
+          </div>
+        {% endif %}
+        {% comment %} Order Total {% endcomment %}
+        <div class="order-total">
+          {% comment %} Order Total Title {% endcomment %}
+          <a>
+            {{ 'customer.order.total' | t }}
+          </a>
+          {% comment %} Order Total Value {% endcomment %}
+          <a>
+            {{ order.total_net_amount | money_with_currency }}
+          </a>
+        </div>
+      </div>
     </table>
 
     <!-- 模態框結構 -->
