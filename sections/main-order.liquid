@@ -1264,13 +1264,12 @@ width: 50%;
           <tr role="row">
             <div>
               <!-- 訂單小計 -->
-              訂單小計
-              <td id="RowSubtotal" role="rowheader" scope="row" colspan="2">
+              <a id="RowSubtotal" role="rowheader" scope="row" colspan="2">
                 {{ 'customer.order.subtotal' | t }}
-              </td>
-              <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
+              </a>
+              <a headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
                 {{ order.line_items_subtotal_price | money }}
-              </td>
+              </a>
             </div>
           </tr>
           {%- if order.cart_level_discount_applications != blank -%}
@@ -1306,12 +1305,12 @@ width: 50%;
             <div>
               <!-- 顯示運費 -->
             <td id="RowShipping" role="rowheader" scope="row" colspan="2">
-              <span>
+              <a>
                 <h3>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h3>
-              </span>
-              <span>
+              </a>
+              <a>
                 <h3>{{ shipping_method.price | money }}</h3>
-              </span>
+              </a>
             </td>
           </div>
           </tr>
