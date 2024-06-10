@@ -1320,7 +1320,6 @@ width: 50%;
         {%- if order.total_refunded_amount != 0 -%}
           <tr>
             <td colspan="2" class="order-refund">
-              {{order.total_refunded_amount }}
               <h4>{{ 'customer.order.total_refunded' | t }}</h4>
               <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
             </td>
