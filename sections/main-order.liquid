@@ -345,69 +345,71 @@ width: 50%;
 
       document.addEventListener('DOMContentLoaded', function () {
         const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
-
-        toggleButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const targetId = button.getAttribute('data-bs-target');
-            const targetTbody = document.querySelector(targetId);
-            const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
-
-            if (!targetTbody) {
-              console.error(`Element with ID ${targetId} not found.`);
-              return;
-            }
-
-            // 如果目標元素已經在過渡過程中，不進行操作
-            if (targetTbody.classList.contains('collapsing')) {
-              return;
-            }
-
-            // 檢查當前狀態，然後切換 class
-            if (targetTbody.classList.contains('show')) {
-              targetTbody.classList.remove('show');
-              targetTbody.classList.remove('expand');
-              targetTbody.classList.add('collapse');
-              collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-              button.textContent = "➕"; // 修改此行
-
-            } else {
-              targetTbody.classList.remove('collapse');
-              targetTbody.classList.add('show');
-              targetTbody.classList.add('expand');
-              collectionTitle.removeAttribute('colspan');
-              button.textContent = "123456"; // 修改此行
-
-            }
-          });
-        });
-
-        // 處理過渡完成事件
-        const targetTbodies = document.querySelectorAll('[id^="targetTbody"]');
+        const targetTbodies = document.querySelectorAll('[id^="collapse"]');
+    
+        // 初始化时展开所有折叠表格并设置按钮文本为 "➖"
         targetTbodies.forEach(targetTbody => {
-          targetTbody.addEventListener('animationend', function () {
+            targetTbody.classList.add('show');
             const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
-            const collectionTitle = button.closest('tr').querySelector('.collection-title');
-            if (targetTbody.classList.contains('show')) {
-              collectionTitle.removeAttribute('colspan');
-            } else {
-              collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
+            if (button) {
+                button.textContent = "➖";
             }
-          });
         });
-
+    
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = button.getAttribute('data-bs-target');
+                const targetTbody = document.querySelector(targetId);
+                const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
+    
+                if (!targetTbody) {
+                    console.error(`Element with ID ${targetId} not found.`);
+                    return;
+                }
+    
+                // 如果目標元素已經在過渡過程中，不進行操作
+                if (targetTbody.classList.contains('collapsing')) {
+                    return;
+                }
+    
+                // 檢查當前狀態，然後切換 class
+                if (targetTbody.classList.contains('show')) {
+                    targetTbody.classList.remove('show');
+                    targetTbody.classList.add('collapse');
+                    collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
+                } else {
+                    targetTbody.classList.remove('collapse');
+                    targetTbody.classList.add('show');
+                    collectionTitle.removeAttribute('colspan');
+                }
+            });
+        });
+    
+        // 监听折叠和展开事件
+        targetTbodies.forEach(targetTbody => {
+            const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
+    
+            targetTbody.addEventListener('shown.bs.collapse', function () {
+                button.textContent = "➖";
+            });
+    
+            targetTbody.addEventListener('hidden.bs.collapse', function () {
+                button.textContent = "➕";
+            });
+        });
+    
         var imageModal = document.getElementById('imageModal');
         imageModal.addEventListener('show.bs.modal', function (event) {
-          var button = event.relatedTarget;
-          var imgSrc = button.getAttribute('data-img-src');
-          var imgAlt = button.getAttribute('data-img-alt');
-
-          var modalImg = imageModal.querySelector('.modal-body img');
-          modalImg.src = imgSrc;
-          modalImg.alt = imgAlt;
+            var button = event.relatedTarget;
+            var imgSrc = button.getAttribute('data-img-src');
+            var imgAlt = button.getAttribute('data-img-alt');
+    
+            var modalImg = imageModal.querySelector('.modal-body img');
+            modalImg.src = imgSrc;
+            modalImg.alt = imgAlt;
         });
-            });
-
-    </script>
+    });
+        </script>
 
   <div class="customer order section-{{ section.id }}-padding">
     <svg style="display:none">
@@ -539,9 +541,35 @@ width: 50%;
       {% assign current_collection = collection %}
       <tr>
         <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
-          <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
-            data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
-            aria-expanded="true" aria-controls="collapse{{ forloop.index }}" data-collapsed-text="➕" data-expanded-text="➖">➕</a>
+<a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+   data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+   aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const targetId = button.getAttribute('data-bs-target');
+                const targetTbody = document.querySelector(targetId);
+                const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
+
+                if (!targetTbody) {
+                    console.error(`Element with ID ${targetId} not found.`);
+                    return;
+                }
+
+                // 切换按钮文本和符号
+                if (targetTbody.classList.contains('show')) {
+                    button.textContent = "➕";
+                } else {
+                    button.textContent = "➖";
+                }
+            });
+        });
+    });
+</script>
         </td>
         <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
           <div class="text-start py-3" colspan="6">
@@ -970,9 +998,9 @@ width: 50%;
       {% assign current_collection = collection %}
       <tr>
         <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
-          <a class="btn btn-primary toggle-button text-decoration-none align-middle" style="padding-top:1rem;"
-            data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}"
-            role="button" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
+          <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+            data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+            aria-expanded="true" aria-controls="collapse{{ forloop.index }}" data-collapsed-text="➕" data-expanded-text="➖">➕</a>
           <Span div class="text text-start py-3">
             {{ collection }}
             {%- assign product = line_item.product -%}
