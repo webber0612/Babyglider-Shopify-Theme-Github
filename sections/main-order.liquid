@@ -316,9 +316,7 @@ width: 50%;
     {%- endstyle -%}
 
     <script>
-      <script>
         console.log({{ shipping_method | json }});
-      </script>
       
       {% assign order_status = order.metafields.custom.order_status %}
       {% assign order_progress = 0 %}
