@@ -284,10 +284,10 @@
 }
 
 /* 在 order-summary-table.css 文件中 */
-@media screen and (max-width: 750px) {
   @media screen and (max-width: 750px) {
   .order-summary-table td:before {
     display: none;       /* 隱藏 ::before 偽元素 */ 
+    text-align:right;
   }
   tbody td:last-of-type {
     padding-bottom: 2rem;
@@ -296,14 +296,11 @@
     padding-top: 2rem;
   }
   /* 针对订单列表表格中特定的 td */
-.order-summary-table td:nth-child(4) {
+  .order-summary-table td:nth-child(4) {
   text-align: right;
-}
+  }
 }
 
-/* 在 order-summary-table.css 中 */
-
-}
 
 
 {%- endstyle -%}
