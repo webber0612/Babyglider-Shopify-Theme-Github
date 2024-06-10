@@ -377,26 +377,24 @@ width: 50%;
                     targetTbody.classList.remove('show');
                     targetTbody.classList.add('collapse');
                     collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-                    button.textContent = "➕"; // 修改此行
                 } else {
                     targetTbody.classList.remove('collapse');
                     targetTbody.classList.add('show');
                     collectionTitle.removeAttribute('colspan');
-                    button.textContent = "➖"; // 修改此行
                 }
             });
         });
     
-        // 處理過渡完成事件
+        // 监听折叠和展开事件
         targetTbodies.forEach(targetTbody => {
-            targetTbody.addEventListener('transitionend', function() {
-                const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
-                const collectionTitle = button.closest('tr').querySelector('.collection-title');
-                if (targetTbody.classList.contains('show')) {
-                    collectionTitle.removeAttribute('colspan');
-                } else {
-                    collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-                }
+            const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
+    
+            targetTbody.addEventListener('shown.bs.collapse', function () {
+                button.textContent = "➖";
+            });
+    
+            targetTbody.addEventListener('hidden.bs.collapse', function () {
+                button.textContent = "➕";
             });
         });
     
