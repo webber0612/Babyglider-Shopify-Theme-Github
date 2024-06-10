@@ -285,7 +285,8 @@ width: 50%;
 
     /* 在 order-summary-table.css 文件中 */
     @media screen and (max-width: 750px) {
-    .order-summary-table td:before {
+    .order-summary-table td:before, 
+    .order-summary-table tfoot:before{
     display: none; /* 隱藏 ::before 偽元素 */
     text-align:right;
     }
@@ -301,9 +302,6 @@ width: 50%;
     }
     tbody tr {
     border-top:0 !important;
-    }
-    .tfoot:before{
-      display: none; /* 隱藏 ::before 偽元素 */
     }
     }
 
