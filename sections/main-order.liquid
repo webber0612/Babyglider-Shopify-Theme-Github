@@ -374,15 +374,6 @@ width: 50%;
               targetTbody.classList.add('expand');
               collectionTitle.removeAttribute('colspan');
             }
-
-            // 更新按钮文本
-            const targetId = button.getAttribute('data-bs-target');
-            const targetTbody = document.querySelector(targetId);
-            if (targetTbody.classList.contains('show')) {
-              button.textContent = '➖'; // 展开时显示 "-"
-            } else {
-              button.textContent = '➕'; // 折叠时显示 "+"
-            }
           });
         });
 
