@@ -499,115 +499,125 @@
     <h2>{{ order.name }} Order List</h2>
 
     {% comment %} PC Table {% endcomment %}
-
-{% assign pre_order_items = order.line_items | where: "product.collections.first.title", "contains [Pre-Order]" | sort: "product.collections[0].title" %}
-{% assign stock_on_hand_items = order.line_items | where: "product.collections.first.title", "not contains [Pre-Order]" | sort: "product.collections[0].title" %}
-
-<table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
-  <thead>
-    <tr class="text-center align-middle">
-      <th class="py-4 fs-4" style="width: 40px;"></th>
-      <th class="py-4 fs-4" style="width: 100px;">Image</th>
-      <th class="py-4 fs-4 ps-3" >Product Info</th>
-      <th class="py-4 fs-4" style="width: 100px;">Price</th>
-      <th class="py-4 fs-4" style="width: 40px;">Qty</th>
-      <th class="py-4 fs-4" style="width: 100px;">Total</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  {% assign current_collection = '' %}
-  {% for line_item in pre_order_items %}
-    {% assign collection = line_item.product.collections[0].title %}
-    {% if collection != current_collection %}
-      {% assign current_collection = collection %}
-      <tr>
-        <td class="text-center align-middle" style="padding-right:0;">
-          <a
-            class="btn btn-primary toggle-button text-decoration-none"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse-preorder-{{ forloop.index }}" 
-            href="#collapse-preorder-{{ forloop.index }}"
-            role="button"
-            aria-expanded="true"
-            aria-controls="collapse-preorder-{{ forloop.index }}"
-          >
-            ➕
-          </a>
-        </td>
-        <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;"> 
-          <div class="text-start py-3" colspan="6">
-            {{ collection }} 
-            {%- assign product = line_item.product -%}
-            {%- assign collection_handle = product.collections[0].handle -%}
-            {%- assign shopify_collection = collections[collection_handle] -%}
-            {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-              <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-                ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
-              </span>
-            {% endif %}
-          </div>
-        </td>
-      </tr>
-    {% endif %}
-      <tbody id="collapse-preorder-{{ forloop.index }}" class="collapse show">
-        <tr>
-          <td></td>
-          <td class="p-0 text-center align-middle">
-            <img
-              src="{{ line_item.image | image_url: width: 100, height: 100 }}"
-              alt="{{ line_item.title }}"
-              width="100"
-              height="100"
-              class="clickable-img"
-              data-bs-toggle="modal"
-              data-bs-target="#imageModal"
-              data-img-src="{{ line_item.image | image_url }}"
-              data-img-alt="{{ line_item.title }}"
-            >
-          </td>
-          <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
-          <td class="pe-4 align-middle">{{ line_item.price | money }}</td>
-          <td class="text-center align-middle">x{{ line_item.quantity }}</td>
-          <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td>
+    <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
+      <thead>
+        <tr class="text-center align-middle">
+          <th class="py-4 fs-4" style="width: 40px;"></th>
+          <th class="py-4 fs-4" style="width: 100px;">Image</th>
+          <th class="py-4 fs-4 ps-3" >Product Info</th>
+          <th class="py-4 fs-4" style="width: 100px;">Price</th>
+          <th class="py-4 fs-4" style="width: 40px;">Qty</th>
+          <th class="py-4 fs-4" style="width: 100px;">Total</th>
         </tr>
+      </thead>
+      <tbody>
+        {% assign current_collection = '' %}
+        {% for line_item in sorted_items %}
+          {% assign collection = line_item.product.collections[0].title %}
+          {% if collection contains '[Pre-Order]' %}
+            {% if collection != current_collection %}
+              {% if current_collection != '' %}
+                </tbody>
+              {% endif %}
+              {% assign current_collection = collection %}
+              <tr>
+                <td class="text-center align-middle" style="padding-right:0;">
+                  <a
+                    class="btn btn-primary toggle-button text-decoration-none"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse{{ forloop.index }}"
+                    href="#collapse{{ forloop.index }}"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="collapse{{ forloop.index }}"
+                  >
+                    ➕
+                  </a>
+                </td>
+                <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;"> 
+                  <div class="text-start py-3" colspan="6">
+                    {{ collection }} 
+                   {%- assign product = line_item.product -%}
+                   {%- assign collection_handle = product.collections[0].handle -%}
+                   {%- assign shopify_collection = collections[collection_handle] -%}
+                   {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                     <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+                       ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                     </span>
+                   {% endif %}
+                   </div>
+                  </td>
+                      </tr>
+              <tbody id="collapse{{ forloop.index }}" class="collapse">
+            {% endif %}
+            <tr>
+              <td></td>
+              <td class="p-0 text-center align-middle">
+                <img
+                  src="{{ line_item.image | image_url: width: 100, height: 100 }}"
+                  alt="{{ line_item.title }}"
+                  width="100"
+                  height="100"
+                  class="clickable-img"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-img-src="{{ line_item.image | image_url }}"
+                  data-img-alt="{{ line_item.title }}"
+                >
+              </td>
+              <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
+              <td class="pe-4 align-middle">{{ line_item.price | money }}</td>
+              <td class="text-center align-middle">x{{ line_item.quantity }}</td>
+              <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+        {% if current_collection != '' %}
+          </tbody>
+        {% endif %}
+
+        {% assign current_collection = '' %}
+        
+        {% if current_collection != '' %}
+          </tbody>
+        {% endif %}
+
+        {%- assign displayed_stock_on_hand = false -%}
+        {% for line_item in sorted_items %}
+          {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
+            {%- if displayed_stock_on_hand == false -%}
+              <tr>
+                <td></td>
+                <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="5" style="background-color: lightgoldenrodyellow;">
+                  Stock On Hand</td>
+              </tr>
+              {%- assign displayed_stock_on_hand = true -%}
+            {%- endif -%}
+
+            <tr>
+              <td></td>
+              <td class="p-0 text-center align-middle">
+                <img
+                  src="{{ line_item.image | image_url: width: 100, height: 100 }}"
+                  alt="{{ line_item.title }}"
+                  width="100"
+                  height="100"
+                  class="clickable-img"
+                  data-bs-toggle="modal"
+                  data-bs-target="#imageModal"
+                  data-img-src="{{ line_item.image | image_url }}"
+                  data-img-alt="{{ line_item.title }}"
+                >
+              </td>
+              <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
+              <td class="pe-4 align-middle">{{ line_item.price | money }}</td>
+              <td class="text-center align-middle">x{{ line_item.quantity }}</td>
+              <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td>
+            </tr>
+          {% endunless %}
+        {% endfor %}
       </tbody>
-  {% endfor %}
-
-  {%- assign displayed_stock_on_hand = false -%}
-  {% for line_item in stock_on_hand_items %}
-    {%- if displayed_stock_on_hand == false -%}
-      <tr>
-        <td></td>
-        <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="5" style="background-color: lightgoldenrodyellow;">
-          Stock On Hand</td>
-      </tr>
-      {%- assign displayed_stock_on_hand = true -%}
-    {%- endif -%}
-
-    <tr>
-      <td></td>
-      <td class="p-0 text-center align-middle">
-        <img
-          src="{{ line_item.image | image_url: width: 100, height: 100 }}"
-          alt="{{ line_item.title }}"
-          width="100"
-          height="100"
-          class="clickable-img"
-          data-bs-toggle="modal"
-          data-bs-target="#imageModal"
-          data-img-src="{{ line_item.image | image_url }}"
-          data-img-alt="{{ line_item.title }}"
-        >
-      </td>
-      <td class="ps-3 align-middle">{{ line_item.product.title }}</td>
-      <td class="pe-4 align-middle">{{ line_item.price | money }}</td>
-      <td class="text-center align-middle">x{{ line_item.quantity }}</td>
-      <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    </table>
 
     {% comment %} Mobile Table {% endcomment %}
     <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
