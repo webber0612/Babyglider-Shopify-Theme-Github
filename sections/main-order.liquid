@@ -374,15 +374,16 @@ width: 50%;
     
                 // 檢查當前狀態，然後切換 class
                 if (targetTbody.classList.contains('show')) {
+                    button.textContent = "➕"; // 修改此行
                     targetTbody.classList.remove('show');
                     targetTbody.classList.add('collapse');
                     collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-                    button.textContent = "➕"; // 修改此行
                 } else {
+                    button.textContent = "➖"; // 修改此行
                     targetTbody.classList.remove('collapse');
                     targetTbody.classList.add('show');
                     collectionTitle.removeAttribute('colspan');
-                    button.textContent = "➖"; // 修改此行
+                    
                 }
             });
         });
