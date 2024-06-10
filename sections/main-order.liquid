@@ -298,9 +298,6 @@
     display: none;       /* 隱藏 ::before 偽元素 */ 
   }
 }
-.toggle-button {
-  line-height: 1.5; /* 假设按钮高度为 36px，则行高为 24px */
-}
 
 
 {%- endstyle -%}
@@ -638,7 +635,7 @@
               <tr>
                 <td class="text text-start align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
                   <a
-                    class="btn btn-primary toggle-button text-decoration-none align-middle"
+                    class="btn btn-primary toggle-button text-decoration-none align-middle pt-3"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapse{{ forloop.index }}"
                     href="#collapse{{ forloop.index }}"
