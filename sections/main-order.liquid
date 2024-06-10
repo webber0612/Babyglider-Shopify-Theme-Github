@@ -972,9 +972,9 @@ width: 50%;
       {% assign current_collection = collection %}
       <tr>
         <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
-          <a class="btn btn-primary toggle-button text-decoration-none align-middle" style="padding-top:1rem;"
-            data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}"
-            role="button" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
+          <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+            data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+            aria-expanded="true" aria-controls="collapse{{ forloop.index }}" data-collapsed-text="➕" data-expanded-text="➖">➕</a>
           <Span div class="text text-start py-3">
             {{ collection }}
             {%- assign product = line_item.product -%}
