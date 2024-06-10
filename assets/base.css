@@ -444,7 +444,7 @@ table:not([class]) th {
 
 @media screen and (max-width: 749px) {
   .small-hide {
-    display: none !important;
+    /* display: none !important; */
   }
 }
 
