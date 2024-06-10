@@ -295,9 +295,6 @@
 /* 在 order-summary-table.css 中 */
 @media screen and (max-width: 750px) {
   .order-summary-table td:before {
-    content: none;        /* 移除 ::before 伪元素的内容 */
-    padding-right: 0;    /* 移除 padding-right */
-    flex-grow: 0;        /* 移除 flex-grow */
     display: none;       /* 隱藏 ::before 偽元素 */ 
   }
 }
@@ -648,7 +645,7 @@
                   >
                     ➕
                   </a>
-                  <div class="text text-start py-3">
+                  <Span div class="text text-start py-3">
                     {{ collection }} 
                    {%- assign product = line_item.product -%}
                    {%- assign collection_handle = product.collections[0].handle -%}
@@ -658,7 +655,7 @@
                         ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
-                   </div>
+                   </Span>
                   </td>
                       </tr>
               <tbody id="collapse{{ forloop.index }}" class="collapse">
