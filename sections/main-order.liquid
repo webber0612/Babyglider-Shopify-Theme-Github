@@ -918,6 +918,8 @@ width: 50%;
               {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
             </td>
             <td headers="RowShipping" role="cell"
+              {{ shipping_method | json }}
+              {{ shipping_method.title | json }}
               data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})">
               {{ shipping_method.price | money }}
             </td>
