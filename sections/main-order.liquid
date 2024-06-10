@@ -616,7 +616,7 @@
               {% endif %}
               {% assign current_collection = collection %}
               <tr>
-                <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
+                <td class="text-start align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
                   <a
                     class="btn btn-primary toggle-button text-decoration-none"
                     data-bs-toggle="collapse"
@@ -635,7 +635,7 @@
                    {%- assign shopify_collection = collections[collection_handle] -%}
                    {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
                      <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-                        {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                        ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
                      </span>
                    {% endif %}
                    </div>
