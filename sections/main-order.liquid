@@ -283,6 +283,15 @@
   }
 }
 
+/* 在 order-summary-table.css 文件中 */
+@media screen and (max-width: 749px) {
+  .order-summary-table .customer td:before {
+    content: none; /* 移除 ::before 伪元素的内容 */
+    padding-right: 0; /* 移除 padding-right */
+    flex-grow: 0; /* 移除 flex-grow */
+  }
+}
+
 {%- endstyle -%}
 
 <script>
