@@ -285,18 +285,21 @@
 
 /* 在 order-summary-table.css 文件中 */
 @media screen and (max-width: 750px) {
-  .order-summary-table .customer td:before {
-    content: none; /* 移除 ::before 伪元素的内容 */
-    padding-right: 0; /* 移除 padding-right */
-    flex-grow: 0; /* 移除 flex-grow */
-  }
-}
-
-/* 在 order-summary-table.css 中 */
-@media screen and (max-width: 750px) {
+  @media screen and (max-width: 750px) {
   .order-summary-table td:before {
     display: none;       /* 隱藏 ::before 偽元素 */ 
   }
+  tbody td:last-of-type {
+    padding-bottom: 2rem;
+  }
+  tbody td:first-of-type {
+    padding-top: 2rem;
+  }
+
+}
+
+/* 在 order-summary-table.css 中 */
+
 }
 
 
