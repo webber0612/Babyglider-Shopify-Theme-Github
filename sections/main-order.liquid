@@ -350,7 +350,6 @@ width: 50%;
             button.addEventListener('click', function () {
                 const targetId = button.getAttribute('data-bs-target');
                 const targetTbody = document.querySelector(targetId);
-                const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
 
                 if (!targetTbody) {
                     console.error(`Element with ID ${targetId} not found.`);
@@ -358,12 +357,30 @@ width: 50%;
                 }
 
                 // 切换按钮文本和符号
-                if (targetTbody.classList.contains('show')) {
-                    button.textContent = "➕";
-                } else {
+                if (button.textContent === "➕") {
                     button.textContent = "➖";
+                } else {
+                    button.textContent = "➕";
+                }
+
+                // 切换表格显示
+                if (targetTbody.classList.contains('show')) {
+                    targetTbody.classList.remove('show');
+                    targetTbody.classList.add('collapse');
+                } else {
+                    targetTbody.classList.remove('collapse');
+                    targetTbody.classList.add('show');
                 }
             });
+        });
+
+        // 页面加载时展开所有表格
+        const allTbodies = document.querySelectorAll('[data-bs-toggle="collapse"]');
+        allTbodies.forEach(tbody => {
+            const targetId = tbody.getAttribute('data-bs-target');
+            const targetTbody = document.querySelector(targetId);
+            tbody.textContent = "➖"; // 设置按钮为展开状态的符号
+            targetTbody.classList.add('show');
         });
     });
     
@@ -513,7 +530,7 @@ width: 50%;
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
             aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
-         
+                           
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const toggleButtons = document.querySelectorAll('.toggle-button');
@@ -970,7 +987,7 @@ width: 50%;
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
             aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
-            <Span div class="text text-start py-3">
+                     <Span div class="text text-start py-3">
             {{ collection }}
             {%- assign product = line_item.product -%}
             {%- assign collection_handle = product.collections[0].handle -%}
