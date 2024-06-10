@@ -345,14 +345,22 @@ width: 50%;
 
       document.addEventListener('DOMContentLoaded', function () {
         const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+        const targetTbodies = document.querySelectorAll('[id^="collapse"]');
+    
+        // 初始化时展开所有折叠表格并设置按钮文本为 "➖"
+        targetTbodies.forEach(targetTbody => {
+            targetTbody.classList.add('show');
+            const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
+            if (button) {
+                button.textContent = "➖";
+            }
+        });
     
         toggleButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const targetId = button.getAttribute('data-bs-target');
                 const targetTbody = document.querySelector(targetId);
                 const collectionTitle = button.closest('tr').querySelector('.collection-title'); // 找到最近的 tr 中的 .collection-title
-                const collapsedText = button.getAttribute('data-collapsed-text');
-                const expandedText = button.getAttribute('data-expanded-text');
     
                 if (!targetTbody) {
                     console.error(`Element with ID ${targetId} not found.`);
@@ -369,13 +377,24 @@ width: 50%;
                     targetTbody.classList.remove('show');
                     targetTbody.classList.add('collapse');
                     collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-                    button.textContent = collapsedText; // 修改此行
                 } else {
                     targetTbody.classList.remove('collapse');
                     targetTbody.classList.add('show');
                     collectionTitle.removeAttribute('colspan');
-                    button.textContent = expandedText; // 修改此行
                 }
+            });
+        });
+    
+        // 监听折叠和展开事件
+        targetTbodies.forEach(targetTbody => {
+            const button = document.querySelector(`[data-bs-target="#${targetTbody.id}"]`);
+    
+            targetTbody.addEventListener('shown.bs.collapse', function () {
+                button.textContent = "➖";
+            });
+    
+            targetTbody.addEventListener('hidden.bs.collapse', function () {
+                button.textContent = "➕";
             });
         });
     
@@ -390,7 +409,7 @@ width: 50%;
             modalImg.alt = imgAlt;
         });
     });
-            </script>
+        </script>
 
   <div class="customer order section-{{ section.id }}-padding">
     <svg style="display:none">
