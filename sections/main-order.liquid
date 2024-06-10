@@ -369,12 +369,16 @@ width: 50%;
               targetTbody.classList.add('collapse');
               collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
               button.textContent = button.getAttribute('data-collapsed-text');
+              button.textContent = "➕"; // 修改此行
+
             } else {
               targetTbody.classList.remove('collapse');
               targetTbody.classList.add('show');
               targetTbody.classList.add('expand');
               collectionTitle.removeAttribute('colspan');
               button.textContent = button.getAttribute('data-expanded-text');
+              button.textContent = "➖"; // 修改此行
+
             }
           });
         });
