@@ -396,7 +396,15 @@ width: 50%;
 
     </script>
 
-{% capture table_header %}
+{% capture table_header_pc %}
+<tr class="text-center align-middle">
+  <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
+  <th class="py-4 fs-4 text-start">Image / Product Info</th>
+  <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
+</tr>
+{% endcapture %}
+
+{% capture table_header_mb %}
 <tr class="text-center align-middle">
   <th class="py-4 fs-4" style="width: 40px;"></th>
   <th class="py-4 fs-4" style="width: 100px;">Image</th>
@@ -405,6 +413,14 @@ width: 50%;
   <th class="py-4 fs-4" style="width: 40px;">Qty</th>
   <th class="py-4 fs-4" style="width: 100px;">Total</th>
 </tr>
+{% endcapture %}
+
+{% capture collapse_btn %}
+<a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+  data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+  aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
+  ➕
+</a>
 {% endcapture %}
 
 
@@ -513,8 +529,18 @@ width: 50%;
     {% comment %} PC Table {% endcomment %}
     <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
       <thead>
-        {% assign table_header_content = table_header %}
-        {{ table_header_content }}
+        {% assign table_header_pc_content = table_header_pc %}
+        {{ table_header_pc_content }}
+        {% comment %} 
+        <tr class="text-center align-middle">
+          <th class="py-4 fs-4" style="width: 40px;"></th>
+          <th class="py-4 fs-4" style="width: 100px;">Image</th>
+          <th class="py-4 fs-4 ps-3">Product Info</th>
+          <th class="py-4 fs-4" style="width: 100px;">Price</th>
+          <th class="py-4 fs-4" style="width: 40px;">Qty</th>
+          <th class="py-4 fs-4" style="width: 100px;">Total</th>
+        </tr>
+         {% endcomment %}
       </thead>
       <tbody>
         {% assign current_collection = '' %}
@@ -528,11 +554,15 @@ width: 50%;
       {% assign current_collection = collection %}
       <tr>
         <td class="text-center align-middle" style="padding-right:0;">
+          {% assign collapse_btn_content = collapse_btn %}
+          {{collapse_btn_content }}
+          {% comment %} 
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
             aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
             ➕
           </a>
+          {% endcomment %}
         </td>
         <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
           <div class="text-start py-3" colspan="6">
@@ -608,9 +638,13 @@ width: 50%;
     <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
       <thead>
         <tr>
+          {% assign table_header_mb_content = table_header_mb %}
+          {{ table_header_mb_content }}
+          {% comment %} 
           <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
           <th class="py-4 fs-4 text-start">Image / Product Info</th>
           <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
+          {% endcomment %}
         </tr>
       </thead>
       <tbody>
@@ -625,11 +659,13 @@ width: 50%;
       {% assign current_collection = collection %}
       <tr>
         <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
-          <a class="btn btn-primary toggle-button text-decoration-none align-middle" style="padding-top:1rem;"
+          {% assign collapse_btn_content = collapse_btn %}
+          {{collapse_btn_content }}
+          {% comment %} <a class="btn btn-primary toggle-button text-decoration-none align-middle" style="padding-top:1rem;"
             data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}"
             role="button" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
             ➕
-          </a>
+          </a> {% endcomment %}
           <Span div class="text text-start py-3">
             {{ collection }}
             {%- assign product = line_item.product -%}
