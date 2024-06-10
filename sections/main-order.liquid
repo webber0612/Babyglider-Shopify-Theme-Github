@@ -408,6 +408,18 @@ width: 50%;
           element.classList.add('show');
           element.classList.add('expand');
         });
+          // 找到所有的折叠按钮
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+
+        toggleButtons.forEach(button => {
+          button.addEventListener('shown.bs.collapse', function () {
+            this.textContent = '➖'; // 展开时显示 "-"
+          });
+
+          button.addEventListener('hidden.bs.collapse', function () {
+            this.textContent = '➕'; // 折叠时显示 "+"
+          });
+        });
       });
 
     </script>
@@ -541,7 +553,7 @@ width: 50%;
       {% endif %}
       {% assign current_collection = collection %}
       <tr>
-        <td class="text-center align-middle" style="padding-right:0;">
+        <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
           <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
             data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
             aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
