@@ -699,18 +699,10 @@ width: 50%;
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-body">
-            <img
-            src="{% if line_item.image == 'no-image.jpg' %}{{ 'no-image.jpg' | asset_url }}{% else %}{{ line_item.image | image_url: width: 100, height: 100 }}{% endif %}"
-            alt="{{ line_item.title }}"
-            width="100"
-            height="100"
-            class="clickable-img"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-img-src="{{ line_item.image | image_url }}"
-            data-img-alt="{{ line_item.title }}"
-          >
-          
+            <img   src="{% if line_item.image == 'no-image.jpg' %}{{ 'no-image.jpg' | asset_url }}{% else %}{{ line_item.image | image_url: width: 100, height: 100 }}{% endif %}"
+            alt="{{ line_item.title }}" width="100%" height="auto"
+              class="img-fluid" data-bs-toggle="modal" data-bs-target="#imageModal"
+              data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
           </div>
         </div>
       </div>
