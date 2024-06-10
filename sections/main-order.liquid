@@ -425,11 +425,7 @@ width: 50%;
       <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
     </div>
     <!-- Start again from here.... -->
-    <div class="card text-dark bg-info mb-3 rounded-3">
-      <div class="card-head text-center py-2">
-        {% comment %} Order-Card-Title {% endcomment %}
-        <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
-      </div>
+    <div class="card text-dark bg-light mb-3 rounded-3">
       <div class="row d-flex flex-wrap justify-content-between px-3 top">
         <div class="d-flex flex-column flex-md-row">
           <div class="flex-grow-1">
@@ -439,16 +435,16 @@ width: 50%;
               <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
               </p>
               {% if order_status != null %}
-              <p class="badge badge-light">Currentlly Status : {{ order_status }}</p>
+              <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
               <br>
               {% endif %}
 
-              <p class="badge badge-light">
+              <p class="badge bg-info">
                 <!-- 付款狀態 -->
                 {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
               </p>
               <br>
-              <p class="badge badge-light">
+              <p class="badge bg-info">
                 <!-- 商品配送狀態 -->
                 {{ 'customer.order.fulfillment_status' | t }}:{{ order.fulfillment_status_label }}
               </p>
