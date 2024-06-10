@@ -1296,16 +1296,16 @@ width: 50%;
         <tr>
           <td colspan="2" class="order-shipping">
             <h4>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</h4>
-            <p class="text-end">{{ shipping_method.price | money }}</p>
+            <p class="text-end">{{ order.shipping_method.price | money }}</p>
           </td>
         </tr>
-        {%- if tax_line.title != blank -%}
+        {%- if order.tax_line.title != blank -%}
           <tr>
             <td colspan="2" class="order-tax">
               <h4>
-                {{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)
+                {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
               </h4>
-              <p class="text-end">{{ tax_line.price | money }}</p>
+              <p class="text-end">{{ order.tax_line.price | money }}</p>
             </td>
           </tr>
         {% endif %}
@@ -1317,7 +1317,7 @@ width: 50%;
             </td>
           </tr>
         {% endif %}
-        {%- if order.total_refunded_amount != blank -%}
+        {%- if order.total_refunded_amount != 0 -%}
           <tr>
             <td colspan="2" class="order-refund">
               <h4>{{ 'customer.order.total_refunded' | t }}</h4>
@@ -1327,12 +1327,12 @@ width: 50%;
         {% endif %}
         <tr>
           <td colspan="2" class="order-total">
-            <h4>{{ 'customer.order.total' | t }}</h4>
+            <h2>{{ 'customer.order.total' | t }}</h2>
             <p class="text-end">{{ order.total_net_amount | money_with_currency }}</p>
           </td>
         </tr>
       </tfoot>
-          </table>
+    </table>
 
     <!-- 模態框結構 -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
