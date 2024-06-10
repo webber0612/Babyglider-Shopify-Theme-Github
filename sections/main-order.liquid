@@ -887,7 +887,7 @@ width: 50%;
       <tfoot>
         <tr>
           <td colspan="6" class="order-subtotal">
-            <p>{{ 'customer.order.subtotal' | t }}</p>
+            <p class="ps-5">{{ 'customer.order.subtotal' | t }}</p>
             <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
           </td>
         </tr>
@@ -895,7 +895,7 @@ width: 50%;
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
               <td colspan="6" class="order-discount">
-                <p>
+                <p class="ps-5">
                   {{ 'customer.order.discount' | t }}
                   <span class="cart-discount">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
@@ -919,14 +919,14 @@ width: 50%;
         {%- endif -%}
         <tr>
           <td colspan="6" class="order-shipping">
-            <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
+            <p  class="ps-5">{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
             <p class="text-end">{{ order.shipping_method.price | money }}</p>
           </td>
         </tr>
         {%- if order.tax_line.title != blank -%}
           <tr>
             <td colspan="6" class="order-tax">
-              <p>
+              <p class="ps-5">
                 {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
               </p>
               <p class="text-end">{{ order.tax_line.price | money }}</p>
@@ -936,7 +936,7 @@ width: 50%;
         {%- if order.total_duties != blank -%}
           <tr>
             <td colspan="6" class="order-customs-duty">
-              <p>{{ 'customer.order.total_duties' | t }}</p>
+              <p class="ps-5">{{ 'customer.order.total_duties' | t }}</p>
               <p class="text-end">{{ order.total_duties | money }}</p>
             </td>
           </tr>
@@ -944,14 +944,14 @@ width: 50%;
         {%- if order.total_refunded_amount != 0 -%}
           <tr>
             <td colspan="6" class="order-refund">
-              <p>{{ 'customer.order.total_refunded' | t }}</p>
+              <p class="ps-5">{{ 'customer.order.total_refunded' | t }}</p>
               <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
             </td>
           </tr>
         {% endif %}
         <tr>
           <td colspan="6" class="order-total">
-            <p class="fs-1">{{ 'customer.order.total' | t }}</p>
+            <p class="fs-1 ps-5">{{ 'customer.order.total' | t }}</p>
             <p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p>
           </td>
         </tr>
