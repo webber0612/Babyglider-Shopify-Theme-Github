@@ -697,9 +697,28 @@ width: 50%;
             x{{ line_item.quantity }}
           </td>
           {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
-          <td class="pe-4 align-middle" headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t }}">
-            {{ order.line_items_subtotal_price | money }}
+          <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
+            <!-- 顯示產品總價，如果有折扣顯示折扣後總價 -->
+            {%- if line_item.original_line_price != line_item.final_line_price -%}
+            <dl>
+              <dt>
+                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+              </dt>
+              <dd class="regular-price">
+                <s>{{ line_item.original_line_price | money }}</s>
+              </dd>
+              <dt>
+                <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+              </dt>
+              <dd>
+                <span>{{ line_item.final_line_price | money }}</span>
+              </dd>
+            </dl>
+            {%- else -%}
+            {{ line_item.original_line_price | money }}
+            {%- endif -%}
           </td>
+
         </tr>
         {% endif %}
         {% endfor %}
@@ -819,7 +838,28 @@ width: 50%;
 
         <td class="pe-4 align-middle">{{ line_item.final_price | money }}</td>
         <td class="text-center align-middle">x{{ line_item.quantity }}</td>
-        <td class="pe-4 align-middle">{{ order.line_items_subtotal_price | money }}</td>
+        {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+        <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
+        <!-- 顯示產品總價，如果有折扣顯示折扣後總價 -->
+        {%- if line_item.original_line_price != line_item.final_line_price -%}
+        <dl>
+          <dt>
+            <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+          </dt>
+          <dd class="regular-price">
+            <s>{{ line_item.original_line_price | money }}</s>
+          </dd>
+          <dt>
+            <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+          </dt>
+          <dd>
+            <span>{{ line_item.final_line_price | money }}</span>
+          </dd>
+        </dl>
+        {%- else -%}
+        {{ line_item.original_line_price | money }}
+        {%- endif -%}
+      </td>
       </tr>
       {% endunless %}
       {% endfor %}
@@ -1043,14 +1083,30 @@ width: 50%;
               {%- endif -%}
             </div>
 
-
-
-
-
           </td>
           <td class="p-1 border-bottom border-dark">
             <div class="w-100">
-              <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = {{ order.line_items_subtotal_price | money }}</h3>
+              <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
+          {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+            {%- if line_item.original_line_price != line_item.final_line_price -%}
+            <dl>
+              <dt>
+                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+              </dt>
+              <dd class="regular-price">
+                <s>{{ line_item.original_line_price | money }}</s>
+              </dd>
+              <dt>
+                <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+              </dt>
+              <dd>
+                <span>{{ line_item.final_line_price | money }}</span>
+              </dd>
+            </dl>
+            {%- else -%}
+            {{ line_item.original_line_price | money }}
+            {%- endif -%}
+              </h3>
             </div>
           </td>
         </tr>
@@ -1166,7 +1222,27 @@ width: 50%;
         </td>
         <td class="p-1 border-bottom border-dark">
           <div class="w-100">
-            <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = {{ order.line_items_subtotal_price | money }}</h3>
+            <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
+                        {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+            {%- if line_item.original_line_price != line_item.final_line_price -%}
+              <dl>
+                <dt>
+                  <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                </dt>
+                <dd class="regular-price">
+                  <s>{{ line_item.original_line_price | money }}</s>
+                </dd>
+                <dt>
+                  <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                </dt>
+                <dd>
+                  <span>{{ line_item.final_line_price | money }}</span>
+                </dd>
+              </dl>
+              {%- else -%}
+              {{ line_item.original_line_price | money }}
+              {%- endif -%}
+            </h3>
           </div>
         </td>
       </tr>
