@@ -402,25 +402,26 @@ width: 50%;
           modalImg.alt = imgAlt;
         });
 
-        // 初始展開所有目標表格
-        const collapsibleElements = document.querySelectorAll('.collapse');
-        collapsibleElements.forEach(element => {
-          element.classList.add('show');
-          element.classList.add('expand');
-        });
-          // 找到所有的折叠按钮
         const toggleButtons = document.querySelectorAll('.toggle-button');
 
         toggleButtons.forEach(button => {
-          button.addEventListener('shown.bs.collapse', function () {
-            this.textContent = '➖'; // 展开时显示 "-"
-          });
-
-          button.addEventListener('hidden.bs.collapse', function () {
-            this.textContent = '➕'; // 折叠时显示 "+"
+          button.addEventListener('click', function() {
+            // 获取按钮关联的折叠元素
+            const target = this.getAttribute('data-bs-target');
+            const collapse = new bootstrap.Collapse(target); // 初始化折叠组件
+      
+            // 切换折叠状态
+            collapse.toggle();
+      
+            // 更新按钮文本
+            if (collapse._isShown()) {
+              this.textContent = '➖'; // 展开时显示 "-"
+            } else {
+              this.textContent = '➕'; // 折叠时显示 "+"
+            }
           });
         });
-      });
+            });
 
     </script>
 
