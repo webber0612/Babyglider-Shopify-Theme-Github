@@ -666,6 +666,7 @@
             {% endif %}
             <tr>
               <td class="p-0 text-start align-middle">
+                <div class="w-100">
                 <img
                   src="{{ line_item.image | image_url: width: 75, height: 75 }}"
                   alt="{{ line_item.title }}"
@@ -677,7 +678,9 @@
                   data-img-src="{{ line_item.image | image_url }}"
                   data-img-alt="{{ line_item.title }}"
                 >
-              {{ line_item.product.title }}</td>
+              {{ line_item.product.title }}
+              </div>
+              </td>
               <td class="p-1"><div class="w-100">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</div></td>
             </tr>
           {% endif %}
