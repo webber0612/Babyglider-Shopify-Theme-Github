@@ -304,11 +304,6 @@ width: 50%;
     tbody tr {
     border-top:0 !important;
     }
-    tfoot td:first-of-type {
-        display: flex !important;
-        justify-content: space-between; /* 两端对齐 */
-        align-items: center; /* 垂直居中 */
-    }
     /* 在您的 order-summary-table.css 文件中 */
 .order-summary-table tfoot p {
   font-size: 1.75rem; /* fs-3 对应的字体大小 */
@@ -317,7 +312,11 @@ width: 50%;
 
     }
 
-
+    tfoot td:first-of-type {
+        display: flex !important;
+        justify-content: space-between; /* 两端对齐 */
+        align-items: center; /* 垂直居中 */
+    }
 
     {%- endstyle -%}
 
