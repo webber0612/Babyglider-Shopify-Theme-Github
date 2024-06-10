@@ -368,13 +368,13 @@ width: 50%;
               targetTbody.classList.remove('expand');
               targetTbody.classList.add('collapse');
               collectionTitle.setAttribute('colspan', '5'); // 在折疊完成后设置 colspan
-              btn.textcontent = "➕"
+              bottom.textcontent = "➕"
             } else {
               targetTbody.classList.remove('collapse');
               targetTbody.classList.add('show');
               targetTbody.classList.add('expand');
               collectionTitle.removeAttribute('colspan');
-              btn.textContent = '➖'
+              bottom.textContent = '➖'
             }
           });
         });
