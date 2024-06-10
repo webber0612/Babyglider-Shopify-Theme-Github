@@ -669,24 +669,27 @@ width: 50%;
       {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
       {%- if displayed_stock_on_hand == false -%}
       <tr>
-        <td class="collection-title p-0 align-middle fs-3 text-start py-4" colspan="3"
+        <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="3"
           style="background-color: lightgoldenrodyellow;">
           Stock On Hand</td>
       </tr>
       {%- assign displayed_stock_on_hand = true -%}
       {%- endif -%}
 
-      <tr>
-        <td></td>
+      <tr class="py-2">
         <td class="p-0 text-start align-middle">
           <img src="{{ line_item.image | image_url: width: 75, height: 75 }}" alt="{{ line_item.title }}" width="75"
             height="75" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
             data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
           {{ line_item.product.title }}
         </td>
-        <td class="pe-4 align-middle text-end">{{ line_item.price | money }} x {{ line_item.quantity }} = {{
-          line_item.line_price | money }}</td>
+        <td class="p-1 border-bottom border-dark">
+          <div class="w-100">
+            <h3>{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</h3>
+          </div>
+        </td>
       </tr>
+      
       {% endunless %}
       {% endfor %}
       </tbody>
