@@ -1,0 +1,58 @@
+{% comment %} Order Item Row Snippet {% endcomment %}
+{%- snippet 'order-item-row' -%}
+  {%- if collection != current_collection -%}
+    {%- if current_collection != '' -%}
+    </tbody>
+    {%- endif -%}
+
+    {%- assign current_collection = collection -%}
+    <tr>
+      <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
+        <a
+          class="btn btn-primary toggle-button text-decoration-none align-middle"
+          style="padding-top:1rem;"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse{{ forloop.index }}"
+          href="#collapse{{ forloop.index }}"
+          role="button"
+          aria-expanded="true"
+          aria-controls="collapse{{ forloop.index }}"
+        >
+          {%- if is_pre_order -%}➕{%- else -%}➖{%- endif -%}
+        </a>
+        <div class="text text-start py-3">
+          {{ collection }} 
+          {%- assign collection_handle = product.collections[0].handle -%}
+          {%- assign shopify_collection = collections[collection_handle] -%}
+          {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+            <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+              ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+            </span>
+          {% endif %}
+        </div>
+      </td>
+    </tr>
+    <tbody id="collapse{{ forloop.index }}" class="{% if is_pre_order %}show{% else %}collapse{% endif %}">
+  {%- endif -%}
+  <tr class="py-2">
+    <td class="p-0 text-start align-middle">
+      <img
+        src="{{ line_item.image | image_url: width: 75, height: 75 }}"
+        alt="{{ line_item.title }}"
+        width="75"
+        height="75"
+        class="clickable-img"
+        data-bs-toggle="modal"
+        data-bs-target="#imageModal"
+        data-img-src="{{ line_item.image | image_url }}"
+        data-img-alt="{{ line_item.title }}"
+      >
+      {{ line_item.product.title }}
+    </td>
+    <td class="p-1 border-bottom border-dark">
+      <div class="w-100 text-end">
+        <h3>{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</h3>
+      </div>
+    </td>
+  </tr>
+{%- endsnippet -%}
