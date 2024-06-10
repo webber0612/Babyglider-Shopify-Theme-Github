@@ -1302,12 +1302,14 @@ width: 50%;
           <tr role="row">
               <!-- 顯示運費 -->
             <td id="RowShipping" role="rowheader" scope="row" colspan="2">
-              <div class="text-start">
-              {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
-              </div>
-              <div class=text-end">
+              <div style="justify-content: space-between">
+              <span>
+                {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
+              </span>
+              <span>
                 {{ shipping_method.price | money }}
-              </div>
+              </span>
+            </div>
             </td>
           </tr>
           {%- endfor -%}
