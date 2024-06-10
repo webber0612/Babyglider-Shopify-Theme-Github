@@ -886,10 +886,8 @@ width: 50%;
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
-          <td></td>
-          <td colspan="3" class="order-subtotal">
-            <p class="ps-5">{{ 'customer.order.subtotal' | t }}</p>
+          <td colspan="6" class="order-subtotal">
+            <p style="padding-left:10rem;">{{ 'customer.order.subtotal' | t }}</p>
             <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
           </td>
         </tr>
