@@ -283,60 +283,6 @@
   }
 }
 
-
-/* 小屏幕样式 */
-@media (max-width: 749px) {
-  /* ...其他样式... */
-
-  .order-summary-table thead,
-  .order-summary-table td:before {
-    display: none; /* 隐藏表头 */
-  }
-  .order-summary-table .btn{
-    vertical-align:middle;
-    padding-top:2rem;
-  }
-  .order-summary-table td{
-    vertical-align:middle;
-    padding:0 !important;
-  }
-
-  /* 将第一行的前三个单元格合并为一行 */
-  .order-summary-table tr:first-child td:nth-child(-n+3) {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap; /* 不允许换行 */
-  }
-
-    /* 将第一行的后三个单元格合并为一行 */
-    .order-summary-table tr:first-child td:nth-child(n+4) {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%; /* 确保占据整行宽度 */
-    margin-top: 0.5rem; /* 添加与上一行之间的间距 */
-  }
-
-  /* 所有 td 元素默认宽度为 auto */
-  .order-summary-table td {
-    width: auto;
-    margin-bottom: 0.5rem;
-    text-align: left;
-  }
-
-  /* 第一个单元格宽度固定为 40px */
-  .order-summary-table td:first-child {
-    width: 40px; /* 或者您想要的宽度 */
-    text-align:center;
-  }
-
-  /* 第二个单元格宽度固定为 100px */
-  .order-summary-table td:nth-child(2) {
-    width: 100%; /* 或者您想要的宽度 */
-    text-align:left;
-  }
-}
-
 {%- endstyle -%}
 
 <script>
@@ -671,7 +617,7 @@
               {% assign current_collection = collection %}
               <tr>
                 <td class="text-center align-middle" style="padding-right:0;">
-                  <a
+                  <a 
                     class="btn btn-primary toggle-button text-decoration-none"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapse{{ forloop.index }}"
@@ -684,20 +630,20 @@
                   </a>
                 </td>
                 <td class="collection-title p-0 align-middle fs-3" colspan="2" style="background-color:lightgoldenrodyellow;"> 
-                  <div class="text-start py-3">
-                    {{ collection }} 
-                   {%- assign product = line_item.product -%}
-                   {%- assign collection_handle = product.collections[0].handle -%}
-                   {%- assign shopify_collection = collections[collection_handle] -%}
-                   {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                     <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-                       ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
-                     </span>
-                   {% endif %}
-                   </div>
-                  </td>
-                      </tr>
-              <tbody id="collapse{{ forloop.index }}" class="collapse">
+                  <div class="d-flex align-items-center"> <div class="text-start py-3">
+                      {{ collection }} 
+                      {%- assign product = line_item.product -%}
+                      {%- assign collection_handle = product.collections[0].handle -%}
+                      {%- assign shopify_collection = collections[collection_handle] -%}
+                      {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                        <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+                          ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                        </span>
+                      {% endif %}
+                    </div></div>
+                </td>
+              </tr>
+                            <tbody id="collapse{{ forloop.index }}" class="collapse">
             {% endif %}
             <tr>
               <td></td>
