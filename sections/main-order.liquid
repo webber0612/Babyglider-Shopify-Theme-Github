@@ -1303,17 +1303,17 @@ width: 50%;
           {%- endif -%}
           {%- for shipping_method in order.shipping_methods -%}
           <tr role="row">
+            <div>
               <!-- 顯示運費 -->
             <td id="RowShipping" role="rowheader" scope="row" colspan="2">
-              <div>
-              <a>
+              <span>
                 {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
-              </a>
-              <a>
+              </span>
+              <span>
                 {{ shipping_method.price | money }}
-              </a>
-            </div>
+              </span>
             </td>
+          </div>
           </tr>
           {%- endfor -%}
           {%- for tax_line in order.tax_lines -%}
