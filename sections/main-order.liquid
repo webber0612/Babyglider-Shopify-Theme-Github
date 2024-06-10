@@ -306,6 +306,12 @@ width: 50%;
     tfoot td:first-of-type {
         display: table-cell !important;
     }
+    .order-summary-table #RowShipping {
+  display: flex;
+  justify-content: space-between; /* 两端对齐 */
+  align-items: center; /* 垂直居中 */
+}
+
     }
 
 
@@ -1303,10 +1309,10 @@ width: 50%;
               <!-- 顯示運費 -->
             <td id="RowShipping" role="rowheader" scope="row" colspan="2">
               <div>
-              <span style="text-align:left;">
+              <span>
                 {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
               </span>
-              <span style="text-align:right;">
+              <span>
                 {{ shipping_method.price | money }}
               </span>
             </div>
