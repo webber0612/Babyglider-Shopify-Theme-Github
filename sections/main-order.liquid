@@ -1297,7 +1297,7 @@ width: 50%;
           {%- endif -%}
           {%- for shipping_method in order.shipping_methods -%}
           <tr role="row">
-            <div>
+            <div class="w-100">
               <!-- 顯示運費 -->
               <td id="RowShipping" role="rowheader" scope="row" colspan="4">
                 {{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})
@@ -1311,7 +1311,7 @@ width: 50%;
           {%- endfor -%}
           {%- for tax_line in order.tax_lines -%}
           <tr role="row">
-            <div>
+            <div class="w-100">
               <!-- 顯示稅金 -->
               <td id="RowTax" role="rowheader" scope="row" colspan="4">
                 {{ 'customer.order.tax' | t }} ({{ tax_line.title }}
@@ -1326,7 +1326,7 @@ width: 50%;
           {%- endfor -%}
           {%- if order.total_duties -%}
           <tr role="row">
-            <div>
+            <div class="w-100">
               <!-- 顯示關稅 -->
               <td id="RowDuties" role="rowheader" scope="row" colspan="4">{{ 'customer.order.total_duties' | t }}</td>
               <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t }}">
@@ -1337,7 +1337,7 @@ width: 50%;
           {%- endif -%}
           {%- if order.total_refunded_amount > 0 -%}
           <tr role="row">
-            <div>
+            <div class="w-100">
               <!-- 顯示退款總額 -->
               <td id="RowTotalRefund" role="rowheader" scope="row" colspan="3">
                 {{ 'customer.order.total_refunded' | t }}
@@ -1349,7 +1349,7 @@ width: 50%;
           </tr>
           {%- endif -%}
           <tr role="row">
-            <div>
+            <div class="w-100">
               <!-- 顯示訂單總額 -->
               <td id="RowTotal" role="rowheader" scope="row" colspan="3">{{ 'customer.order.total' | t }}</td>
               <td headers="RowTotal" role="cell" colspan="2" data-label="{{ 'customer.order.total' | t }}">
