@@ -1297,6 +1297,8 @@ width: 50%;
         {%- endif -%}
         <tr>
           <td colspan="2" class="order-shipping">
+            {{ shipping_method | json }}
+            {{ shipping_method.title | json }}
             <h4>{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</h4>
             <p class="text-end">{{ shipping_method.price | money }}</p>
           </td>
