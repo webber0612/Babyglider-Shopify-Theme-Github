@@ -886,18 +886,16 @@ width: 50%;
       </tbody>
       <tfoot>
         <tr>
-          <td> </td>
-          <td> </td>
-          <td><p>{{ 'customer.order.subtotal' | t }}</p> </td>
-          <td> </td>
-          <td><p>{{ order.line_items_subtotal_price | money }}</p></td>
+          <td colspan="2"> </td>
+          <td><p class="text-start">{{ 'customer.order.subtotal' | t }}</p> </td>
+          <td colspan="2"><p class="text-end">{{ order.line_items_subtotal_price | money }}</p></td>
         </tr>
         {%- if order.cart_level_discount_applications != blank -%}
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
               <td> </td>
               <td> </td>
-              <td>
+              <td class="text-start">
                 <p>
                   {{ 'customer.order.discount' | t }}
                   <span class="cart-discount">
@@ -926,7 +924,7 @@ width: 50%;
         <tr>
           <td> </td>
           <td> </td>
-          <td><p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p></td>
+          <td><p class="text-start">{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p></td>
           <td> </td>
           <td><p class="text-end">{{ order.shipping_method.price | money }}</p></td>
         </tr>
@@ -934,7 +932,7 @@ width: 50%;
           <tr>
             <td> </td>
             <td> </td>
-            <td><p>{{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)</p></td>
+            <td><p class="text-start">{{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)</p></td>
             <td> </td>
             <td><p class="text-end">{{ order.tax_line.price | money }}</p></td>
           </tr>
@@ -943,7 +941,7 @@ width: 50%;
           <tr>
             <td> </td>
             <td> </td>
-            <td><p>{{ 'customer.order.total_duties' | t }}</p></td>
+            <td><p class="text-start">{{ 'customer.order.total_duties' | t }}</p></td>
             <td> </td>
             <td><p class="text-end">{{ order.total_duties | money }}</p></td>
           </tr>
@@ -952,7 +950,7 @@ width: 50%;
           <tr>
             <td> </td>
             <td> </td>
-            <td><p>{{ 'customer.order.total_refunded' | t }}</p></td>
+            <td><p class="text-start">{{ 'customer.order.total_refunded' | t }}</p></td>
             <td> </td>
             <td><p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p></td>
           </tr>
@@ -960,7 +958,7 @@ width: 50%;
         <tr>
           <td> </td>
           <td> </td>
-          <td><p class="fs-1">{{ 'customer.order.total' | t }}</p></td>
+          <td><p class="fs-1 text-start">{{ 'customer.order.total' | t }}</p></td>
           <td> </td>
           <td><p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p></td>
         </tr>
