@@ -295,6 +295,10 @@
   tbody td:first-of-type {
     padding-top: 2rem;
   }
+  /* 针对订单列表表格中特定的 td */
+.order-summary-table td:nth-child(4) {
+  text-align: right;
+}
 }
 
 /* 在 order-summary-table.css 中 */
@@ -677,7 +681,7 @@
                   data-img-alt="{{ line_item.title }}"
                 >
               {{ line_item.product.title }}</td>
-              <td class="p-1"><span class="text-end">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</span></td>
+              <td class="p-1">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</td>
             </tr>
           {% endif %}
         {% endfor %}
