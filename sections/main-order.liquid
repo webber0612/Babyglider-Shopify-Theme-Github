@@ -308,6 +308,11 @@ width: 50%;
         justify-content: space-between; /* 两端对齐 */
         align-items: center; /* 垂直居中 */
     }
+    /* 在您的 order-summary-table.css 文件中 */
+.order-summary-table tfoot p {
+  font-size: 1.75rem; /* fs-3 对应的字体大小 */
+}
+
 
     }
 
@@ -1263,7 +1268,7 @@ width: 50%;
       <tfoot>
         <tr>
           <td colspan="2" class="order-subtotal">
-            <h4>{{ 'customer.order.subtotal' | t }}</h4>
+            <p>{{ 'customer.order.subtotal' | t }}</p>
             <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
           </td>
         </tr>
@@ -1271,7 +1276,7 @@ width: 50%;
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
               <td colspan="2" class="order-discount">
-                <h4>
+                <p>
                   {{ 'customer.order.discount' | t }}
                   <span class="cart-discount">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
@@ -1279,7 +1284,7 @@ width: 50%;
                     </svg>
                     {{- discount_application.title -}}
                   </span>
-                </h4>
+                </p>
                 <p class="text-end">
                   <span>-{{ discount_application.total_allocated_amount | money }}</span>
                   <span class="cart-discount">
@@ -1295,16 +1300,16 @@ width: 50%;
         {%- endif -%}
         <tr>
           <td colspan="2" class="order-shipping">
-            <h4>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</h4>
+            <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
             <p class="text-end">{{ order.shipping_method.price | money }}</p>
           </td>
         </tr>
         {%- if order.tax_line.title != blank -%}
           <tr>
             <td colspan="2" class="order-tax">
-              <h4>
+              <p>
                 {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
-              </h4>
+              </p>
               <p class="text-end">{{ order.tax_line.price | money }}</p>
             </td>
           </tr>
@@ -1312,7 +1317,7 @@ width: 50%;
         {%- if order.total_duties != blank -%}
           <tr>
             <td colspan="2" class="order-customs-duty">
-              <h4>{{ 'customer.order.total_duties' | t }}</h4>
+              <p>{{ 'customer.order.total_duties' | t }}</p>
               <p class="text-end">{{ order.total_duties | money }}</p>
             </td>
           </tr>
@@ -1320,15 +1325,15 @@ width: 50%;
         {%- if order.total_refunded_amount != 0 -%}
           <tr>
             <td colspan="2" class="order-refund">
-              <h4>{{ 'customer.order.total_refunded' | t }}</h4>
+              <p>{{ 'customer.order.total_refunded' | t }}</p>
               <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
             </td>
           </tr>
         {% endif %}
         <tr>
           <td colspan="2" class="order-total">
-            <h2>{{ 'customer.order.total' | t }}</h2>
-            <p class="text-end">{{ order.total_net_amount | money_with_currency }}</p>
+            <p class="fs-2">{{ 'customer.order.total' | t }}</p>
+            <p class="fs-2 text-end">{{ order.total_net_amount | money_with_currency }}</p>
           </td>
         </tr>
       </tfoot>
