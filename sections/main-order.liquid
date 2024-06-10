@@ -299,7 +299,10 @@
   .order-summary-table td:nth-child(4) {
   text-align: right;
   }
-  
+/* 针对订单列表表格中第二列的单元格 */
+.order-summary-table td:nth-child(2) {
+  width:100%:
+}
 }
 
 
@@ -679,7 +682,6 @@
                   data-img-alt="{{ line_item.title }}"
                 >
               {{ line_item.product.title }}</td>
-              <td>123</td>
               <td class="p-1">{{ line_item.price | money }} x {{ line_item.quantity }} = {{ line_item.line_price | money }}</td>
             </tr>
           {% endif %}
