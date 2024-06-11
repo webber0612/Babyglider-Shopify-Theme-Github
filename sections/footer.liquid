@@ -25,6 +25,11 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  .list-social__link svg, /* 针对 SVG 图标 */{
+    width: 80px;
+    height: auto;
+  }
+
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
@@ -613,15 +618,4 @@
       "default": 36
     }
   ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
-}
-{% endschema %}
+  "default": 
