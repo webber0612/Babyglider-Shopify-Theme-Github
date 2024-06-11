@@ -446,6 +446,9 @@ table:not([class]) th {
   .small-hide {
     /* display: none !important; */
   }
+  .small-hide2 {
+    display: none !important;
+  }
 }
 
 @media screen and (min-width: 750px) and (max-width: 989px) {
@@ -1243,7 +1246,7 @@ button.shopify-payment-button__button--unbranded {
   justify-content: center;
   align-items: center;
   border: 0;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
   cursor: pointer;
   font: inherit;
   font-size: 1.5rem;
