@@ -19,7 +19,7 @@
   }
 {%- endstyle -%}
 
-<script>
+{% comment %} <script>
 document.addEventListener('DOMContentLoaded', function() {
   const editButtons = document.querySelectorAll('.edit_cart_option');
 
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ... (其他函数的实现)
 
-</script>
+</script> {% endcomment %}
 
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
