@@ -82,7 +82,6 @@
                   <tr data-hulkapps-lineitem class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                     <td class="cart-item__media">
                       {% if item.image %}
-                        <div class="text-center align-middle">
                           <a href="{{ item.url }}" class="cart-item__link" tabindex="-1">
                             <div class="cart-item__image-container gradient global-media-settings">
                               <img
@@ -92,11 +91,9 @@
                                 loading="lazy"
                                 width="300"
                                 height="{{ 300 | divided_by: item.image.aspect_ratio | ceil }}"
-                                style="width: 90%; height: auto;" 
                               >
                             </div>
-                          </a> 
-                        </div>                     
+                          </a>            
                       {% endif %}
                     </td>
 
