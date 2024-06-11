@@ -19,6 +19,43 @@
   }
 {%- endstyle -%}
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const editButtons = document.querySelectorAll('.edit_cart_option');
+
+  editButtons.forEach(button => {
+    button.addEventListener('click', async function() {
+      const productId = this.dataset.productId;
+      const variantId = this.dataset.variantId;
+
+      // 1. 获取商品选项
+      const product = await fetchProductOptions(productId);
+
+      // 2. 创建模态框或下拉菜单
+      const optionsForm = createOptionsForm(product, variantId);
+      showModal(optionsForm);
+
+      // 3. 监听表单提交事件
+      optionsForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const selectedOptions = getSelectedOptions(optionsForm);
+        const newVariantId = await getVariantIdByOptions(productId, selectedOptions);
+
+        // 4. 更新购物车
+        await updateCartItem(button.dataset.key, newVariantId, button.dataset.quantity);
+
+        // 5. 更新页面
+        updateCartDisplay();
+        hideModal();
+      });
+    });
+  });
+});
+
+// ... (其他函数的实现)
+
+</script>
+
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
