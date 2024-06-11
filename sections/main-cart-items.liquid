@@ -80,7 +80,7 @@
               <tbody>
                 {%- for item in cart.items -%}
                   <tr data-hulkapps-lineitem class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
-                    <td class="cart-item__media">
+                    <td class="cart-item__media align-middle">
                       {% if item.image %}
                         {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                         <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
