@@ -514,212 +514,353 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="order-list">
-  {% comment %} 摺疊表格 {% endcomment %}
-  {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
-  {% assign current_collection = null %}
-  <h2>{{ order.name }} Order List</h2>
-
-  {% comment %} PC Table {% endcomment %}
-  <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
-
-    <thead>
-      <tr class="text-center align-middle">
-        <th class="py-4 fs-4" style="width: 40px;"></th>
-        <th class="py-4 fs-4" style="width: 100px;">Image</th>
-        <th class="py-4 fs-4 ps-3">Product Info</th>
-        <th class="py-4 fs-4" style="width: 100px;">Price</th>
-        <th class="py-4 fs-4" style="width: 40px;">Qty</th>
-        <th class="py-4 fs-4" style="width: 100px;">Total</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {% assign current_collection = '' %}
-      {% for line_item in sorted_items %}
-        {% assign collection = line_item.product.collections[0].title %}
-        {% if collection contains '[Pre-Order]' %}
-          {% if collection != current_collection %}
-            {% if current_collection != '' %}
-              </tbody>
-            {% endif %}
-            {% assign current_collection = collection %}
-            <tr>
-              <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
-                <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
-                  data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
-                  aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
-              </td>
-              <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
-                <div class="text-start py-3" colspan="6">
-                  {{ collection }}
-                  {%- assign product = line_item.product -%}
-                  {%- assign collection_handle = product.collections[0].handle -%}
-                  {%- assign shopify_collection = collections[collection_handle] -%}
-                  {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-                    <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-                      ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+    <div>
+      {% comment %} 摺疊表格 {% endcomment %}
+      {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
+      {% assign current_collection = null %}
+      <h2>{{ order.name }} Order List</h2>
+  
+      {% comment %} PC Table {% endcomment %}
+      <table class="table order-summary-table d-none d-md-table" style="padding: 0%;">
+  
+        <thead>
+          <tr class="text-center align-middle">
+            <th class="py-4 fs-4" style="width: 40px;"></th>
+            <th class="py-4 fs-4" style="width: 100px;">Image</th>
+            <th class="py-4 fs-4 ps-3">Product Info</th>
+            <th class="py-4 fs-4" style="width: 100px;">Price</th>
+            <th class="py-4 fs-4" style="width: 40px;">Qty</th>
+            <th class="py-4 fs-4" style="width: 100px;">Total</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% assign current_collection = '' %}
+          {% for line_item in sorted_items %}
+            {% assign collection = line_item.product.collections[0].title %}
+            {% if collection contains '[Pre-Order]' %}
+              {% if collection != current_collection %}
+                {% if current_collection != '' %}
+                  </tbody>
+                {% endif %}
+                {% assign current_collection = collection %}
+                <tr>
+                  <td class="text-center align-middle" style="padding-right:0;background-color:lightgoldenrodyellow;">
+                    <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+                      data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+                      aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➕</a>
+                  </td>
+                  <td class="collection-title p-0 align-middle fs-3" colspan="6" style="background-color:lightgoldenrodyellow;">
+                    <div class="text-start py-3" colspan="6">
+                      {{ collection }}
+                      {%- assign product = line_item.product -%}
+                      {%- assign collection_handle = product.collections[0].handle -%}
+                      {%- assign shopify_collection = collections[collection_handle] -%}
+                      {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                        <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+                          ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                        </span>
+                      {% endif %}
+                    </div>
+                  </td>
+                </tr>
+                <tbody id="collapse{{ forloop.index }}" class="collapse">
+              {% endif %}
+              <tr>
+                <td></td>
+                <td class="p-0 text-center align-middle">
+                  <img src="{{ line_item.image | image_url: width: 100, height: 100 }}" alt="{{ line_item.title }}"
+                    width="100" height="100" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
+                    data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+                </td>
+                {% comment %} <td class="ps-3 align-middle">{{ line_item.product.title }}</td> {% endcomment %}
+                <td class="ps-3 align-top" id="Row{{ line_item.key }}" headers="ColumnProduct" role="rowheader" scope="row"
+                  data-label="{{ 'customer.order.product' | t }}">
+                  <div>
+                    {%- if line_item.url != blank -%}
+                      <!-- 如果產品有URL，顯示為可點擊鏈接 -->
+                      <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+                    {%- else -%}
+                      <!-- 否則顯示為普通文本 -->
+                      <p>{{ line_item.title }}</p>
+                    {%- endif -%}
+                    {%- assign property_size = line_item.properties | size -%}
+                    {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+                      <div class="properties">
+                        {%- unless line_item.product.has_only_default_variant -%}
+                          <!-- 如果產品有變體，顯示變體名稱 -->
+                          <span>
+                            {{ line_item.variant.title }}
+                          </span>
+                        {%- endunless -%}
+                        {%- unless line_item.selling_plan_allocation == null -%}
+                          <!-- 如果有銷售計劃，顯示計劃名稱 -->
+                          <span>
+                            {{ line_item.selling_plan_allocation.selling_plan.name }}
+                          </span>
+                        {%- endunless -%}
+                        {%- if property_size != 0 -%}
+                          <!-- 顯示產品屬性 -->
+                          {%- for property in line_item.properties -%}
+                            {% assign property_first_char = property.first | slice: 0 %}
+                            {%- if property.last != blank and property_first_char != '_' -%}
+                              <span>
+                                {{ property.first }}:
+                              </span>
+                              <span>
+                                {%- if property.last contains '/uploads/' -%}
+                                  <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                                {%- else -%}
+                                  {{ property.last }}
+                                {%- endif -%}
+                              </span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        {%- endif -%}
+                      </div>
+                    {%- endunless -%}
+                    {%- if line_item.line_level_discount_allocations != blank -%}
+                      <!-- 如果有折扣，顯示折扣信息 -->
+                      <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                        {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                          <li>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                            <use href="#icon-discount" />
+                            </svg>
+                            {{- discount_allocation.discount_application.title }} (-{{- discount_allocation.amount | money -}})
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+  
+                  {%- if line_item.fulfillment -%}
+                  <div class="fulfillment">
+                    {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                    <!-- 顯示履行日期 -->
+                    <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+  
+                    {%- if line_item.fulfillment.tracking_url -%}
+                    <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
+                    <a href="{{ line_item.fulfillment.tracking_url }}">
+                      {{ 'customer.order.track_shipment' | t }}
+                    </a>
+                    {%- endif -%}
+                    <span>
+                      {{ line_item.fulfillment.tracking_company }}
+                      {%- if line_item.fulfillment.tracking_number -%}
+                      #{{ line_item.fulfillment.tracking_number }}
+                      {%- endif -%}
                     </span>
-                  {% endif %}
+                  </div>
+                  {%- endif -%}
                 </div>
               </td>
+              {% comment %} <td class="pe-4 align-middle">{{ line_item.price | money }}</td> {% endcomment %}
+              <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnPrice" role="cell" data-label="{{ 'customer.order.price' | t }}">
+                <!-- 顯示產品價格，如果有折扣顯示折扣後價格 -->
+                {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
+                <dl>
+                  {%- if line_item.original_price != line_item.final_price -%}
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                  </dt>
+                  <dd class="regular-price">
+                    <s>{{ line_item.original_price | money }}</s>
+                  </dd>
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                  </dt>
+                  <dd>
+                    <span>{{ line_item.final_price | money }}</span>
+                  </dd>
+                  {%- else -%}
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                  </dt>
+                  <dd>
+                    {{ line_item.original_price | money }}
+                  </dd>
+                  {%- endif -%}
+                  {%- if line_item.unit_price_measurement -%}
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                  </dt>
+                  <dd class="unit-price">
+                    <span>
+                      {%- capture unit_price_separator -%}
+                      <span aria-hidden="true">/</span><span class="visually-hidden">{{
+                        'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                      {%- endcapture -%}
+                      {%- capture unit_price_base_unit -%}
+                      {%- if line_item.unit_price_measurement.reference_value != 1 -%}
+                      {{- line_item.unit_price_measurement.reference_value -}}
+                      {%- endif -%}
+                      {{ line_item.unit_price_measurement.reference_unit }}
+                      {%- endcapture -%}
+                      <span data-unit-price>{{ line_item.unit_price | money }}</span>
+                      {{- unit_price_separator -}}
+                      {{- unit_price_base_unit -}}
+                    </span>
+                  </dd>
+                  {%- endif -%}
+                </dl>
+                {%- else -%}
+                <span>{{ line_item.final_price | money }}</span>
+                {%- endif -%}
+              </td>
+              {% comment %} <td class="text-center align-middle">x{{ line_item.quantity }}</td> {% endcomment %}
+              <td
+                class="text-center align-middle"
+                headers="Row{{ line_item.key }} ColumnQuantity"
+                role="cell"
+                data-label="{{ 'customer.order.quantity' | t }}"
+              >
+                x{{ line_item.quantity }}
+              </td>
+              {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+              <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
+                <!-- 顯示產品總價，如果有折扣顯示折扣後總價 -->
+                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                <dl>
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                  </dt>
+                  <dd class="regular-price">
+                    <s>{{ line_item.original_line_price | money }}</s>
+                  </dd>
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                  </dt>
+                  <dd>
+                    <span>{{ line_item.final_line_price | money }}</span>
+                  </dd>
+                </dl>
+                {%- else -%}
+                {{ line_item.original_line_price | money }}
+                {%- endif -%}
+              </td>
+  
             </tr>
-            <tbody id="collapse{{ forloop.index }}" class="collapse">
+            {% endif %}
+            {% endfor %}
+            {% if current_collection != '' %}
+          </tbody>
           {% endif %}
+  
+          {% assign current_collection = '' %}
+  
+          {% if current_collection != '' %}
+          </tbody>
+          {% endif %}
+  
+          {%- assign displayed_stock_on_hand = false -%}
+          {% for line_item in sorted_items %}
+          {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
+          {%- if displayed_stock_on_hand == false -%}
+          <tr>
+            <td style="background-color: lightgoldenrodyellow;"> </td>
+            <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="5"
+              style="background-color: lightgoldenrodyellow;">
+              Stock On Hand</td>
+          </tr>
+          {%- assign displayed_stock_on_hand = true -%}
+          {%- endif -%}
+  
           <tr>
             <td></td>
             <td class="p-0 text-center align-middle">
-              <img src="{{ line_item.image | image_url: width: 100, height: 100 }}" alt="{{ line_item.title }}"
-                width="100" height="100" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
+              <img src="{{ line_item.image | image_url: width: 100, height: 100 }}" alt="{{ line_item.title }}" width="100"
+                height="100" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
                 data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
             </td>
-            {% comment %} <td class="ps-3 align-middle">{{ line_item.product.title }}</td> {% endcomment %}
-            <td class="ps-3 align-top" id="Row{{ line_item.key }}" headers="ColumnProduct" role="rowheader" scope="row"
-              data-label="{{ 'customer.order.product' | t }}">
-              <div>
-                {%- if line_item.url != blank -%}
+              {% comment %} <td class="ps-3 align-middle">{{ line_item.product.title }}</td> {% endcomment %}
+              <td class="ps-3 align-top" id="Row{{ line_item.key }}" headers="ColumnProduct" role="rowheader" scope="row"
+                data-label="{{ 'customer.order.product' | t }}">
+                <div>
+                  {%- if line_item.url != blank -%}
                   <!-- 如果產品有URL，顯示為可點擊鏈接 -->
                   <a href="{{ line_item.url }}">{{ line_item.title }}</a>
-                {%- else -%}
+                  {%- else -%}
                   <!-- 否則顯示為普通文本 -->
                   <p>{{ line_item.title }}</p>
-                {%- endif -%}
-                {%- assign property_size = line_item.properties | size -%}
-                {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+                  {%- endif -%}
+                  {%- assign property_size = line_item.properties | size -%}
+                  {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
                   <div class="properties">
                     {%- unless line_item.product.has_only_default_variant -%}
-                      <!-- 如果產品有變體，顯示變體名稱 -->
-                      <span>
-                        {{ line_item.variant.title }}
-                      </span>
+                    <!-- 如果產品有變體，顯示變體名稱 -->
+                    <span>
+                      {{ line_item.variant.title }}
+                    </span>
                     {%- endunless -%}
                     {%- unless line_item.selling_plan_allocation == null -%}
-                      <!-- 如果有銷售計劃，顯示計劃名稱 -->
-                      <span>
-                        {{ line_item.selling_plan_allocation.selling_plan.name }}
-                      </span>
+                    <!-- 如果有銷售計劃，顯示計劃名稱 -->
+                    <span>
+                      {{ line_item.selling_plan_allocation.selling_plan.name }}
+                    </span>
                     {%- endunless -%}
                     {%- if property_size != 0 -%}
-                      <!-- 顯示產品屬性 -->
-                      {%- for property in line_item.properties -%}
-                        {% assign property_first_char = property.first | slice: 0 %}
-                        {%- if property.last != blank and property_first_char != '_' -%}
-                          <span>
-                            {{ property.first }}:
-                          </span>
-                          <span>
-                            {%- if property.last contains '/uploads/' -%}
-                              <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                            {%- else -%}
-                              {{ property.last }}
-                            {%- endif -%}
-                          </span>
-                        {%- endif -%}
-                      {%- endfor -%}
+                    <!-- 顯示產品屬性 -->
+                    {%- for property in line_item.properties -%}
+                    {% assign property_first_char = property.first | slice: 0 %}
+                    {%- if property.last != blank and property_first_char != '_' -%}
+                    <span>{{ property.first }}:</span>
+                    <span>
+                      {%- if property.last contains '/uploads/' -%}
+                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                      {%- else -%}
+                      {{ property.last }}
+                      {%- endif -%}
+                    </span>
+                    {%- endif -%}
+                    {%- endfor -%}
                     {%- endif -%}
                   </div>
-                {%- endunless -%}
-                {%- if line_item.line_level_discount_allocations != blank -%}
+                  {%- endunless -%}
+  
+                  {%- if line_item.line_level_discount_allocations != blank -%}
                   <!-- 如果有折扣，顯示折扣信息 -->
                   <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
                     {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                      <li>
-                        <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                    <li>
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
                         <use href="#icon-discount" />
-                        </svg>
-                        {{- discount_allocation.discount_application.title }} (-{{- discount_allocation.amount | money -}})
-                      </li>
+                      </svg>
+                      {{- discount_allocation.discount_application.title }} (-
+                      {{- discount_allocation.amount | money -}}
+                      )
+                    </li>
                     {%- endfor -%}
                   </ul>
-                {%- endif -%}
-
-              {%- if line_item.fulfillment -%}
-              <div class="fulfillment">
-                {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
-                <!-- 顯示履行日期 -->
-                <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
-
-                {%- if line_item.fulfillment.tracking_url -%}
-                <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
-                <a href="{{ line_item.fulfillment.tracking_url }}">
-                  {{ 'customer.order.track_shipment' | t }}
-                </a>
-                {%- endif -%}
-                <span>
-                  {{ line_item.fulfillment.tracking_company }}
-                  {%- if line_item.fulfillment.tracking_number -%}
-                  #{{ line_item.fulfillment.tracking_number }}
                   {%- endif -%}
-                </span>
-              </div>
-              {%- endif -%}
-            </div>
-          </td>
-          {% comment %} <td class="pe-4 align-middle">{{ line_item.price | money }}</td> {% endcomment %}
-          <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnPrice" role="cell" data-label="{{ 'customer.order.price' | t }}">
-            <!-- 顯示產品價格，如果有折扣顯示折扣後價格 -->
-            {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
-            <dl>
-              {%- if line_item.original_price != line_item.final_price -%}
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-              </dt>
-              <dd class="regular-price">
-                <s>{{ line_item.original_price | money }}</s>
-              </dd>
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-              </dt>
-              <dd>
-                <span>{{ line_item.final_price | money }}</span>
-              </dd>
-              {%- else -%}
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-              </dt>
-              <dd>
-                {{ line_item.original_price | money }}
-              </dd>
-              {%- endif -%}
-              {%- if line_item.unit_price_measurement -%}
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-              </dt>
-              <dd class="unit-price">
-                <span>
-                  {%- capture unit_price_separator -%}
-                  <span aria-hidden="true">/</span><span class="visually-hidden">{{
-                    'accessibility.unit_price_separator' | t }}&nbsp;</span>
-                  {%- endcapture -%}
-                  {%- capture unit_price_base_unit -%}
-                  {%- if line_item.unit_price_measurement.reference_value != 1 -%}
-                  {{- line_item.unit_price_measurement.reference_value -}}
+  
+                  {%- if line_item.fulfillment -%}
+                  <div class="fulfillment">
+                    {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                    <!-- 顯示履行日期 -->
+                    <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+  
+                    {%- if line_item.fulfillment.tracking_url -%}
+                    <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
+                    <a href="{{ line_item.fulfillment.tracking_url }}">
+                      {{ 'customer.order.track_shipment' | t }}
+                    </a>
+                    {%- endif -%}
+                    <span>
+                      {{ line_item.fulfillment.tracking_company }}
+                      {%- if line_item.fulfillment.tracking_number -%}
+                      #{{ line_item.fulfillment.tracking_number }}
+                      {%- endif -%}
+                    </span>
+                  </div>
                   {%- endif -%}
-                  {{ line_item.unit_price_measurement.reference_unit }}
-                  {%- endcapture -%}
-                  <span data-unit-price>{{ line_item.unit_price | money }}</span>
-                  {{- unit_price_separator -}}
-                  {{- unit_price_base_unit -}}
-                </span>
-              </dd>
-              {%- endif -%}
-            </dl>
-            {%- else -%}
-            <span>{{ line_item.final_price | money }}</span>
-            {%- endif -%}
-          </td>
-          {% comment %} <td class="text-center align-middle">x{{ line_item.quantity }}</td> {% endcomment %}
-          <td
-            class="text-center align-middle"
-            headers="Row{{ line_item.key }} ColumnQuantity"
-            role="cell"
-            data-label="{{ 'customer.order.quantity' | t }}"
-          >
-            x{{ line_item.quantity }}
-          </td>
-          {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
-          <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
+                </div>
+              </td>
+  
+            <td class="pe-4 align-middle">{{ line_item.final_price | money }}</td>
+            <td class="text-center align-middle">x{{ line_item.quantity }}</td>
+            {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+            <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
             <!-- 顯示產品總價，如果有折扣顯示折扣後總價 -->
             {%- if line_item.original_line_price != line_item.final_line_price -%}
             <dl>
@@ -740,602 +881,461 @@
             {{ line_item.original_line_price | money }}
             {%- endif -%}
           </td>
-
-        </tr>
-        {% endif %}
-        {% endfor %}
-        {% if current_collection != '' %}
-      </tbody>
-      {% endif %}
-
-      {% assign current_collection = '' %}
-
-      {% if current_collection != '' %}
-      </tbody>
-      {% endif %}
-
-      {%- assign displayed_stock_on_hand = false -%}
-      {% for line_item in sorted_items %}
-      {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
-      {%- if displayed_stock_on_hand == false -%}
-      <tr>
-        <td style="background-color: lightgoldenrodyellow;"> </td>
-        <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="5"
-          style="background-color: lightgoldenrodyellow;">
-          Stock On Hand</td>
-      </tr>
-      {%- assign displayed_stock_on_hand = true -%}
-      {%- endif -%}
-
-      <tr>
-        <td></td>
-        <td class="p-0 text-center align-middle">
-          <img src="{{ line_item.image | image_url: width: 100, height: 100 }}" alt="{{ line_item.title }}" width="100"
-            height="100" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
-            data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
-        </td>
-          {% comment %} <td class="ps-3 align-middle">{{ line_item.product.title }}</td> {% endcomment %}
-          <td class="ps-3 align-top" id="Row{{ line_item.key }}" headers="ColumnProduct" role="rowheader" scope="row"
-            data-label="{{ 'customer.order.product' | t }}">
-            <div>
-              {%- if line_item.url != blank -%}
-              <!-- 如果產品有URL，顯示為可點擊鏈接 -->
-              <a href="{{ line_item.url }}">{{ line_item.title }}</a>
-              {%- else -%}
-              <!-- 否則顯示為普通文本 -->
-              <p>{{ line_item.title }}</p>
-              {%- endif -%}
-              {%- assign property_size = line_item.properties | size -%}
-              {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
-              <div class="properties">
-                {%- unless line_item.product.has_only_default_variant -%}
-                <!-- 如果產品有變體，顯示變體名稱 -->
-                <span>
-                  {{ line_item.variant.title }}
-                </span>
-                {%- endunless -%}
-                {%- unless line_item.selling_plan_allocation == null -%}
-                <!-- 如果有銷售計劃，顯示計劃名稱 -->
-                <span>
-                  {{ line_item.selling_plan_allocation.selling_plan.name }}
-                </span>
-                {%- endunless -%}
-                {%- if property_size != 0 -%}
-                <!-- 顯示產品屬性 -->
-                {%- for property in line_item.properties -%}
-                {% assign property_first_char = property.first | slice: 0 %}
-                {%- if property.last != blank and property_first_char != '_' -%}
-                <span>{{ property.first }}:</span>
-                <span>
-                  {%- if property.last contains '/uploads/' -%}
-                  <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                  {%- else -%}
-                  {{ property.last }}
-                  {%- endif -%}
-                </span>
-                {%- endif -%}
-                {%- endfor -%}
-                {%- endif -%}
-              </div>
-              {%- endunless -%}
-
-              {%- if line_item.line_level_discount_allocations != blank -%}
-              <!-- 如果有折扣，顯示折扣信息 -->
-              <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                <li>
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_allocation.discount_application.title }} (-
-                  {{- discount_allocation.amount | money -}}
-                  )
-                </li>
-                {%- endfor -%}
-              </ul>
-              {%- endif -%}
-
-              {%- if line_item.fulfillment -%}
-              <div class="fulfillment">
-                {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
-                <!-- 顯示履行日期 -->
-                <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
-
-                {%- if line_item.fulfillment.tracking_url -%}
-                <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
-                <a href="{{ line_item.fulfillment.tracking_url }}">
-                  {{ 'customer.order.track_shipment' | t }}
-                </a>
-                {%- endif -%}
-                <span>
-                  {{ line_item.fulfillment.tracking_company }}
-                  {%- if line_item.fulfillment.tracking_number -%}
-                  #{{ line_item.fulfillment.tracking_number }}
-                  {%- endif -%}
-                </span>
-              </div>
-              {%- endif -%}
-            </div>
-          </td>
-
-        <td class="pe-4 align-middle">{{ line_item.final_price | money }}</td>
-        <td class="text-center align-middle">x{{ line_item.quantity }}</td>
-        {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
-        <td class="pe-4 align-middle" headers="Row{{ line_item.key }} ColumnTotal" role="cell" data-label="{{ 'customer.order.total' | t }}">
-        <!-- 顯示產品總價，如果有折扣顯示折扣後總價 -->
-        {%- if line_item.original_line_price != line_item.final_line_price -%}
-        <dl>
-          <dt>
-            <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-          </dt>
-          <dd class="regular-price">
-            <s>{{ line_item.original_line_price | money }}</s>
-          </dd>
-          <dt>
-            <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-          </dt>
-          <dd>
-            <span>{{ line_item.final_line_price | money }}</span>
-          </dd>
-        </dl>
-        {%- else -%}
-        {{ line_item.original_line_price | money }}
-        {%- endif -%}
-      </td>
-      </tr>
-      {% endunless %}
-      {% endfor %}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="2"> </td>
-          <td><p class="text-start">{{ 'customer.order.subtotal' | t }}</p> </td>
-          <td colspan="2"><p class="text-end">{{ order.line_items_subtotal_price | money }}</p></td>
-        </tr>
-        {%- if order.cart_level_discount_applications != blank -%}
-          {%- for discount_application in order.cart_level_discount_applications -%}
+          </tr>
+          {% endunless %}
+          {% endfor %}
+          </tbody>
+          <tfoot>
             <tr>
               <td colspan="2"> </td>
-              <td class="text-start">
-                <p>
-                  {{ 'customer.order.discount' | t }}
-                  <span class="cart-discount">
-                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                      <use href="#icon-discount" />
-                    </svg>
-                    {{- discount_application.title -}}
-                  </span>
-                </p>
-              </td>
-              <td colspan="2" class="text-end">
-                <p>
-                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                  <span class="cart-discount">
-                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                      <use href="#icon-discount" />
-                    </svg>
-                    {{- discount_application.title -}}
-                  </span>
-                </p>
-              </td>
+              <td><p class="text-start">{{ 'customer.order.subtotal' | t }}</p> </td>
+              <td colspan="2"><p class="text-end">{{ order.line_items_subtotal_price | money }}</p></td>
             </tr>
-          {%- endfor -%}
-        {%- endif -%}
-        <tr>
-          <td colspan="2"> </td>
-          <td><p class="text-start">{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p></td>
-          <td colspan="2"><p class="text-end">{{ order.shipping_method.price | money }}</p></td>
-        </tr>
-        {%- if order.tax_line.title != blank -%}
-          <tr>
-            <td colspan="2"> </td>
-            <td><p class="text-start">{{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)</p></td>
-            <td colspan="2"><p class="text-end">{{ order.tax_line.price | money }}</p></td>
-          </tr>
-        {% endif %}
-        {%- if order.total_duties != blank -%}
-          <tr>
-            <td colspan="2"> </td>
-            <td><p class="text-start">{{ 'customer.order.total_duties' | t }}</p></td>
-            <td colspan="2"><p class="text-end">{{ order.total_duties | money }}</p></td>
-          </tr>
-        {% endif %}
-        {%- if order.total_refunded_amount != 0 -%}
-          <tr>
-            <td colspan="2"> </td>
-            <td><p class="text-start">{{ 'customer.order.total_refunded' | t }}</p></td>
-            <td colspan="2"><p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p></td>
-          </tr>
-        {% endif %}
-        <tr>
-          <td colspan="2"> </td>
-          <td><p class="fs-1 text-start">{{ 'customer.order.total' | t }}</p></td>
-          <td colspan="3"><p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p></td>
-        </tr>
-      </tfoot>
-
-    </table>
-
-    {% comment %} Mobile Table {% endcomment %}
-    <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
-      <thead>
-        <tr>
-          <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
-          <th class="py-4 fs-4 text-start">Image / Product Info</th>
-          <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% assign current_collection = '' %}
-        {% for line_item in sorted_items %}
-        {% assign collection = line_item.product.collections[0].title %}
-        {% if collection contains '[Pre-Order]' %}
-        {% if collection != current_collection %}
-        {% if current_collection != '' %}
-      </tbody>
-      {% endif %}
-      {% assign current_collection = collection %}
-      <tr>
-        <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
-          <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
-            data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
-            aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➖</a>
-                   <Span div class="text text-start py-3">
-            {{ collection }}
-            {%- assign product = line_item.product -%}
-            {%- assign collection_handle = product.collections[0].handle -%}
-            {%- assign shopify_collection = collections[collection_handle] -%}
-            {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
-            <span class="badge rounded-pill text-white bg-primary text-center align-middle">
-              ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
-            </span>
-            {% endif %}
-          </Span>
-        </td>
-      </tr>
-      <tbody id="collapse{{ forloop.index }}" class="collapse">
-        {% endif %}
-        <tr class="py-2">
-          <td class="p-0 text-start align-middle">
-            <img src="{{ line_item.image | image_url: width: 75, height: 75 }}" alt="{{ line_item.title }}" width="75"
-              height="75" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
-              data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
-            {% comment %} {{ line_item.product.title }} {% endcomment %}
-            <div>
-              {%- if line_item.url != blank -%}
-              <!-- 如果產品有URL，顯示為可點擊鏈接 -->
-              <a href="{{ line_item.url }}">{{ line_item.title }}</a>
-              {%- else -%}
-              <!-- 否則顯示為普通文本 -->
-              <p>{{ line_item.title }}</p>
-              {%- endif -%}
-              {%- assign property_size = line_item.properties | size -%}
-              {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
-              <div class="properties">
-                {%- unless line_item.product.has_only_default_variant -%}
-                <!-- 如果產品有變體，顯示變體名稱 -->
-                <span>
-                  {{ line_item.variant.title }}
-                </span>
-                {%- endunless -%}
-                {%- unless line_item.selling_plan_allocation == null -%}
-                <!-- 如果有銷售計劃，顯示計劃名稱 -->
-                <span>
-                  {{ line_item.selling_plan_allocation.selling_plan.name }}
-                </span>
-                {%- endunless -%}
-                {%- if property_size != 0 -%}
-                <!-- 顯示產品屬性 -->
-                {%- for property in line_item.properties -%}
-                {% assign property_first_char = property.first | slice: 0 %}
-                {%- if property.last != blank and property_first_char != '_' -%}
-                <span>{{ property.first }}:</span>
-                <span>
-                  {%- if property.last contains '/uploads/' -%}
-                  <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                  {%- else -%}
-                  {{ property.last }}
-                  {%- endif -%}
-                </span>
-                {%- endif -%}
-                {%- endfor -%}
-                {%- endif -%}
-              </div>
-              {%- endunless -%}
-
-              {%- if line_item.line_level_discount_allocations != blank -%}
-              <!-- 如果有折扣，顯示折扣信息 -->
-              <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-                <li>
-                  <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                    <use href="#icon-discount" />
-                  </svg>
-                  {{- discount_allocation.discount_application.title }} (-
-                  {{- discount_allocation.amount | money -}}
-                  )
-                </li>
-                {%- endfor -%}
-              </ul>
-              {%- endif -%}
-
-              {%- if line_item.fulfillment -%}
-              <div class="fulfillment">
-                {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
-                <!-- 顯示履行日期 -->
-                <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
-
-                {%- if line_item.fulfillment.tracking_url -%}
-                <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
-                <a href="{{ line_item.fulfillment.tracking_url }}">
-                  {{ 'customer.order.track_shipment' | t }}
-                </a>
-                {%- endif -%}
-                <span>
-                  {{ line_item.fulfillment.tracking_company }}
-                  {%- if line_item.fulfillment.tracking_number -%}
-                  #{{ line_item.fulfillment.tracking_number }}
-                  {%- endif -%}
-                </span>
-              </div>
-              {%- endif -%}
-            </div>
-
-          </td>
-          <td class="p-1 border-bottom border-dark">
-            <div class="w-100">
-              <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
-          {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
-            {%- if line_item.original_line_price != line_item.final_line_price -%}
-            <dl>
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-              </dt>
-              <dd class="regular-price">
-                <s>{{ line_item.original_line_price | money }}</s>
-              </dd>
-              <dt>
-                <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-              </dt>
-              <dd>
-                <span>{{ line_item.final_line_price | money }}</span>
-              </dd>
-            </dl>
-            {%- else -%}
-            {{ line_item.original_line_price | money }}
-            {%- endif -%}
-              </h3>
-            </div>
-          </td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-        {% if current_collection != '' %}
-      </tbody>
-      {% endif %}
-
-      {% assign current_collection = '' %}
-
-      {% if current_collection != '' %}
-      </tbody>
-      {% endif %}
-
-      {%- assign displayed_stock_on_hand = false -%}
-      {% for line_item in sorted_items %}
-      {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
-      {%- if displayed_stock_on_hand == false -%}
-      <tr>
-        <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="3"
-          style="background-color: lightgoldenrodyellow;">
-          Stock On Hand</td>
-      </tr>
-      {%- assign displayed_stock_on_hand = true -%}
-      {%- endif -%}
-
-      <tr class="py-2">
-        <td class="p-0 text-start align-middle">
-          <img src="{{ line_item.image | image_url: width: 75, height: 75 }}" alt="{{ line_item.title }}" width="75"
-            height="75" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
-            data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
-          {% comment %} {{ line_item.product.title }} {% endcomment %}
-          <div>
-            {%- if line_item.url != blank -%}
-            <!-- 如果產品有URL，顯示為可點擊鏈接 -->
-            <a href="{{ line_item.url }}">{{ line_item.title }}</a>
-            {%- else -%}
-            <!-- 否則顯示為普通文本 -->
-            <p>{{ line_item.title }}</p>
-            {%- endif -%}
-            {%- assign property_size = line_item.properties | size -%}
-            {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
-            <div class="properties">
-              {%- unless line_item.product.has_only_default_variant -%}
-              <!-- 如果產品有變體，顯示變體名稱 -->
-              <span>
-                {{ line_item.variant.title }}
-              </span>
-              {%- endunless -%}
-              {%- unless line_item.selling_plan_allocation == null -%}
-              <!-- 如果有銷售計劃，顯示計劃名稱 -->
-              <span>
-                {{ line_item.selling_plan_allocation.selling_plan.name }}
-              </span>
-              {%- endunless -%}
-              {%- if property_size != 0 -%}
-              <!-- 顯示產品屬性 -->
-              {%- for property in line_item.properties -%}
-              {% assign property_first_char = property.first | slice: 0 %}
-              {%- if property.last != blank and property_first_char != '_' -%}
-              <span>{{ property.first }}:</span>
-              <span>
-                {%- if property.last contains '/uploads/' -%}
-                <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                {%- else -%}
-                {{ property.last }}
-                {%- endif -%}
-              </span>
-              {%- endif -%}
+            {%- if order.cart_level_discount_applications != blank -%}
+              {%- for discount_application in order.cart_level_discount_applications -%}
+                <tr>
+                  <td colspan="2"> </td>
+                  <td class="text-start">
+                    <p>
+                      {{ 'customer.order.discount' | t }}
+                      <span class="cart-discount">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                          <use href="#icon-discount" />
+                        </svg>
+                        {{- discount_application.title -}}
+                      </span>
+                    </p>
+                  </td>
+                  <td colspan="2" class="text-end">
+                    <p>
+                      <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                      <span class="cart-discount">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                          <use href="#icon-discount" />
+                        </svg>
+                        {{- discount_application.title -}}
+                      </span>
+                    </p>
+                  </td>
+                </tr>
               {%- endfor -%}
-              {%- endif -%}
-            </div>
-            {%- endunless -%}
-
-            {%- if line_item.line_level_discount_allocations != blank -%}
-            <!-- 如果有折扣，顯示折扣信息 -->
-            <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
-              {%- for discount_allocation in line_item.line_level_discount_allocations -%}
-              <li>
-                <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                  <use href="#icon-discount" />
-                </svg>
-                {{- discount_allocation.discount_application.title }} (-
-                {{- discount_allocation.amount | money -}}
-                )
-              </li>
-              {%- endfor -%}
-            </ul>
             {%- endif -%}
-
-            {%- if line_item.fulfillment -%}
-            <div class="fulfillment">
-              {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
-              <!-- 顯示履行日期 -->
-              <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
-
-              {%- if line_item.fulfillment.tracking_url -%}
-              <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
-              <a href="{{ line_item.fulfillment.tracking_url }}">
-                {{ 'customer.order.track_shipment' | t }}
-              </a>
-              {%- endif -%}
-              <span>
-                {{ line_item.fulfillment.tracking_company }}
-                {%- if line_item.fulfillment.tracking_number -%}
-                #{{ line_item.fulfillment.tracking_number }}
-                {%- endif -%}
-              </span>
-            </div>
-            {%- endif -%}
-          </div>
-        </td>
-        <td class="p-1 border-bottom border-dark">
-          <div class="w-100">
-            <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
-                        {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
-            {%- if line_item.original_line_price != line_item.final_line_price -%}
-              <dl>
-                <dt>
-                  <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                </dt>
-                <dd class="regular-price">
-                  <s>{{ line_item.original_line_price | money }}</s>
-                </dd>
-                <dt>
-                  <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-                </dt>
-                <dd>
-                  <span>{{ line_item.final_line_price | money }}</span>
-                </dd>
-              </dl>
-              {%- else -%}
-              {{ line_item.original_line_price | money }}
-              {%- endif -%}
-            </h3>
-          </div>
-        </td>
-      </tr>
-
-      {% endunless %}
-      {% endfor %}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="2" class="order-subtotal">
-            <p>{{ 'customer.order.subtotal' | t }}</p>
-            <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
-          </td>
-        </tr>
-        {%- if order.cart_level_discount_applications != blank -%}
-          {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
-              <td colspan="2" class="order-discount">
-                <p>
-                  {{ 'customer.order.discount' | t }}
-                  <span class="cart-discount">
-                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                      <use href="#icon-discount" />
-                    </svg>
-                    {{- discount_application.title -}}
-                  </span>
-                </p>
-                <p class="text-end">
-                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
-                  <span class="cart-discount">
-                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
-                      <use href="#icon-discount" />
-                    </svg>
-                    {{- discount_application.title -}}
-                  </span>
-                </p>
+              <td colspan="2"> </td>
+              <td><p class="text-start">{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p></td>
+              <td colspan="2"><p class="text-end">{{ order.shipping_method.price | money }}</p></td>
+            </tr>
+            {%- if order.tax_line.title != blank -%}
+              <tr>
+                <td colspan="2"> </td>
+                <td><p class="text-start">{{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)</p></td>
+                <td colspan="2"><p class="text-end">{{ order.tax_line.price | money }}</p></td>
+              </tr>
+            {% endif %}
+            {%- if order.total_duties != blank -%}
+              <tr>
+                <td colspan="2"> </td>
+                <td><p class="text-start">{{ 'customer.order.total_duties' | t }}</p></td>
+                <td colspan="2"><p class="text-end">{{ order.total_duties | money }}</p></td>
+              </tr>
+            {% endif %}
+            {%- if order.total_refunded_amount != 0 -%}
+              <tr>
+                <td colspan="2"> </td>
+                <td><p class="text-start">{{ 'customer.order.total_refunded' | t }}</p></td>
+                <td colspan="2"><p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p></td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td colspan="2"> </td>
+              <td><p class="fs-1 text-start">{{ 'customer.order.total' | t }}</p></td>
+              <td colspan="3"><p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p></td>
+            </tr>
+          </tfoot>
+  
+        </table>
+  
+        {% comment %} Mobile Table {% endcomment %}
+        <table class="table order-summary-table d-table d-md-none" style="padding: 0%;">
+          <thead>
+            <tr>
+              <th class="py-4 fs-4 text-center" style="width: 40px;"></th>
+              <th class="py-4 fs-4 text-start">Image / Product Info</th>
+              <th class="py-4 fs-4 text-end" style="width: 100px;">Price x Qty = Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% assign current_collection = '' %}
+            {% for line_item in sorted_items %}
+            {% assign collection = line_item.product.collections[0].title %}
+            {% if collection contains '[Pre-Order]' %}
+            {% if collection != current_collection %}
+            {% if current_collection != '' %}
+          </tbody>
+          {% endif %}
+          {% assign current_collection = collection %}
+          <tr>
+            <td class="text text-start align-middle py-2" style="padding-right:0;background-color:lightgoldenrodyellow;">
+              <a class="btn btn-primary toggle-button text-decoration-none" data-bs-toggle="collapse"
+                data-bs-target="#collapse{{ forloop.index }}" href="#collapse{{ forloop.index }}" role="button"
+                aria-expanded="true" aria-controls="collapse{{ forloop.index }}">➖</a>
+                      <Span div class="text text-start py-3">
+                {{ collection }}
+                {%- assign product = line_item.product -%}
+                {%- assign collection_handle = product.collections[0].handle -%}
+                {%- assign shopify_collection = collections[collection_handle] -%}
+                {% if shopify_collection.metafields.custom.estimated_time_of_arrival %}
+                <span class="badge rounded-pill text-white bg-primary text-center align-middle">
+                  ETA: {{ shopify_collection.metafields.custom.estimated_time_of_arrival | date: '%Y-%m-%d' }}
+                </span>
+                {% endif %}
+              </Span>
+            </td>
+          </tr>
+          <tbody id="collapse{{ forloop.index }}" class="collapse">
+            {% endif %}
+            <tr class="py-2">
+              <td class="p-0 text-start align-middle">
+                <img src="{{ line_item.image | image_url: width: 75, height: 75 }}" alt="{{ line_item.title }}" width="75"
+                  height="75" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
+                  data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+                {% comment %} {{ line_item.product.title }} {% endcomment %}
+                <div>
+                  {%- if line_item.url != blank -%}
+                  <!-- 如果產品有URL，顯示為可點擊鏈接 -->
+                  <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+                  {%- else -%}
+                  <!-- 否則顯示為普通文本 -->
+                  <p>{{ line_item.title }}</p>
+                  {%- endif -%}
+                  {%- assign property_size = line_item.properties | size -%}
+                  {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+                  <div class="properties">
+                    {%- unless line_item.product.has_only_default_variant -%}
+                    <!-- 如果產品有變體，顯示變體名稱 -->
+                    <span>
+                      {{ line_item.variant.title }}
+                    </span>
+                    {%- endunless -%}
+                    {%- unless line_item.selling_plan_allocation == null -%}
+                    <!-- 如果有銷售計劃，顯示計劃名稱 -->
+                    <span>
+                      {{ line_item.selling_plan_allocation.selling_plan.name }}
+                    </span>
+                    {%- endunless -%}
+                    {%- if property_size != 0 -%}
+                    <!-- 顯示產品屬性 -->
+                    {%- for property in line_item.properties -%}
+                    {% assign property_first_char = property.first | slice: 0 %}
+                    {%- if property.last != blank and property_first_char != '_' -%}
+                    <span>{{ property.first }}:</span>
+                    <span>
+                      {%- if property.last contains '/uploads/' -%}
+                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                      {%- else -%}
+                      {{ property.last }}
+                      {%- endif -%}
+                    </span>
+                    {%- endif -%}
+                    {%- endfor -%}
+                    {%- endif -%}
+                  </div>
+                  {%- endunless -%}
+  
+                  {%- if line_item.line_level_discount_allocations != blank -%}
+                  <!-- 如果有折扣，顯示折扣信息 -->
+                  <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                    {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                    <li>
+                      <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                        <use href="#icon-discount" />
+                      </svg>
+                      {{- discount_allocation.discount_application.title }} (-
+                      {{- discount_allocation.amount | money -}}
+                      )
+                    </li>
+                    {%- endfor -%}
+                  </ul>
+                  {%- endif -%}
+  
+                  {%- if line_item.fulfillment -%}
+                  <div class="fulfillment">
+                    {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                    <!-- 顯示履行日期 -->
+                    <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+  
+                    {%- if line_item.fulfillment.tracking_url -%}
+                    <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
+                    <a href="{{ line_item.fulfillment.tracking_url }}">
+                      {{ 'customer.order.track_shipment' | t }}
+                    </a>
+                    {%- endif -%}
+                    <span>
+                      {{ line_item.fulfillment.tracking_company }}
+                      {%- if line_item.fulfillment.tracking_number -%}
+                      #{{ line_item.fulfillment.tracking_number }}
+                      {%- endif -%}
+                    </span>
+                  </div>
+                  {%- endif -%}
+                </div>
+  
+              </td>
+              <td class="p-1 border-bottom border-dark">
+                <div class="w-100">
+                  <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
+              {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                <dl>
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                  </dt>
+                  <dd class="regular-price">
+                    <s>{{ line_item.original_line_price | money }}</s>
+                  </dd>
+                  <dt>
+                    <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                  </dt>
+                  <dd>
+                    <span>{{ line_item.final_line_price | money }}</span>
+                  </dd>
+                </dl>
+                {%- else -%}
+                {{ line_item.original_line_price | money }}
+                {%- endif -%}
+                  </h3>
+                </div>
               </td>
             </tr>
-          {%- endfor -%}
-        {%- endif -%}
-        <tr>
-          <td colspan="2" class="order-shipping">
-            <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
-            <p class="text-end">{{ order.shipping_method.price | money }}</p>
-          </td>
-        </tr>
-        {%- if order.tax_line.title != blank -%}
+            {% endif %}
+            {% endfor %}
+            {% if current_collection != '' %}
+          </tbody>
+          {% endif %}
+  
+          {% assign current_collection = '' %}
+  
+          {% if current_collection != '' %}
+          </tbody>
+          {% endif %}
+  
+          {%- assign displayed_stock_on_hand = false -%}
+          {% for line_item in sorted_items %}
+          {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
+          {%- if displayed_stock_on_hand == false -%}
           <tr>
-            <td colspan="2" class="order-tax">
-              <p>
-                {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
-              </p>
-              <p class="text-end">{{ order.tax_line.price | money }}</p>
+            <td class="collection-title p-0 align-middle fs-3 text-start py-3" colspan="3"
+              style="background-color: lightgoldenrodyellow;">
+              Stock On Hand</td>
+          </tr>
+          {%- assign displayed_stock_on_hand = true -%}
+          {%- endif -%}
+  
+          <tr class="py-2">
+            <td class="p-0 text-start align-middle">
+              <img src="{{ line_item.image | image_url: width: 75, height: 75 }}" alt="{{ line_item.title }}" width="75"
+                height="75" class="clickable-img" data-bs-toggle="modal" data-bs-target="#imageModal"
+                data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+              {% comment %} {{ line_item.product.title }} {% endcomment %}
+              <div>
+                {%- if line_item.url != blank -%}
+                <!-- 如果產品有URL，顯示為可點擊鏈接 -->
+                <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+                {%- else -%}
+                <!-- 否則顯示為普通文本 -->
+                <p>{{ line_item.title }}</p>
+                {%- endif -%}
+                {%- assign property_size = line_item.properties | size -%}
+                {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
+                <div class="properties">
+                  {%- unless line_item.product.has_only_default_variant -%}
+                  <!-- 如果產品有變體，顯示變體名稱 -->
+                  <span>
+                    {{ line_item.variant.title }}
+                  </span>
+                  {%- endunless -%}
+                  {%- unless line_item.selling_plan_allocation == null -%}
+                  <!-- 如果有銷售計劃，顯示計劃名稱 -->
+                  <span>
+                    {{ line_item.selling_plan_allocation.selling_plan.name }}
+                  </span>
+                  {%- endunless -%}
+                  {%- if property_size != 0 -%}
+                  <!-- 顯示產品屬性 -->
+                  {%- for property in line_item.properties -%}
+                  {% assign property_first_char = property.first | slice: 0 %}
+                  {%- if property.last != blank and property_first_char != '_' -%}
+                  <span>{{ property.first }}:</span>
+                  <span>
+                    {%- if property.last contains '/uploads/' -%}
+                    <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                    {%- else -%}
+                    {{ property.last }}
+                    {%- endif -%}
+                  </span>
+                  {%- endif -%}
+                  {%- endfor -%}
+                  {%- endif -%}
+                </div>
+                {%- endunless -%}
+  
+                {%- if line_item.line_level_discount_allocations != blank -%}
+                <!-- 如果有折扣，顯示折扣信息 -->
+                <ul role="list" aria-label="{{ 'customer.order.discount' | t }}">
+                  {%- for discount_allocation in line_item.line_level_discount_allocations -%}
+                  <li>
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                      <use href="#icon-discount" />
+                    </svg>
+                    {{- discount_allocation.discount_application.title }} (-
+                    {{- discount_allocation.amount | money -}}
+                    )
+                  </li>
+                  {%- endfor -%}
+                </ul>
+                {%- endif -%}
+  
+                {%- if line_item.fulfillment -%}
+                <div class="fulfillment">
+                  {%- assign created_at = line_item.fulfillment.created_at | time_tag: format: 'date' -%}
+                  <!-- 顯示履行日期 -->
+                  <span>{{ 'customer.order.fulfilled_at_html' | t: date: created_at }}</span>
+  
+                  {%- if line_item.fulfillment.tracking_url -%}
+                  <!-- 如果有追蹤URL，顯示追蹤鏈接 -->
+                  <a href="{{ line_item.fulfillment.tracking_url }}">
+                    {{ 'customer.order.track_shipment' | t }}
+                  </a>
+                  {%- endif -%}
+                  <span>
+                    {{ line_item.fulfillment.tracking_company }}
+                    {%- if line_item.fulfillment.tracking_number -%}
+                    #{{ line_item.fulfillment.tracking_number }}
+                    {%- endif -%}
+                  </span>
+                </div>
+                {%- endif -%}
+              </div>
+            </td>
+            <td class="p-1 border-bottom border-dark">
+              <div class="w-100">
+                <h3>{{ line_item.final_price | money }} x {{ line_item.quantity }} = 
+                            {% comment %} <td class="pe-4 align-middle">{{ line_item.line_price | money }}</td> {% endcomment %}
+                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                  <dl>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                    </dt>
+                    <dd class="regular-price">
+                      <s>{{ line_item.original_line_price | money }}</s>
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <span>{{ line_item.final_line_price | money }}</span>
+                    </dd>
+                  </dl>
+                  {%- else -%}
+                  {{ line_item.original_line_price | money }}
+                  {%- endif -%}
+                </h3>
+              </div>
             </td>
           </tr>
-        {% endif %}
-        {%- if order.total_duties != blank -%}
-          <tr>
-            <td colspan="2" class="order-customs-duty">
-              <p>{{ 'customer.order.total_duties' | t }}</p>
-              <p class="text-end">{{ order.total_duties | money }}</p>
-            </td>
-          </tr>
-        {% endif %}
-        {%- if order.total_refunded_amount != 0 -%}
-          <tr>
-            <td colspan="2" class="order-refund">
-              <p>{{ 'customer.order.total_refunded' | t }}</p>
-              <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
-            </td>
-          </tr>
-        {% endif %}
-        <tr>
-          <td colspan="2" class="order-total">
-            <p class="fs-1">{{ 'customer.order.total' | t }}</p>
-            <p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-
-    <!-- 模態框結構 -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            <img src="{{ line_item.image | image_url }}" alt="{{ line_item.title }}" width="100%" height="auto"
-              class="img-fluid" data-bs-toggle="modal" data-bs-target="#imageModal"
-              data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+  
+          {% endunless %}
+          {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="order-subtotal">
+                <p>{{ 'customer.order.subtotal' | t }}</p>
+                <p class="text-end">{{ order.line_items_subtotal_price | money }}</p>
+              </td>
+            </tr>
+            {%- if order.cart_level_discount_applications != blank -%}
+              {%- for discount_application in order.cart_level_discount_applications -%}
+                <tr>
+                  <td colspan="2" class="order-discount">
+                    <p>
+                      {{ 'customer.order.discount' | t }}
+                      <span class="cart-discount">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                          <use href="#icon-discount" />
+                        </svg>
+                        {{- discount_application.title -}}
+                      </span>
+                    </p>
+                    <p class="text-end">
+                      <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                      <span class="cart-discount">
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
+                          <use href="#icon-discount" />
+                        </svg>
+                        {{- discount_application.title -}}
+                      </span>
+                    </p>
+                  </td>
+                </tr>
+              {%- endfor -%}
+            {%- endif -%}
+            <tr>
+              <td colspan="2" class="order-shipping">
+                <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
+                <p class="text-end">{{ order.shipping_method.price | money }}</p>
+              </td>
+            </tr>
+            {%- if order.tax_line.title != blank -%}
+              <tr>
+                <td colspan="2" class="order-tax">
+                  <p>
+                    {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }} {{ order.tax_line.rate | times: 100 }}%)
+                  </p>
+                  <p class="text-end">{{ order.tax_line.price | money }}</p>
+                </td>
+              </tr>
+            {% endif %}
+            {%- if order.total_duties != blank -%}
+              <tr>
+                <td colspan="2" class="order-customs-duty">
+                  <p>{{ 'customer.order.total_duties' | t }}</p>
+                  <p class="text-end">{{ order.total_duties | money }}</p>
+                </td>
+              </tr>
+            {% endif %}
+            {%- if order.total_refunded_amount != 0 -%}
+              <tr>
+                <td colspan="2" class="order-refund">
+                  <p>{{ 'customer.order.total_refunded' | t }}</p>
+                  <p class="text-end">-{{ order.total_refunded_amount | money_with_currency }}</p>
+                </td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td colspan="2" class="order-total">
+                <p class="fs-1">{{ 'customer.order.total' | t }}</p>
+                <p class="fs-1 text-end">{{ order.total_net_amount | money_with_currency }}</p>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+  
+        <!-- 模態框結構 -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="{{ line_item.image | image_url }}" alt="{{ line_item.title }}" width="100%" height="auto"
+                  class="img-fluid" data-bs-toggle="modal" data-bs-target="#imageModal"
+                  data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
+
 
 {% schema %}
   {
