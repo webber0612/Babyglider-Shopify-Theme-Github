@@ -438,7 +438,7 @@
           {% endif %}
           <br>
         {% endif %}
-        <div class="payment-status-card card align-middle"  style="padding-bottom:10px;">
+        <div class="payment-status-card card align-middle">
           <div class="card-header">
             {% comment %} 付款狀態 {% endcomment %}
             <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
@@ -451,8 +451,8 @@
             </div>
           {% endif %}
         </div>
-
-        <div class="shipping-status-card card align-middle" style="padding-top:10px;padding-bottom:10px;">
+        <p></p>
+        <div class="shipping-status-card card align-middle">
           <div class="card-header">
             <h2 class="m-0">{{ 'customer.order.fulfillment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.fulfillment_status_label }}</span></h2>
           </div>
