@@ -441,7 +441,7 @@
         <div class="payment-status-card card align-middle" class="border-radius: 10px;">
           <div class="card-header">
             {% comment %} 付款狀態 {% endcomment %}
-            <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-2 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
+            <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
           </div>
           {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
             <div class="card-body">
@@ -453,7 +453,7 @@
         </div>
         <div class="shipping-status-card card">
           <div class="card-header">
-            <h2>{{ 'customer.order.fulfillment_status' | t }}: <span class="badge fs-2 rounded-pill text-white bg-info text-center align-middle">{{ order.fulfillment_status_label }}</span></h2>
+            <h2 class="m-0">{{ 'customer.order.fulfillment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.fulfillment_status_label }}</span></h2>
           </div>
           {% if order.fulfillment_status_label == 'shipping' %}
             <div class="card-body">
