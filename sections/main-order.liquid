@@ -515,7 +515,7 @@
       </div>
     </div>
   </div>
-
+  <div class="order-list">
   {% comment %} 摺疊表格 {% endcomment %}
   {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
   {% assign current_collection = null %}
@@ -1321,6 +1321,7 @@
         </tr>
       </tfoot>
     </table>
+  </div>
 
     <!-- 模態框結構 -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
