@@ -193,6 +193,17 @@
         "disabled": false,
         "settings": {
         }
+      },
+      "17524978868273665157": {
+        "type": "shopify:\/\/apps\/panda-preorder-split-payments\/blocks\/app-embed\/02e330c8-fd22-48e4-bc7e-37f002d683e5",
+        "disabled": false,
+        "settings": {
+          "widget_title": "Purchase Options",
+          "no_partial_title": "Full Payment",
+          "show_no_partial_pay_title": "yes",
+          "widget_heading_color": "#1d1d1d",
+          "widget_text_color": "#1d1d1d"
+        }
       }
     },
     "color_schemes": {
