@@ -463,11 +463,13 @@
           </div>
         {% endif %}
       </div>
-        <div class="flex-grow-2 shipping-address">
-          <div>
+        <div class="flex-grow-2 card">
+          <div class="card-head">
             <!-- 顯示運送地址 -->
-            <p style="font-size:24px;">{{ 'customer.order.shipping_address' | t }}</p>
-              {{ order.shipping_address | format_address }}
+            <h2>{{ 'customer.order.shipping_address' | t }}</h2>
+          </div>
+          <div class="card-body fs-3">
+            <p>{{ order.shipping_address | format_address }}</p>
             <p>
               Phone :
               {%- liquid
@@ -482,6 +484,7 @@
             </p>
           </div>
         </div>
+      </div>
 
     </div>
 
