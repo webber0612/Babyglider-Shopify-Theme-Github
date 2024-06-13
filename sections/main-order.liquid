@@ -526,7 +526,6 @@
             <h2 class="m-0">{{ 'customer.order.shipping_address' | t }}</h2>
           </div>
           <div class="card-body">
-            <p>
               {{ order.shipping_address | format_address }}
               Phone :
               {%- liquid
@@ -538,7 +537,6 @@
                   echo customer.phone
                 endif
               %}
-            </p>
           </div>
         </div>
       </div>
