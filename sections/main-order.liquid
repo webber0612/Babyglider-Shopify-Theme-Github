@@ -464,11 +464,11 @@
         {% endif %}
       </div>
         <div class="flex-grow-2 card">
-          <div class="card-head">
+          <div class="card-head bg-info align-millde">
             <!-- 顯示運送地址 -->
             <h2>{{ 'customer.order.shipping_address' | t }}</h2>
           </div>
-          <div class="card-body fs-3">
+          <div class="card-body">
             <p>{{ order.shipping_address | format_address }}</p>
             <p>
               Phone :
@@ -485,34 +485,32 @@
           </div>
         </div>
       </div>
-
-    </div>
-
-    <!-- Add class 'active' to progress -->
-    <div class="row d-flex justify-content-center">
-      <div class="col-12">
-        <ul id="progressbar" class="text-center">
-          <li class="step0 active">
-            <p class="step1-icon" style="margin-bottom: 0;">📋</p>
-            <p>
-              Order Placed at<br>
-              {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
-              {{ order_date }}
-            </p>
-          </li>
-          <li class="step0 {% if order_progress >= 50 %}active{% endif %}">
-            <p class="step2-icon" style=" margin-bottom: 0;">💳</p>
-            <p>Paid</p>
-          </li>
-          <li class="step0 {% if order_progress >= 75 %}active{% endif %}">
-            <p class="step3-icon" style=" margin-bottom: 0;">🚚</p>
-            <p>Shipped/In Transit</p>
-          </li>
-          <li class="step0 {% if order_progress == 100 %}active{% endif %}">
-            <p class="step4-icon" style=" margin-bottom: 0;">🌟</p>
-            <p>Completed!</p>
-          </li>
-        </ul>
+      <!-- Add class 'active' to progress -->
+      <div class="row d-flex justify-content-center">
+        <div class="col-12">
+          <ul id="progressbar" class="text-center">
+            <li class="step0 active">
+              <p class="step1-icon" style="margin-bottom: 0;">📋</p>
+              <p>
+                Order Placed at<br>
+                {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
+                {{ order_date }}
+              </p>
+            </li>
+            <li class="step0 {% if order_progress >= 50 %}active{% endif %}">
+              <p class="step2-icon" style=" margin-bottom: 0;">💳</p>
+              <p>Paid</p>
+            </li>
+            <li class="step0 {% if order_progress >= 75 %}active{% endif %}">
+              <p class="step3-icon" style=" margin-bottom: 0;">🚚</p>
+              <p>Shipped/In Transit</p>
+            </li>
+            <li class="step0 {% if order_progress == 100 %}active{% endif %}">
+              <p class="step4-icon" style=" margin-bottom: 0;">🌟</p>
+              <p>Completed!</p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
