@@ -429,15 +429,16 @@
             <div>
               <p class="badge bg-info">
                 {% comment %} 付款狀態 {% endcomment %}
-                {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</p>
+                {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
               
                 {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
-                  <p>
+
                     <span class="payment-link-instructions small">
                       If you need to complete your payment, please contact us at [您的联系方式]. We will be happy to assist you and send you a secure payment link.
                     </span>
-                  </p>
+
                 {% endif %}
+              </p>
             </div>
             <br>
             <p class="badge bg-info">
