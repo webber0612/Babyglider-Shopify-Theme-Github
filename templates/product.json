@@ -121,6 +121,12 @@
         },
         "judge_me_reviews_all_reviews_text_ktgBmz": {
           "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/all_reviews_text\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "judge_me_reviews_review_widget_KUJnUJ": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
           }
         }
@@ -136,7 +142,8 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "judge_me_reviews_all_reviews_text_ktgBmz"
+        "judge_me_reviews_all_reviews_text_ktgBmz",
+        "judge_me_reviews_review_widget_KUJnUJ"
       ],
       "custom_css": [
         ".price-item {font-family: \"Open Sans\", sans-serif !important; font-size: 32px !important; \/* ...其他樣式... *\/}",
@@ -185,6 +192,7 @@
         "judge_me_reviews_all_reviews_text_bEGmga",
         "judge_me_reviews_review_widget_8VyL3e"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
