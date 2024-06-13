@@ -41,10 +41,17 @@
       font-size:64px !important;
       user-select: none; /* 禁止选择 */
     }
+
+    .card flex-glow1 {
+      width:75%;
+    }
+    .card flex-glow2 {
+      width:25%
+    }
   }
 
-  /* 螢幕寬度小於751PX時 */
-  @media (max-width: 751px) {
+  /* 螢幕寬度小於750PX時 */
+  @media (max-width: 750px) {
     .shipping-address,
     .bill-address {
       width: 100%; /* 小屏幕下每个地址占满宽度 */
@@ -59,6 +66,12 @@
     .step4-icon {
       font-size:32px !important;
       user-select: none; /* 禁止选择 */
+    }
+    .card flex-glow1 {
+      width:100%;
+    }
+    .card flex-glow2 {
+      width:100%
     }
   }
 
@@ -411,7 +424,7 @@
   <div class="card bg-light mb-3 rounded-3">
     <div class="row d-flex flex-wrap justify-content-between px-3 top">
       <div class="d-flex flex-column flex-md-row">
-        <div class="flex-grow-1 w-50">
+        <div class="flex-grow-1">
           <div style="text-align: left;margin-bottom:10px">
             <p>
               <!-- 訂單標題，顯示訂單名稱 -->
@@ -451,7 +464,7 @@
             {% endif %}
           </div>
         </div>
-        <div class="flex-grow-1 shipping-address">
+        <div class="flex-grow-2 shipping-address">
           <div>
             <!-- 顯示運送地址 -->
             <p style="font-size:24px;">{{ 'customer.order.shipping_address' | t }}</p>
