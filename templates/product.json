@@ -118,11 +118,6 @@
           "disabled": true,
           "settings": {
           }
-        },
-        "judge_me_reviews_preview_badge_hUKCTM": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-          }
         }
       },
       "block_order": [
@@ -135,8 +130,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
-        "judge_me_reviews_preview_badge_hUKCTM"
+        "description"
       ],
       "custom_css": [
         ".price-item {font-family: \"Open Sans\", sans-serif !important; font-size: 32px !important; \/* ...其他樣式... *\/}",
@@ -160,34 +154,14 @@
         "padding_bottom": 16
       }
     },
-    "1718238774f1ed6f4b": {
-      "type": "apps",
-      "blocks": {
-        "judge_me_reviews_featured_carousel_3wjrVk": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-            "maxwidth": 1080
-          }
-        },
-        "judge_me_reviews_all_reviews_text_bEGmga": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/all_reviews_text\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-          }
-        },
-        "judge_me_reviews_review_widget_8VyL3e": {
-          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "judge_me_reviews_featured_carousel_3wjrVk",
-        "judge_me_reviews_all_reviews_text_bEGmga",
-        "judge_me_reviews_review_widget_8VyL3e"
-      ],
-      "disabled": true,
+    "quick_order_list_4mmMbe": {
+      "type": "quick-order-list",
       "settings": {
-        "include_margins": true
+        "show_image": false,
+        "show_sku": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "related-products": {
@@ -215,7 +189,7 @@
     "custom_liquid_R8VLyX",
     "custom_liquid_cbCgJR",
     "main",
-    "1718238774f1ed6f4b",
+    "quick_order_list_4mmMbe",
     "related-products"
   ]
 }
