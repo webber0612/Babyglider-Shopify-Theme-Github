@@ -391,42 +391,42 @@
           modalImg.src = imgSrc;
           modalImg.alt = imgAlt;
       });
-      document.addEventListener('DOMContentLoaded', function () {
-        const requestPaymentLinkButton = document.getElementById('requestPaymentLink');
-      
-        if (requestPaymentLinkButton) {
-          requestPaymentLinkButton.addEventListener('click', function () {
-            const orderId = this.dataset.orderId;
-      
-            console.log(`Requesting payment link for order ID: ${orderId}`); // 记录开始请求
-      
-            fetch('/cart/add.js', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                id: orderId,
-                quantity: 1,
-              })
-            })
-              .then(response => {
-                console.log('Received response from server:', response); // 记录服务器响应
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`); // 检查响应状态
-                }
-                return response.json();
-              })
-              .then(data => {
-                console.log('Payment link request successful:', data); // 记录请求成功
-                alert('Payment link request sent successfully!');
-              })
-              .catch(error => {
-                console.error('Error requesting payment link:', error); // 记录请求失败
-                alert('There was an error processing your request. Please try again later.');
-              });
+
+    const requestPaymentLinkButton = document.getElementById('requestPaymentLink');
+  
+    if (requestPaymentLinkButton) {
+      requestPaymentLinkButton.addEventListener('click', function () {
+        const orderId = this.dataset.orderId;
+  
+        console.log(`Requesting payment link for order ID: ${orderId}`); // 记录开始请求
+  
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: orderId,
+            quantity: 1,
+          })
+        })
+          .then(response => {
+            console.log('Received response from server:', response); // 记录服务器响应
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`); // 检查响应状态
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Payment link request successful:', data); // 记录请求成功
+            alert('Payment link request sent successfully!');
+          })
+          .catch(error => {
+            console.error('Error requesting payment link:', error); // 记录请求失败
+            alert('There was an error processing your request. Please try again later.');
           });
-        }
+      });
+    }
       
   });
 </script>
