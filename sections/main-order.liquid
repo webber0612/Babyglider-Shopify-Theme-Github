@@ -430,6 +430,14 @@
               <!-- 付款狀態 -->
               {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
             </p>
+            {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
+              <p class="badge bg-info">
+                {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
+                <button id="requestPaymentLink" class="btn btn-sm btn-secondary" data-order-id="{{ order.id }}">
+                  Request Payment Link
+                </button>
+              </p>
+            {% endif %}            
             <br>
             <p class="badge bg-info">
               <!-- 商品配送狀態 -->
