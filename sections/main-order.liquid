@@ -408,11 +408,7 @@
     <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
   </div>
   {% comment %} Shipping & Status Information Card {% endcomment %}
-  <div class="card text-dark bg-light mb-3 rounded-3">
-    <div class="card-head">
-      <!-- 訂單標題，顯示訂單名稱 -->
-      <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
-    </div>
+  <div class="card bg-light mb-3 rounded-3">
     <div class="row d-flex flex-wrap justify-content-between px-3 top">
       <div class="d-flex flex-column flex-md-row">
         <div class="flex-grow-1 w-50">
