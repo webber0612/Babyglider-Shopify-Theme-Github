@@ -451,11 +451,16 @@
             </div>
           {% endif %}
         </div>
-        <br>
-        <p class="badge bg-info">
-          <!-- 商品配送狀態 -->
-          {{ 'customer.order.fulfillment_status' | t }}:{{ order.fulfillment_status_label }}
-        </p>
+        <div class="shipping-status-card card">
+          <div class="card-header">
+            <h2>{{ 'customer.order.fulfillment_status' | t }}: <span class="badge fs-2 rounded-pill text-white bg-info text-center align-middle">{{ order.fulfillment_status_label }}</span></h2>
+          </div>
+          {% if order.fulfillment_status_label == 'shipping' %}
+            <div class="card-body">
+              <p>Tracking Number is:</p>
+            </div>
+          {% endif %}
+        </div>
         {% if order.note != null %}
           <div class="order-notes">
             <h2>Note from BabygliderPH :</h2>
@@ -466,7 +471,6 @@
         <div class="flex-grow-2">
           <div class="shipping-address-card card">
             <div class="card-header">
-              <!-- 顯示運送地址 -->
               <h2 class="m-0">{{ 'customer.order.shipping_address' | t }}</h2>
             </div>
             <div class="card-body">
@@ -514,8 +518,7 @@
         </div>
       </div>
     </div>
-    <div>
-      {% comment %} 摺疊表格 {% endcomment %}
+    <div> {% comment %} 摺疊表格 {% endcomment %}
       {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
       {% assign current_collection = null %}
       <h2>{{ order.name }} Order List</h2>
