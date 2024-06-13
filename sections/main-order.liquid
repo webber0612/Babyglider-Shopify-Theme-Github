@@ -440,7 +440,6 @@
           {% case order.financial_status %}
             {% when 'pending', 'partially_paid' %}
               <div class="card-header">
-                {% comment %} 付款狀態 {% endcomment %}
                 <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
               </div>
               <div class="card-body">
@@ -450,7 +449,6 @@
               </div>
             {% when 'paid' %}
               <div class="card-header">
-                {% comment %} 付款狀態 {% endcomment %}
                 <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-success text-center align-middle">{{ order.financial_status_label }}</span></h2>
               </div>
               <div class="card-body">
@@ -459,7 +457,6 @@
               </div>
             {% when 'voided' %}
               <div class="card-header">
-                {% comment %} 付款狀態 {% endcomment %}
                 <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-dark text-center align-middle">{{ order.financial_status_label }}</span></h2>
               </div>
               <div class="card-body">
