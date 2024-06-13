@@ -429,43 +429,40 @@
       </p>
     </div>
     <div class="row d-flex flex-wrap justify-content-between px-3 top">
-
-        <div class="flex-grow-1">
-          <div style="text-align: left;margin-bottom:10px">
-            {% if order_status != null %}
-              {% if order_status != Cancelled %}
-                <p class="badge bg-danger text-white">Currentlly Status : {{ order_status }}</p>
-              {% else %}
-                <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
-              {% endif %}
-              <br>
-            {% endif %}
-            <div class="payment-status-card card align-middle" class="border-radius: 10px;">
-              <div class="card-header">
-                {% comment %} 付款狀態 {% endcomment %}
-                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-2 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
-              </div>
-              {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
-                <div class="card-body">
-                  <p class="payment-link-instructions m-0">
-                    If you need to complete your payment,<br>please contact us and We will be happy to assist you and send you a secure payment link.
-                  </p>
-                </div>
-              {% endif %}
-            </div>
-            <br>
-            <p class="badge bg-info">
-              <!-- 商品配送狀態 -->
-              {{ 'customer.order.fulfillment_status' | t }}:{{ order.fulfillment_status_label }}
-            </p>
-            {% if order.note != null %}
-              <div class="order-notes">
-                <h2>Note from BabygliderPH :</h2>
-                <p style="font-size:18px;">{{ order.note }}</p>
-              </div>
-            {% endif %}
+      <div class="flex-grow-1" style="text-align: left;margin-bottom:10px">
+        {% if order_status != null %}
+          {% if order_status != Cancelled %}
+            <p class="badge bg-danger text-white">Currentlly Status : {{ order_status }}</p>
+          {% else %}
+            <p class="badge bg-info">Currentlly Status : {{ order_status }}</p>
+          {% endif %}
+          <br>
+        {% endif %}
+        <div class="payment-status-card card align-middle" class="border-radius: 10px;">
+          <div class="card-header">
+            {% comment %} 付款狀態 {% endcomment %}
+            <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-2 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
           </div>
+          {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
+            <div class="card-body">
+              <p class="payment-link-instructions m-0">
+                If you need to complete your payment,<br>please contact us and We will be happy to assist you and send you a secure payment link.
+              </p>
+            </div>
+          {% endif %}
         </div>
+        <br>
+        <p class="badge bg-info">
+          <!-- 商品配送狀態 -->
+          {{ 'customer.order.fulfillment_status' | t }}:{{ order.fulfillment_status_label }}
+        </p>
+        {% if order.note != null %}
+          <div class="order-notes">
+            <h2>Note from BabygliderPH :</h2>
+            <p style="font-size:18px;">{{ order.note }}</p>
+          </div>
+        {% endif %}
+      </div>
         <div class="flex-grow-2 shipping-address">
           <div>
             <!-- 顯示運送地址 -->
