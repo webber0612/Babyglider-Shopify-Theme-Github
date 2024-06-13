@@ -426,19 +426,18 @@
               {% endif %}
               <br>
             {% endif %}
-            <div>
-              <p class="badge bg-info text-start">
+            <div class="card">
+              <div class="card-header">
                 {% comment %} 付款狀態 {% endcomment %}
                 <span>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</span><br><br>
-              
-                {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
-
-                    <span class="payment-link-instructions small">
-                      If you need to complete your payment,<br>please contact us at [您的联系方式].<br>We will be happy to assist you and send you a secure payment link.
-                    </span>
-
-                {% endif %}
-              </p>
+              </div>
+              {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
+                <div class="card-body">
+                  <p class="payment-link-instructions small">
+                    If you need to complete your payment,<br>please contact us at [您的联系方式].<br>We will be happy to assist you and send you a secure payment link.
+                  </p>
+                </div>
+              {% endif %}
             </div>
             <br>
             <p class="badge bg-info">
