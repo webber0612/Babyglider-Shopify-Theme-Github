@@ -339,7 +339,7 @@
           <div class="footer__payment">
             <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
             <ul class="list list-payment" role="list">
-              {%- comment -%} {% assign enabled_payment_types = 'paypal,gcash,grabpay,shopeepay,qr ph,visa,master,american_express,bdo,bpi,7-eleven,alfamart,cebuana,gopay,palawa' | remove: ' ' | split: ',' %} {%- endcomment -%}
+              {%- comment -%} {% assign enabled_payment_types = 'paypal,gcash,grabpay,shopeepay,qr ph,visa,master,american_express,bdo,bpi,seveneleven,alfamart,cebuana,gopay,palawa' | remove: ' ' | split: ',' %} {%- endcomment -%}
               {% assign enabled_payment_types = 'paypal,gcash,grabpay,shopeepay,qr ph,visa,master,american_express,bdo,bpi,7-Eleven,alfamart,cebuana,gopay,palawa' | remove: ' ' | split: ',' %}
                 {% for type in enabled_payment_types %}
                   <li class="list-payment__item">
