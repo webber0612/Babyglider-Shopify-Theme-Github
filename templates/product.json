@@ -115,6 +115,12 @@
         },
         "description": {
           "type": "description",
+          "disabled": true,
+          "settings": {
+          }
+        },
+        "judge_me_reviews_all_reviews_text_ktgBmz": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/all_reviews_text\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
           }
         }
@@ -129,7 +135,8 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description"
+        "description",
+        "judge_me_reviews_all_reviews_text_ktgBmz"
       ],
       "custom_css": [
         ".price-item {font-family: \"Open Sans\", sans-serif !important; font-size: 32px !important; \/* ...其他樣式... *\/}",
@@ -151,6 +158,35 @@
         "enable_video_looping": false,
         "padding_top": 16,
         "padding_bottom": 16
+      }
+    },
+    "1718238774f1ed6f4b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_3wjrVk": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        },
+        "judge_me_reviews_all_reviews_text_bEGmga": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/all_reviews_text\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        },
+        "judge_me_reviews_review_widget_8VyL3e": {
+          "type": "shopify:\/\/apps\/judge-me-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_3wjrVk",
+        "judge_me_reviews_all_reviews_text_bEGmga",
+        "judge_me_reviews_review_widget_8VyL3e"
+      ],
+      "settings": {
+        "include_margins": true
       }
     },
     "related-products": {
@@ -178,6 +214,7 @@
     "custom_liquid_R8VLyX",
     "custom_liquid_cbCgJR",
     "main",
+    "1718238774f1ed6f4b",
     "related-products"
   ]
 }
