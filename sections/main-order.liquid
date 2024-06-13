@@ -425,11 +425,11 @@
     <div class="row d-flex flex-wrap justify-content-between px-3 top">
       <div class="d-flex flex-column flex-md-row">
         <div class="flex-grow-1">
+          <p>
+            <!-- 訂單標題，顯示訂單名稱 -->
+            <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+          </p>
           <div style="text-align: left;margin-bottom:10px">
-            <p>
-              <!-- 訂單標題，顯示訂單名稱 -->
-              <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
-            </p>
             {% if order_status != null %}
               {% if order_status != Cancelled %}
                 <p class="badge bg-danger text-white">Currentlly Status : {{ order_status }}</p>
