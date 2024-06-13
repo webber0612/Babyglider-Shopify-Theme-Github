@@ -429,7 +429,7 @@
             <div class="card">
               <div class="card-header">
                 {% comment %} 付款狀態 {% endcomment %}
-                <span>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</span><br><br>
+                <h4>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</h4>
               </div>
               {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
                 <div class="card-body">
