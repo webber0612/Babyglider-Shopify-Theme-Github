@@ -115,7 +115,6 @@
         },
         "description": {
           "type": "description",
-          "disabled": true,
           "settings": {
           }
         }
@@ -154,16 +153,6 @@
         "padding_bottom": 16
       }
     },
-    "quick_order_list_4mmMbe": {
-      "type": "quick-order-list",
-      "settings": {
-        "show_image": false,
-        "show_sku": false,
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "related-products": {
       "type": "related-products",
       "settings": {
@@ -189,7 +178,6 @@
     "custom_liquid_R8VLyX",
     "custom_liquid_cbCgJR",
     "main",
-    "quick_order_list_4mmMbe",
     "related-products"
   ]
 }
