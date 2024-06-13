@@ -391,43 +391,6 @@
           modalImg.src = imgSrc;
           modalImg.alt = imgAlt;
       });
-
-    const requestPaymentLinkButton = document.getElementById('requestPaymentLink');
-  
-    if (requestPaymentLinkButton) {
-      requestPaymentLinkButton.addEventListener('click', function () {
-        const orderId = this.dataset.orderId;
-  
-        console.log(`Requesting payment link for order ID: ${orderId}`); // 记录开始请求
-  
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            id: orderId,
-            quantity: 1,
-          })
-        })
-          .then(response => {
-            console.log('Received response from server:', response); // 记录服务器响应
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`); // 检查响应状态
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Payment link request successful:', data); // 记录请求成功
-            alert('Payment link request sent successfully!');
-          })
-          .catch(error => {
-            console.error('Error requesting payment link:', error); // 记录请求失败
-            alert('There was an error processing your request. Please try again later.');
-          });
-      });
-    }
-      
   });
 </script>
 
@@ -464,17 +427,17 @@
               <br>
             {% endif %}
             <p class="badge bg-info">
-              <!-- 付款狀態 -->
+              {% comment %} 付款狀態 {% endcomment %}
               {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
+            
+              {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
+                <br>
+                <span class="payment-link-instructions small">
+                  If you need to complete your payment, please contact us at [您的联系方式]. We will be happy to assist you and send you a secure payment link.
+                </span>
+              {% endif %}
             </p>
-            {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
-              <p class="badge bg-info">
-                {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}
-                <button id="requestPaymentLink" class="btn btn-sm btn-secondary" data-order-id="{{ order.id }}">
-                  Request Payment Link
-                </button>
-              </p>
-            {% endif %}            
+            
             <br>
             <p class="badge bg-info">
               <!-- 商品配送狀態 -->
@@ -1347,4 +1310,46 @@
 
     <!-- 模態框結構 -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-cente
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <img src="{{ line_item.image | image_url }}" alt="{{ line_item.title }}" width="100%" height="auto"
+              class="img-fluid" data-bs-toggle="modal" data-bs-target="#imageModal"
+              data-img-src="{{ line_item.image | image_url }}" data-img-alt="{{ line_item.title }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% schema %}
+  {
+    "name": "t:sections.main-order.name",
+    "settings": [
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 36
+      }
+    ]
+  }
+{% endschema %}
