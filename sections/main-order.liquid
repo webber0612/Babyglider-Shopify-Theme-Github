@@ -426,9 +426,9 @@
               <br>
             {% endif %}
             <div class="card w-75 align-middle" class="border-radius: 10px;">
-              <div class="card-header bg-info">
+              <div class="card-header">
                 {% comment %} 付款狀態 {% endcomment %}
-                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</h2>
+                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge rounded-pill text-white bg-priminfo text-center align-middle">{{ order.financial_status_label }}</span></h2>
               </div>
               {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
                 <div class="card-body">
