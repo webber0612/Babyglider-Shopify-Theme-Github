@@ -319,25 +319,6 @@
 {%- endstyle -%}
 
 <script>
-
-  {% assign order_status = order.metafields.custom.order_status %}
-  {% assign order_progress = 0 %}
-
-  {% case order_status %}
-  {% when 'Partially Paid - Unconfirmed', 'Partially Paid - Confirmed', 'Paid in Full - Unconfirmed', 'Paid in Full - Confirmed' %}
-  {% assign order_progress = 25 %}
-  {% when 'Unfulfilled', 'Partially Fulfilled', 'Fulfilled' %}
-  {% assign order_progress = 50 %}
-  {% when 'Not Delivered', 'Partially Delivered' %}
-  {% assign order_progress = 75 %}
-  {% when 'Delivered', 'Completed', 'Returned - Refunded', 'Returned - Not Refunded', 'On Hold' %}
-  {% assign order_progress = 100 %}
-  {% when 'Failed', 'Cancelled' %}
-  {% assign order_progress = 0 %}
-  {% when 'Order Created' %}
-  {% assign order_progress = 100 %}
-  {% endcase %}
-
   document.addEventListener('DOMContentLoaded', function () {
     const toggleButtons = document.querySelectorAll('[data-bs-toggle="collapse"]');
     const targetTbodies = document.querySelectorAll('[id^="collapse"]');
@@ -406,6 +387,23 @@
   });
 </script>
 
+{% assign order_status = order.metafields.custom.order_status %}
+{% assign order_progress = 0 %}
+
+{% case order_status %}
+{% when 'Partially Paid - Unconfirmed', 'Partially Paid - Confirmed', 'Paid in Full - Unconfirmed', 'Paid in Full - Confirmed' %}
+{% assign order_progress = 25 %}
+{% when 'Unfulfilled', 'Partially Fulfilled', 'Fulfilled' %}
+{% assign order_progress = 50 %}
+{% when 'Not Delivered', 'Partially Delivered' %}
+{% assign order_progress = 75 %}
+{% when 'Delivered', 'Completed', 'Returned - Refunded', 'Returned - Not Refunded', 'On Hold' %}
+{% assign order_progress = 100 %}
+{% when 'Failed', 'Cancelled' %}
+{% assign order_progress = 0 %}
+{% when 'Order Created' %}
+{% assign order_progress = 100 %}
+{% endcase %}
 <div class="customer order section-{{ section.id }}-padding">
   <svg style="display:none">
     <symbol id="icon-discount" viewBox="0 0 12 12">
@@ -439,17 +437,41 @@
           <br>
         {% endif %}
         <div class="payment-status-card card align-middle">
-          <div class="card-header">
-            {% comment %} 付款狀態 {% endcomment %}
-            <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
-          </div>
-          {% if order.financial_status == 'pending' or order.financial_status == 'partially_paid' %}
-            <div class="card-body">
-              <p class="payment-link-instructions m-0">
-                To complete your payment, please contact us and we'll send a secure payment link to the email address associated with your order. <br><span class="badge rounded-pill text-white bg-danger text-center align-middle">Important</span><span style="font-weight: bold;"><br>Do not make payments through unsolicited emails or links.</span>
+          {% case order.financial_status %}
+            {% when 'pending', 'partially_paid' %}
+              <div class="card-header">
+                {% comment %} 付款狀態 {% endcomment %}
+                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">{{ order.financial_status_label }}</span></h2>
+              </div>
+              <div class="card-body">
+                <p class="payment-link-instructions m-0">
+                  To complete your payment, please contact us and we'll send a secure payment link to the email address associated with your order. <br><span class="badge rounded-pill text-white bg-danger text-center align-middle">Important</span><span style="font-weight: bold;"><br>Do not make payments through unsolicited emails or links.</span>
+                </p>
+              </div>
+            {% when 'paid' %}
+              <div class="card-header">
+                {% comment %} 付款狀態 {% endcomment %}
+                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-success text-center align-middle">{{ order.financial_status_label }}</span></h2>
+              </div>
+              <div class="card-body">
+                <p class="payment-link-instructions m-0">
+                  We're excited to get your order on its way! Your payment has been processed, and we'll notify you when your package ships. Feel free to reach out if you have any questions.              </p>
+              </div>
+            {% when 'voided' %}
+              <div class="card-header">
+                {% comment %} 付款狀態 {% endcomment %}
+                <h2 class="m-0">{{ 'customer.order.payment_status' | t }}: <span class="badge fs-3 rounded-pill text-white bg-dark text-center align-middle">{{ order.financial_status_label }}</span></h2>
+              </div>
+              <div class="card-body">
+                <p class="payment-link-instructions m-0">
+                  This order has been cancelled due to an unsuccessful payment. Please contact us if you require further assistance.
+                </p>
+              </div>
+            {% else %}
+              <p class="badge bg-info">
+                {{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }} 
               </p>
-            </div>
-          {% endif %}
+          {% endcase %}          
         </div>
         <p> </p>
         <div class="shipping-status-card card align-middle">
