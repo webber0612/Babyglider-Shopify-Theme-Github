@@ -463,25 +463,27 @@
           </div>
         {% endif %}
       </div>
-        <div class="flex-grow-2 card">
-          <div class="card-head bg-info align-millde">
-            <!-- 顯示運送地址 -->
-            <h2>{{ 'customer.order.shipping_address' | t }}</h2>
-          </div>
-          <div class="card-body">
-            <p>{{ order.shipping_address | format_address }}</p>
-            <p>
-              Phone :
-              {%- liquid
-              if order.shipping_address.phone
-              echo order.shipping_address.phone
-              elsif order.billing_address.phone
-              echo order.billing_address.phone
-              else
-              echo customer.phone
-              endif
-              %}
-            </p>
+        <div class="flex-grow-2">
+          <div class="shipping-address-card card">
+            <div class="card-head bg-info align-millde">
+              <!-- 顯示運送地址 -->
+              <h2 class="m-0">{{ 'customer.order.shipping_address' | t }}</h2>
+            </div>
+            <div class="card-body">
+              <p>{{ order.shipping_address | format_address }}</p>
+              <p>
+                Phone :
+                {%- liquid
+                if order.shipping_address.phone
+                echo order.shipping_address.phone
+                elsif order.billing_address.phone
+                echo order.billing_address.phone
+                else
+                echo customer.phone
+                endif
+                %}
+              </p>
+            </div>
           </div>
         </div>
       </div>
