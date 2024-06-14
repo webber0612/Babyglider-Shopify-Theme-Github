@@ -1009,9 +1009,9 @@
         {%- if order.cart_level_discount_applications != blank -%}
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
-              <td colspan="2"></td>
-              <td class="text-start">
-                <p>
+              <td></td>
+              <td colspan="2">
+                <p class="text-start">
                   {{ 'customer.order.discount' | t }}
                   <span class="cart-discount">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 12 12">
@@ -1543,3 +1543,4 @@
   ]
 }
 {% endschema %}
+ 
