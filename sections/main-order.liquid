@@ -999,7 +999,7 @@
       <tfoot>
         <tr>
           <td colspan="2"><p> </p></td>
-          <td class="tfoot-subtotal-title text-start" colspan="2">
+          <td class="tfoot-subtotal-title text-start" colspan="1">
             <p>{{ 'customer.order.subtotal' | t }}</p>
           </td>
           <td class="tfoot-subtotal-value text-end" colspan="2">
@@ -1010,7 +1010,7 @@
           {%- for discount_application in order.cart_level_discount_applications -%}
             <tr>
               <td colspan="2"><p> </p></td>
-              <td class="tfoot-discount-title text-start" colspan="2">
+              <td class="tfoot-discount-title text-start" colspan="1">
                 <p>
                   {{ 'customer.order.discount' | t }}
                   <span class="cart-discount">
@@ -1037,7 +1037,7 @@
         {%- endif -%}
         <tr>
           <td colspan="2"><p> </p></td>
-          <td class="tfoot-shipping-title text-start" colspan="2">
+          <td class="tfoot-shipping-title text-start" colspan="1">
             <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
           </td>
           <td class="tfoot-shipping-value text-end" colspan="2">
@@ -1047,7 +1047,7 @@
         {%- if order.tax_line.title != blank -%}
           <tr>
             <td colspan="2"><p> </p></td>
-            <td class="tfoot-tax-title text-start" colspan="2">
+            <td class="tfoot-tax-title text-start" colspan="1">
               <p>
                 {{ 'customer.order.tax' | t }} ({{ order.tax_line.title }}
                 {{ order.tax_line.rate | times: 100 }}%)
@@ -1061,7 +1061,7 @@
         {%- if order.total_duties != blank -%}
           <tr>
             <td colspan="2"><p> </p></td>
-            <td class="tfoot-duties-title text-start" colspan="2">
+            <td class="tfoot-duties-title text-start" colspan="1">
               <p>{{ 'customer.order.total_duties' | t }}</p>
             </td>
             <td class="tfoot-duties-value text-end" colspan="2">
@@ -1072,7 +1072,7 @@
         {%- if order.total_refunded_amount != 0 -%}
           <tr>
             <td colspan="2"><p> </p></td>
-            <td class="tfoot-refound-title text-start" colspan="2">
+            <td class="tfoot-refound-title text-start" colspan="1">
               <p>{{ 'customer.order.total_refunded' | t }}</p>
             </td>
             <td class="tfoot-refound-value text-end" colspan="2">
@@ -1082,7 +1082,7 @@
         {% endif %}
         <tr>
           <td colspan="2"><p> </p></td>
-          <td class="tfoot-total-title text-start" colspan="2">
+          <td class="tfoot-total-title text-start" colspan="1">
             <p class="fs-1">{{ 'customer.order.total' | t }}</p>
           </td>
           <td class="tfoot-total-value text-end" colspan="2">
