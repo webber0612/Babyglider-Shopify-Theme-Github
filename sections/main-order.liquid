@@ -1002,7 +1002,7 @@
           <td class="tfoot-subtotal-title text-start" colspan="1">
             <p>{{ 'customer.order.subtotal' | t }}</p>
           </td>
-          <td class="tfoot-subtotal-value text-end" colspan="2">
+          <td class="tfoot-subtotal-value text-end" colspan="3">
             <p>{{ order.line_items_subtotal_price | money }}</p>
           </td>
         </tr>
@@ -1021,7 +1021,7 @@
                   </span>
                 </p>
               </td>
-              <td class="tfoot-discount-value text-end" colspan="2">
+              <td class="tfoot-discount-value text-end" colspan="3">
                 <p>
                   <span>-{{ discount_application.total_allocated_amount | money }}</span>
                   <span class="cart-discount">
@@ -1040,7 +1040,7 @@
           <td class="tfoot-shipping-title text-start" colspan="1">
             <p>{{ 'customer.order.shipping' | t }} ({{ order.shipping_method.title }})</p>
           </td>
-          <td class="tfoot-shipping-value text-end" colspan="2">
+          <td class="tfoot-shipping-value text-end" colspan="3">
             <p>{{ order.shipping_method.price | money }}</p>
           </td>
         </tr>
@@ -1053,7 +1053,7 @@
                 {{ order.tax_line.rate | times: 100 }}%)
               </p>
             </td>
-            <td class="tfoot-tax-value text-end" colspan="2">
+            <td class="tfoot-tax-value text-end" colspan="3">
               <p>{{ order.tax_line.price | money }}</p>
             </td>
           </tr>
@@ -1064,7 +1064,7 @@
             <td class="tfoot-duties-title text-start" colspan="1">
               <p>{{ 'customer.order.total_duties' | t }}</p>
             </td>
-            <td class="tfoot-duties-value text-end" colspan="2">
+            <td class="tfoot-duties-value text-end" colspan="3">
               <p>{{ order.total_duties | money }}</p>
             </td>
           </tr>
@@ -1075,7 +1075,7 @@
             <td class="tfoot-refound-title text-start" colspan="1">
               <p>{{ 'customer.order.total_refunded' | t }}</p>
             </td>
-            <td class="tfoot-refound-value text-end" colspan="2">
+            <td class="tfoot-refound-value text-end" colspan="3">
               <p>-{{ order.total_refunded_amount | money_with_currency }}</p>
             </td>
           </tr>
@@ -1085,7 +1085,7 @@
           <td class="tfoot-total-title text-start" colspan="1">
             <p class="fs-1">{{ 'customer.order.total' | t }}</p>
           </td>
-          <td class="tfoot-total-value text-end" colspan="2">
+          <td class="tfoot-total-value text-end" colspan="3">
             <p class="fs-1">{{ order.total_net_amount | money_with_currency }}</p>
           </td>
         </tr>
