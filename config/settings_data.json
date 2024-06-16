@@ -205,8 +205,8 @@
           "widget_text_color": "#1d1d1d"
         }
       },
-      "1097096201824731535": {
-        "type": "shopify:\/\/apps\/k-preorder-now-partial-payment\/blocks\/app-embeded\/65705a60-a3b0-43ae-9dc8-15db78d76b3b",
+      "14660309866608708618": {
+        "type": "shopify:\/\/apps\/split-payment\/blocks\/app-embed\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
         "disabled": false,
         "settings": {
         }
