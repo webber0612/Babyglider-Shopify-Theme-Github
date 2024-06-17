@@ -152,6 +152,7 @@
       <div class="header-wrapper color-{{ section.settings.color_scheme }} gradient header-wrapper--border-bottom">
   {% else %}
       <div class="header-wrapper color-{{ section.settings.color_scheme }}">
+  {% endif %}
 {% endif %}
 {%- liquid
     assign social_links = false
@@ -355,8 +356,12 @@
       </a>
     </div>
   </header>
-</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
+{% if section.settings.sticky_header_type != 'none' %}
+  </sticky-header>
+{% ease %}
+  </div>
+{% endif %}
 {%- if settings.cart_type == "notification" -%}
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
 {%- endif -%}
