@@ -141,8 +141,19 @@
   endfor
 -%}
 
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  {%- liquid
+{% if section.settings.sticky_header_type != 'none' %}
+  {% if section.settings.show_line_separator %}
+      <sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}" class="header-wrapper color-{{ section.settings.color_scheme }} gradient header-wrapper--border-bottom">
+  {% else %}
+      <sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}" class="header-wrapper color-{{ section.settings.color_scheme }} gradient">
+  {% endif %}
+{% else %}
+  {% if section.settings.show_line_separator %}
+      <div class="header-wrapper color-{{ section.settings.color_scheme }} gradient header-wrapper--border-bottom">
+  {% else %}
+      <div class="header-wrapper color-{{ section.settings.color_scheme }}">
+{% endif %}
+{%- liquid
     assign social_links = false
     assign localization_forms = false
 
