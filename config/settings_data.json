@@ -202,7 +202,7 @@
       },
       "17524978868273665157": {
         "type": "shopify:\/\/apps\/panda-preorder-split-payments\/blocks\/app-embed\/02e330c8-fd22-48e4-bc7e-37f002d683e5",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "widget_title": "Purchase Options",
           "no_partial_title": "Full Payment",
