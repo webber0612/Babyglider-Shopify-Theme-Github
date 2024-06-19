@@ -106,10 +106,34 @@
             "collection": "stickers-1"
           }
         },
+        "featured_collection_mjcXzJ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "📒-notebook-stickerbook"
+          }
+        },
+        "featured_collection_epVDby": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "writing-paper-post-card-card"
+          }
+        },
+        "featured_collection_MhtWY3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "stamps-ink-pad-1"
+          }
+        },
         "featured_collection_HTbyMh": {
           "type": "featured_collection",
           "settings": {
             "collection": "ink-writing-supply-1"
+          }
+        },
+        "featured_collection_dKk6XJ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "🔖-book-cover-bookmark"
           }
         },
         "featured_collection_tUMxjn": {
@@ -136,30 +160,6 @@
             "collection": "📋-pvc-pencil-board"
           }
         },
-        "featured_collection_mjcXzJ": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "📒-notebook-stickerbook"
-          }
-        },
-        "featured_collection_dKk6XJ": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "🔖-book-cover-bookmark"
-          }
-        },
-        "featured_collection_MhtWY3": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "stamps-ink-pad-1"
-          }
-        },
-        "featured_collection_epVDby": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "writing-paper-post-card-card"
-          }
-        },
         "featured_collection_GV9aG7": {
           "type": "featured_collection",
           "settings": {
@@ -176,15 +176,15 @@
       "block_order": [
         "featured_collection_dydmUL",
         "featured_collection_A4dcFt",
+        "featured_collection_mjcXzJ",
+        "featured_collection_epVDby",
+        "featured_collection_MhtWY3",
         "featured_collection_HTbyMh",
+        "featured_collection_dKk6XJ",
         "featured_collection_tUMxjn",
         "featured_collection_3YCKKT",
         "featured_collection_TX6eCc",
         "featured_collection_4YFk3B",
-        "featured_collection_mjcXzJ",
-        "featured_collection_dKk6XJ",
-        "featured_collection_MhtWY3",
-        "featured_collection_epVDby",
         "featured_collection_GV9aG7",
         "featured_collection_cNDxaU"
       ],
