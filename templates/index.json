@@ -94,6 +94,18 @@
     "collection_list_8YrJmm": {
       "type": "collection-list",
       "blocks": {
+        "featured_collection_dydmUL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "masking-tape"
+          }
+        },
+        "featured_collection_A4dcFt": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "stickers-1"
+          }
+        },
         "featured_collection_HTbyMh": {
           "type": "featured_collection",
           "settings": {
@@ -142,12 +154,6 @@
             "collection": "stamps-ink-pad-1"
           }
         },
-        "featured_collection_dydmUL": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "masking-tape"
-          }
-        },
         "featured_collection_epVDby": {
           "type": "featured_collection",
           "settings": {
@@ -168,6 +174,8 @@
         }
       },
       "block_order": [
+        "featured_collection_dydmUL",
+        "featured_collection_A4dcFt",
         "featured_collection_HTbyMh",
         "featured_collection_tUMxjn",
         "featured_collection_3YCKKT",
@@ -176,7 +184,6 @@
         "featured_collection_mjcXzJ",
         "featured_collection_dKk6XJ",
         "featured_collection_MhtWY3",
-        "featured_collection_dydmUL",
         "featured_collection_epVDby",
         "featured_collection_GV9aG7",
         "featured_collection_cNDxaU"
