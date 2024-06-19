@@ -137,7 +137,7 @@
         "heading_rcNpqF": {
           "type": "heading",
           "settings": {
-            "heading": "Misc",
+            "heading": "Others",
             "heading_size": "h1"
           }
         }
@@ -163,12 +163,6 @@
             "collection": "3d-printer-1"
           }
         },
-        "featured_collection_aqL4J9": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "sewing-thread-1"
-          }
-        },
         "featured_collection_yPaBBb": {
           "type": "featured_collection",
           "settings": {
@@ -178,7 +172,6 @@
       },
       "block_order": [
         "featured_collection_3ChFb6",
-        "featured_collection_aqL4J9",
         "featured_collection_yPaBBb"
       ],
       "settings": {
