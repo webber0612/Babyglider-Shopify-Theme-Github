@@ -140,7 +140,7 @@
         ".button {padding-top: 1.5rem; padding-bottom: 1.5rem; background-color: deepskyblue;}"
       ],
       "settings": {
-        "enable_sticky_info": true,
+        "enable_sticky_info": false,
         "color_scheme": "scheme-1",
         "media_size": "medium",
         "constrain_to_viewport": true,
