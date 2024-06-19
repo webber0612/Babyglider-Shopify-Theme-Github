@@ -142,10 +142,10 @@
             "collection": "✨-accessories"
           }
         },
-        "featured_collection_3YCKKT": {
+        "featured_collection_4YFk3B": {
           "type": "featured_collection",
           "settings": {
-            "collection": "💼-bag-pouch-case"
+            "collection": "📋-pvc-pencil-board"
           }
         },
         "featured_collection_TX6eCc": {
@@ -154,16 +154,16 @@
             "collection": "📄-memo-pad-memo-card"
           }
         },
-        "featured_collection_4YFk3B": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "📋-pvc-pencil-board"
-          }
-        },
         "featured_collection_GV9aG7": {
           "type": "featured_collection",
           "settings": {
             "collection": "other-stationery"
+          }
+        },
+        "featured_collection_3YCKKT": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "💼-bag-pouch-case"
           }
         },
         "featured_collection_cNDxaU": {
@@ -182,10 +182,10 @@
         "featured_collection_HTbyMh",
         "featured_collection_dKk6XJ",
         "featured_collection_tUMxjn",
-        "featured_collection_3YCKKT",
-        "featured_collection_TX6eCc",
         "featured_collection_4YFk3B",
+        "featured_collection_TX6eCc",
         "featured_collection_GV9aG7",
+        "featured_collection_3YCKKT",
         "featured_collection_cNDxaU"
       ],
       "settings": {
