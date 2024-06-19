@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "current": {
     "logo": "shopify:\/\/shop_images\/LOGO_Babygliderph_40cd3438-e332-4e21-ab48-afde9941761d.png",
@@ -198,17 +207,6 @@
           "desktop_nav_selector": "",
           "mobile_nav_selector": "",
           "addons_enabled": false
-        }
-      },
-      "17524978868273665157": {
-        "type": "shopify:\/\/apps\/panda-preorder-split-payments\/blocks\/app-embed\/02e330c8-fd22-48e4-bc7e-37f002d683e5",
-        "disabled": false,
-        "settings": {
-          "widget_title": "Purchase Options",
-          "no_partial_title": "Full Payment",
-          "show_no_partial_pay_title": "yes",
-          "widget_heading_color": "#1d1d1d",
-          "widget_text_color": "#1d1d1d"
         }
       }
     },
