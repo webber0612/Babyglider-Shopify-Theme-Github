@@ -162,7 +162,7 @@
           "type": "heading",
           "settings": {
             "heading": "Product description",
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         }
       },
@@ -172,10 +172,10 @@
       "settings": {
         "desktop_content_position": "left",
         "content_alignment": "left",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 0,
-        "padding_bottom": 8
+        "padding_bottom": 0
       }
     },
     "custom_liquid_Aygp9h": {
@@ -184,7 +184,7 @@
         "custom_liquid": "<div class=\"page-width\">\n{{ product.description }}\n<\/div>",
         "color_scheme": "",
         "padding_top": 16,
-        "padding_bottom": 52
+        "padding_bottom": 0
       }
     },
     "related-products": {
