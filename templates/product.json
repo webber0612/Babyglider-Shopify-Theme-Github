@@ -172,10 +172,10 @@
       "settings": {
         "desktop_content_position": "left",
         "content_alignment": "left",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 8,
+        "padding_bottom": 8
       }
     },
     "custom_liquid_Aygp9h": {
