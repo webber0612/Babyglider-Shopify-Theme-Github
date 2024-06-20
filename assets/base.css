@@ -3584,7 +3584,21 @@ details-disclosure>details {
   }
 }
 
-.gPreorderSellingPlanDescription,
-.gPreorderPoweredBy {
+.gPreorderSellingPlanDescription {
   display: none !important;
+}
+
+.gPreorderPoweredBy {
+  position: relative; /* 使其成为定位上下文 */
+}
+
+.gPreorderPoweredBy::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white; /* 白色背景 */
+  z-index: 1; /* 确保覆盖在原有元素之上 */
 }
