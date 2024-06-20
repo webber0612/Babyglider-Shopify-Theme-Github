@@ -3551,4 +3551,14 @@ details-disclosure>details {
     transform: scale(1.1) !important;
     border-bottom-color: red !important; /* 鼠标悬停时改变底线颜色 */
   }
+
+  /* Pill 样式 (从第5个li开始) */
+  .Meteor-DesktopNavigation li:nth-child(n+4) {
+    list-style-type: none;
+    padding-bottom: 0 !important;
+    margin: 0 10px;
+    background-color: lightpink; /* Pill 背景颜色 */
+    border-radius: 20px; /* 圆角 */
+    padding: 8px 16px; /* 内边距 */
+  }
 }
