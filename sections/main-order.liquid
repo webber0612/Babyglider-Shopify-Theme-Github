@@ -575,9 +575,9 @@
     {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
     {% assign current_collection = null %}
     {% assign current_collection = '' %}
-    {% assign collection = line_item.product.collections[0].title %}
+    {% assign collection = line_item.product[0].collections.title %}
 
-    <p>collection = {{ line_item.product.collections[0].title }}</p>
+    <p>collection = {{ line_item.product[0].collections.title }}</p>
     {% if collection contains '[Pre-Order]' %}
       <p>collection contains '[Pre-Order]' = TRUE</p>
     {% else %}
@@ -1572,4 +1572,4 @@
     }
   ]
 }
-{% endschema %}
+{% endschema
