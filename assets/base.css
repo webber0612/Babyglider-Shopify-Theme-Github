@@ -3566,6 +3566,9 @@ details-disclosure>details {
 .spp2__reminder-container.spp2__reminder-container_top-right {
   right: 22px !important;
   top: 25% !important;
+}
+
+.spp2__reminder-toggler {
   animation: bounce 1s ease infinite; /* 添加跳动动画 */
 }
 
@@ -3580,7 +3583,6 @@ details-disclosure>details {
     transform: translateY(-5px); /* 向下回弹 */
   }
 }
-
 
 
 
