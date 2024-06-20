@@ -189,10 +189,10 @@
         "type": "shopify:\/\/apps\/meteor-mega-menu\/blocks\/app_embed\/9412d6a7-f8f8-4d65-b9ae-2737c2f0f45b",
         "disabled": false,
         "settings": {
-          "navigation_link_caret_style": "outline",
-          "navigation_link_spacing": 16,
-          "menu_vertical_padding": 0,
-          "menu_justify_content": "flex-start",
+          "navigation_link_caret_style": "filled",
+          "navigation_link_spacing": 20,
+          "menu_vertical_padding": 10,
+          "menu_justify_content": "center",
           "menu_font_size": 16,
           "menu_font_weight": "400",
           "menu_text_transform": "none",
@@ -200,13 +200,13 @@
           "menu_vertical_offset": 10,
           "menu_display_action": "hover",
           "menu_display_delay": "0",
-          "menu_display_animation": "none",
+          "menu_display_animation": "fade",
           "disable_desktop": false,
           "mobile_breakpoint": 0,
           "disable_mobile": false,
           "desktop_nav_selector": "",
           "mobile_nav_selector": "",
-          "addons_enabled": false
+          "addons_enabled": true
         }
       }
     },
@@ -462,10 +462,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      "@media screen and (min-width: 750px) {.banner {height: 280px !important; flex-direction: row; }}",
-      "\/* Pill 样式 (从第4个li开始) *\/.Meteor-DesktopNavigation li:nth-child(n + 4) {background-color: pink; \/* Pill 背景颜色 *\/ border-radius: 10px; \/* 圆角 *\/ padding: 0 8px; \/* 内边距 *\/}",
-      ".Meteor-DesktopNavigation li a:hover {background-color: #e0e0e0; \/* 或者你想要的背景颜色 *\/}",
-      ".Meteor-DesktopNavigation li a{width: 100px; text-align:center;}"
+      "@media screen and (min-width: 750px) {.banner {height: 280px !important; flex-direction: row; }}"
     ]
   }
 }
