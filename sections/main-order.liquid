@@ -408,6 +408,7 @@
   {% when 'Order Created' %}
     {% assign order_progress = 100 %}
 {% endcase %}
+
 <div class="customer order section-{{ section.id }}-padding">
   <svg style="display:none">
     <symbol id="icon-discount" viewBox="0 0 12 12">
@@ -569,6 +570,35 @@
       </div>
     </div>
   </div>
+
+  <div class="debug-content w-100 fs-1">
+    {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
+    {% assign current_collection = null %}
+    {% assign current_collection = '' %}
+    {% assign collection = line_item.product.collections[0].title %}
+
+    <p>collection = {{ collection }}</p>
+    {% if collection contains '[Pre-Order]' %}
+      <p>collection contains '[Pre-Order]' = TRUE</p>
+    {% else %}
+      <p>collection contains '[Pre-Order]' = False</p>
+    {% endif %}
+
+    <p>current_collection = {{ current_collection }}</p>
+    {% if collection != current_collection %}
+      <p>collection != current_collection = TRUE</p>
+    {% else %}
+      <p>collection != current_collection = False</p>
+    {% endif %}  
+    
+    <p>current_collection = {{ current_collection }}</p>
+    {% if current_collection != '' %}
+      <p>current_collection != '' = TRUE</p>
+    {% else %}
+      <p>current_collection != '' = False</p>
+    {% endif %}  
+  </div>
+
   <div>
     {% comment %} 摺疊表格 {% endcomment %}
     {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
@@ -1542,4 +1572,4 @@
     }
   ]
 }
-{% endschema %}
+{% endsc                  
