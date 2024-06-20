@@ -165,12 +165,6 @@
         "settings": {
         }
       },
-      "14660309866608708618": {
-        "type": "shopify:\/\/apps\/split-payment\/blocks\/app-embed\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "12645029315662244871": {
         "type": "shopify:\/\/apps\/meteor-mega-menu\/blocks\/app_embed\/9412d6a7-f8f8-4d65-b9ae-2737c2f0f45b",
         "disabled": false,
@@ -207,6 +201,18 @@
           "button_horizontal_position": "bottom_right",
           "button_vertical_position": "lowest",
           "greeting_message": ""
+        }
+      },
+      "14660309866608708618": {
+        "type": "shopify:\/\/apps\/split-payment\/blocks\/app-embed\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
+        "disabled": true,
+        "settings": {
+        }
+      },
+      "5439026248262864547": {
+        "type": "shopify:\/\/apps\/preorder-globo\/blocks\/app-embed\/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
+        "disabled": false,
+        "settings": {
         }
       }
     },
