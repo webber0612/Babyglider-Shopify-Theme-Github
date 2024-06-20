@@ -463,7 +463,9 @@
   "platform_customizations": {
     "custom_css": [
       "@media screen and (min-width: 750px) {.banner {height: 280px !important; flex-direction: row; }}",
-      ".Meteor-DesktopNavigation a:hover {background-color: #f0f0f0; \/* 或者你想要的背景顏色 *\/}"
+      "\/* Pill 样式 (从第4个li开始) *\/.Meteor-DesktopNavigation li:nth-child(n + 4) {background-color: pink; \/* Pill 背景颜色 *\/ border-radius: 10px; \/* 圆角 *\/ padding: 0 8px; \/* 内边距 *\/}",
+      ".Meteor-DesktopNavigation li a:hover {background-color: #e0e0e0; \/* 或者你想要的背景颜色 *\/}",
+      ".Meteor-DesktopNavigation li {width:100px;}"
     ]
   }
 }
