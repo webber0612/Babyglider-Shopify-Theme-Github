@@ -207,9 +207,12 @@
 }
 
 .card--horizontal .card__heading,
-.card--horizontal .price__container .price-item,
 .card--horizontal__quick-add {
   font-size: calc(var(--font-heading-scale) * 1.2rem);
+}
+
+.card--horizontal .price__container .price-item {
+  font-size: calc(var(--font-heading-scale) * 1rem);
 }
 
 .card--horizontal
@@ -225,9 +228,12 @@
 
 @media only screen and (min-width: 750px) {
   .card--horizontal .card__heading,
-  .card--horizontal .price__container .price-item,
   .card--horizontal__quick-add {
     font-size: calc(var(--font-heading-scale) * 1.3rem);
+  }
+
+  .card--horizontal .price__container .price-item {
+    font-size: calc(var(--font-heading-scale) * 1rem);
   }
 }
 
