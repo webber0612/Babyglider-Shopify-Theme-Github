@@ -3533,20 +3533,22 @@ details-disclosure>details {
     --border-offset: 0px;
     /* Prevent the border from growing on buttons when this effect is on. */
   }
-}
-.Meteor-Navigation__Link__desktop {
-  width: 120px !important;
-  font-size: 18px !important;
-  transition: all .3s ease !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  border-bottom: 1px solid #000 !important;
-  padding-bottom: 5px !important;
-}
-.Meteor-Navigation__Link__desktop:hover {
-  color: red !important;
-  background-color: #f0f0f0 !important;
-  transform: scale(1.1) !important;
-  border-bottom-color: red !important; /* 鼠标悬停时改变底线颜色 */
+
+  .Meteor-Navigation__Link__desktop {
+    width: 120px !important;
+    font-size: 18px !important;
+    transition: all 0.3s ease !important;
+    display: flex !important; /* 启用 Flexbox */
+    justify-content: center !important; /* 水平居中 */
+    align-items: center !important; /* 垂直居中 */
+    border-bottom: 1px solid #000 !important; /* 添加底線 */
+    padding-bottom: 5px !important; /* 调整底线与文字的距离 */
+  }
+  
+  .Meteor-Navigation__Link__desktop:hover {
+    color: red !important;
+    background-color: #f0f0f0 !important;
+    transform: scale(1.1) !important;
+    border-bottom-color: red !important; /* 鼠标悬停时改变底线颜色 */
+  }
 }
