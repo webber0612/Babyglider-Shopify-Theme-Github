@@ -3585,8 +3585,5 @@ details-disclosure>details {
 }
 
 .gPreorderSellingPlanDescription {
-  display: none;
+  display: none !important;
 }
-
-/* .spp2__reminder-title::before {
-  content: "Please complete your first payment soon
