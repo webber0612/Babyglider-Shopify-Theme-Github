@@ -3562,4 +3562,12 @@ details-disclosure>details {
     padding: 0 8px; /* 内边距 */
   }
 }
- 
+
+.spp2__reminder-container.spp2__reminder-container_top-right {
+  right: 22px !important;
+  top: 25% !important;
+}
+
+
+
+
