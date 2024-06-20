@@ -584,7 +584,7 @@
     {% assign current_collection = '' %}
     {% assign collection = line_item.product[0].collections.title %}
 
-    <p>collection = {{ sorted_items }}</p>
+    <p>collection = {{ product.collections[0].title }}</p>
     {% if collection contains '[Pre-Order]' %}
       <p>collection contains '[Pre-Order]' = TRUE</p>
     {% else %}
