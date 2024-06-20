@@ -573,6 +573,13 @@
 
   <div class="debug-content w-100 fs-1">
     {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
+    {% for item in sorted_items %}
+      <p>Product: {{ item.product.title }}</p>
+      <p>Collection: {{ item.product.collections[0].title }}</p>
+      <p>Price: {{ item.price | money }}</p>
+      <p>Quantity: {{ item.quantity }}</p>
+    {% endfor %}
+    
     {% assign current_collection = null %}
     {% assign current_collection = '' %}
     {% assign collection = line_item.product[0].collections.title %}
@@ -1572,4 +1579,4 @@
     }
   ]
 }
-{% endschema %}
+{% endsch
