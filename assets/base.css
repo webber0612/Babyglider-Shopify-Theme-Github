@@ -3584,7 +3584,7 @@ details-disclosure>details {
   }
 }
 
-.spp2__reminder-title::after {
+.spp2__reminder-title {
   content: "新的标题文字"; /* 替换为您想要的文字 */
   /* 其他样式，例如字体、颜色等 */
 }
