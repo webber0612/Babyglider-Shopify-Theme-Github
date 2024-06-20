@@ -571,7 +571,7 @@
     </div>
   </div>
 
-  <div class="debug-content w-100 fs-1">
+  {% comment %} <div class="debug-content w-100 fs-1">
     {% assign sorted_items = order.line_items | sort: 'product.collections[0].title' %}
     {% for item in sorted_items %}
       <p>Product: {{ item.product.title }}</p>
@@ -604,7 +604,7 @@
     {% else %}
       <p>current_collection != '' = False</p>
     {% endif %}  
-  </div>
+  </div> {% endcomment %}
 
   <div>
     {% comment %} 摺疊表格 {% endcomment %}
