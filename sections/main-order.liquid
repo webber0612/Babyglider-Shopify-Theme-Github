@@ -846,7 +846,7 @@
           {% unless line_item.product.collections.first.title contains '[Pre-Order]' %}
             {%- if displayed_stock_on_hand == false -%}
               <tr>
-                <td style="background-color: lightgoldenrodyellow;"></td>
+                <td style="background-color: lightgoldenrodyellow;"><p> </p></td>
                 <td
                   class="collection-title p-0 align-middle fs-3 text-start py-3"
                   colspan="5"
@@ -1542,4 +1542,4 @@
     }
   ]
 }
-{% endschema %}
+{% endsc
