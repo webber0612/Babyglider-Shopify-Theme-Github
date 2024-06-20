@@ -3535,7 +3535,7 @@ details-disclosure>details {
   }
 
   .Meteor-Navigation__Link__desktop {
-    width: 120px !important;
+    width: 100px !important;
     font-size: 18px !important;
     transition: all 0.3s ease !important;
     display: flex !important; /* 启用 Flexbox */
