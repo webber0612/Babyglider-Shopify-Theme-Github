@@ -3566,6 +3566,19 @@ details-disclosure>details {
 .spp2__reminder-container.spp2__reminder-container_top-right {
   right: 22px !important;
   top: 25% !important;
+  animation: bounce 1s ease infinite; /* 添加跳动动画 */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); /* 回到原始位置 */
+  }
+  40% {
+    transform: translateY(-10px); /* 向上跳动 */
+  }
+  60% {
+    transform: translateY(-5px); /* 向下回弹 */
+  }
 }
 
 
