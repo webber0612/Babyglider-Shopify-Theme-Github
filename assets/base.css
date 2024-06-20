@@ -3584,7 +3584,9 @@ details-disclosure>details {
   }
 }
 
-/* .spp2__reminder-title::before {
-  content: "Please complete your first payment soon to confirm your order. "; 
-} */
+.gPreorderSellingPlanDescription {
+  display: none;
+}
 
+/* .spp2__reminder-title::before {
+  content: "Please complete your first payment soon
