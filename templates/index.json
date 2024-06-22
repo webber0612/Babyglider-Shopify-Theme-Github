@@ -79,7 +79,6 @@
       "block_order": [
         "button_DqqtN3"
       ],
-      "disabled": true,
       "custom_css": [
         ".button {padding-top: 1rem; padding-bottom: 1rem; border-radius: 10px;}"
       ],
@@ -189,7 +188,6 @@
         "featured_collection_3YCKKT",
         "featured_collection_cNDxaU"
       ],
-      "disabled": true,
       "settings": {
         "title": "Category",
         "heading_size": "h1",
@@ -217,7 +215,6 @@
       "block_order": [
         "heading_rcNpqF"
       ],
-      "disabled": true,
       "settings": {
         "desktop_content_position": "left",
         "content_alignment": "left",
@@ -247,7 +244,6 @@
         "featured_collection_3ChFb6",
         "featured_collection_yPaBBb"
       ],
-      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
@@ -260,16 +256,6 @@
         "padding_top": 16,
         "padding_bottom": 32
       }
-    },
-    "page_K6b6h3": {
-      "type": "page",
-      "settings": {
-        "page": "brands",
-        "heading_size": "h1",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
@@ -279,7 +265,6 @@
     "rich_text_bpFFak",
     "collection_list_8YrJmm",
     "rich_text_jBf9XL",
-    "collection_list_8VwLKB",
-    "page_K6b6h3"
+    "collection_list_8VwLKB"
   ]
 }
