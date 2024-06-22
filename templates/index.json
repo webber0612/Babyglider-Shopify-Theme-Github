@@ -256,34 +256,6 @@
         "padding_top": 16,
         "padding_bottom": 32
       }
-    },
-    "171902134600608eec": {
-      "type": "apps",
-      "blocks": {
-        "split_payment_app_deposit_widget_UAipTD": {
-          "type": "shopify:\/\/apps\/split-payment\/blocks\/app-deposit-widget\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
-          "settings": {
-          }
-        },
-        "split_payment_app_installment_message_JQpVMR": {
-          "type": "shopify:\/\/apps\/split-payment\/blocks\/app-installment-message\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
-          "settings": {
-          }
-        },
-        "split_payment_app_installment_widget_TAUxQh": {
-          "type": "shopify:\/\/apps\/split-payment\/blocks\/app-installment-widget\/35a708d6-4cb9-406a-9fdb-e05a89b032c6",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "split_payment_app_deposit_widget_UAipTD",
-        "split_payment_app_installment_message_JQpVMR",
-        "split_payment_app_installment_widget_TAUxQh"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
@@ -293,7 +265,6 @@
     "rich_text_bpFFak",
     "collection_list_8YrJmm",
     "rich_text_jBf9XL",
-    "collection_list_8VwLKB",
-    "171902134600608eec"
+    "collection_list_8VwLKB"
   ]
 }
