@@ -48,7 +48,7 @@
           >
             {%- if filter_type == 'horizontal' and results.filters != empty -%}
               <h2 class="facets__heading caption-large text-body" id="verticalTitle" tabindex="-1">
-                test{{ 'products.facets.filter_by_label' | t }}
+                {{ 'products.facets.filter_by_label' | t }}
               </h2>
             {%- endif -%}
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
@@ -1192,3 +1192,4 @@
     </facet-filters-form>
   {%- endif -%}
 </div>
+   
