@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   <tr data-hulkapps-lineitem class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                     <td class="cart-item__media">
                       {% if item.image %}
-                          <a href="{{ item.url }}" class="cart-item__link gradient global-media-settings" tabindex="-1" style="padding-top:2rem;padding-bottom: 2rem;">
-                            <div class="cart-item__image-container gradient global-media-settings">
+                          {% comment %} <a href="{{ item.url }}" class="cart-item__link gradient global-media-settings" tabindex="-1" style="padding-top:2rem;padding-bottom: 2rem;"> {% endcomment %}
+                            {% comment %} <div class="cart-item__image-container gradient global-media-settings"> {% endcomment %}
                               <img
                                 src="{{ item.image | image_url: width: 500 }}"
                                 class="cart-item__image"
@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 width="500"
                                 height="{{ 500 | divided_by: item.image.aspect_ratio | ceil }}"
                               >
-                            </div>
-                          </a>            
+                            {% comment %} </div> {% endcomment %}
+                          {% comment %} </a>             {% endcomment %}
                       {% endif %}
                     </td>
 
@@ -576,9 +576,4 @@ document.addEventListener('DOMContentLoaded', function() {
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
-}
-{% endschema %}
+      "labe
