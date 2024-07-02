@@ -238,11 +238,18 @@
           "settings": {
             "collection": "bearing"
           }
+        },
+        "featured_collection_NbD8EW": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "mit-sewing-thread"
+          }
         }
       },
       "block_order": [
         "featured_collection_3ChFb6",
-        "featured_collection_yPaBBb"
+        "featured_collection_yPaBBb",
+        "featured_collection_NbD8EW"
       ],
       "settings": {
         "title": "",
