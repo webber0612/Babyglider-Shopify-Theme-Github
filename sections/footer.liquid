@@ -340,7 +340,7 @@
             <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
             <ul class="list list-payment" role="list">
               {%- comment -%} {% assign enabled_payment_types = 'paypal,gcash,grabpay,shopeepay,qr ph,visa,master,american_express,bdo,bpi,seveneleven,alfamart,cebuana,gopay,palawa' | remove: ' ' | split: ',' %} {%- endcomment -%}
-              {% assign enabled_payment_types = 'paypal,gcash,grabpay,shopeepay,qr ph,visa,master,american_express,bdo,bpi' | remove: ' ' | split: ',' %}
+              {% assign enabled_payment_types = 'paypal,gcash,grabpay,qr ph,visa,master' | remove: ' ' | split: ',' %}
                 {% for type in enabled_payment_types %}
                   <li class="list-payment__item">
                 {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
