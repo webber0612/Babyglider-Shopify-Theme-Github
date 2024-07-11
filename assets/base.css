@@ -3601,3 +3601,8 @@ details-disclosure>details {
   background-color: white; /* 白色背景 */
   z-index: 1; /* 确保覆盖在原有元素之上 */
 }
+
+._1ip0g651 { 
+  display: none; 
+}
+
