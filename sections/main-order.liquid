@@ -428,7 +428,7 @@
     <div class="card-head text-start" style="padding-left:10%;padding-right:10%;">
       <p>
         <!-- 訂單標題，顯示訂單名稱 -->
-        <h1>{{ 'customer.order.title' | t: name: order.name }}</h1>
+        <h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
       </p>
     </div>
     <div class="row d-flex flex-wrap justify-content-between px-3 top">
@@ -445,12 +445,12 @@
           {% case order.financial_status %}
             {% when 'pending', 'partially_paid' %}
               <div class="card-header">
-                <h2 class="m-0">
+                <h3 class="m-0">
                   {{ 'customer.order.payment_status' | t }}:
                   <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">
                     {{- order.financial_status_label -}}
                   </span>
-                </h2>
+                </h3>
               </div>
               <div class="card-body">
                 <p class="payment-link-instructions m-0">
@@ -465,12 +465,12 @@
               </div>
             {% when 'paid' %}
               <div class="card-header">
-                <h2 class="m-0">
+                <h3 class="m-0">
                   {{ 'customer.order.payment_status' | t }}:
                   <span class="badge fs-3 rounded-pill text-white bg-success text-center align-middle">
                     {{- order.financial_status_label -}}
                   </span>
-                </h2>
+                </h3>
               </div>
               <div class="card-body">
                 <p class="payment-link-instructions m-0">
@@ -480,12 +480,12 @@
               </div>
             {% when 'voided' %}
               <div class="card-header">
-                <h2 class="m-0">
+                <h3 class="m-0">
                   {{ 'customer.order.payment_status' | t }}:
                   <span class="badge fs-3 rounded-pill text-white bg-dark text-center align-middle">
                     {{- order.financial_status_label -}}
                   </span>
-                </h2>
+                </h3>
               </div>
               <div class="card-body">
                 <p class="payment-link-instructions m-0">
@@ -500,12 +500,12 @@
         <p> </p>
         <div class="shipping-status-card card align-middle">
           <div class="card-header m-0">
-            <h2 class="m-0">
+            <h3 class="m-0">
               {{ 'customer.order.fulfillment_status' | t }}:
               <span class="badge fs-3 rounded-pill text-white bg-info text-center align-middle">
                 {{- order.fulfillment_status_label -}}
               </span>
-            </h2>
+            </h3>
           </div>
           {% if order.fulfillment_status_label == 'shipping' %}
             <div class="card-body">
@@ -516,15 +516,15 @@
         {% if order.note != null %}
           <p></p>
           <div class="order-notes">
-            <h2>Note from BabygliderPH :</h2>
-            <p style="font-size:18px;">{{ order.note }}</p>
+            {% comment %} <h3>Note from BabygliderPH :</h3> {% endcomment %}
+            <p style="font-size:18px;">Order Note : <br> {{ order.note }}</p>
           </div>
         {% endif %}
       </div>
       <div class="flex-grow-2">
         <div class="shipping-address-card card align-middle">
           <div class="card-header">
-            <h2 class="m-0">{{ 'customer.order.shipping_address' | t }}</h2>
+            <h3 class="m-0">{{ 'customer.order.shipping_address' | t }}</h3>
           </div>
           <div class="card-body">
               {{ order.shipping_address | format_address }}
