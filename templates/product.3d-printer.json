@@ -16,7 +16,7 @@
       ],
       "settings": {
         "custom_liquid": "<div class=\"page-width\">\n  <nav aria-label=\"Breadcrumb\" class=\"breadcrumb\">\n    <a href=\"\/\">BabygliderPH<\/a>\n    {% if product.collections.size > 0 %}\n      <span>&gt;<\/span>\n      <a href=\"{{ product.collections.first.url }}\">{{ product.collections.first.title }}<\/a>\n    {% endif %}\n  <\/nav>\n<\/div>\n\n\n\n<style>\n.breadcrumb {\n  white-space: nowrap; \/* 确保不断行 *\/\n  font-size: 16px; \/* 根据需要调整字体大小 *\/\n}\n\n.breadcrumb a {\n  text-decoration: none; \/* 去除链接下划线 *\/\n  color: #337ab7; \/* 设置链接颜色 *\/\n  margin: 0 5px; \/* 在链接和符号之间添加适当的空间 *\/\n}\n\n.breadcrumb span {\n  margin: 0 5px; \/* 在符号两侧添加空间 *\/\n}\n<\/style>",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "padding_top": 16,
         "padding_bottom": 16
       }
@@ -25,7 +25,7 @@
       "type": "custom-liquid",
       "settings": {
         "custom_liquid": "<div class=\"page-width\">\n{%- liquid\n    assign previous_product = collection.previous_product\n    assign next_product = collection.next_product\n    if previous_product or next_product\n    else\n    \tassign collectionList = product.collections[0].handle\n        assign previous_product = nil\n        assign next_product = nil\n        assign last = collections[collectionList].products_count\n        for p in collections[collectionList].products\n        \tif p.handle == product.handle\n            \tassign prev = forloop.index | minus: 2\n                assign next = forloop.index\n                if prev >= 0\n                  assign previous_product = collections[collectionList].products[prev].handle\n                endif\n                if last >= next\n                  assign next_product = collections[collectionList].products[next].handle\n                endif\n                break\n            endif\n        endfor\n    endif\n-%} \n{%- if previous_product -%}\n            <a class=\"next-prev-icon prev-icon\" href=\"{{ previous_product }}\">\n                Previous Item\n            <\/a>\n        {%- endif -%}\n        {%- if next_product -%}\n            <a class=\"next-prev-icon next-icon\" href=\"{{ next_product }}\">\n                Next Item\n            <\/a>\n        {%- endif -%}\n<\/div>\n\n<style>\n  .next-prev-icon {\n    display: inline-block; \/* 使链接内联显示 *\/\n    margin: 0 10px; \/* 在链接之间添加一些间距 *\/\n    padding: 8px 12px; \/* 增加链接的点击区域 *\/\n    background-color: #f4f4f4; \/* 轻微的背景色 *\/\n    border: 1px solid #ccc; \/* 边框颜色 *\/\n    color: #333; \/* 链接文字颜色 *\/\n    text-decoration: none; \/* 去掉下划线 *\/\n    border-radius: 10px; \/* 轻微的圆角 *\/\n    transition: background-color 0.3s; \/* 平滑过渡效果 *\/\n\twidth: 160px;\n\ttext-align: center;\n  }\n\n  .next-prev-icon:hover {\n    background-color: #e9e9e9; \/* 鼠标悬停时变更背景色 *\/\n  }\n<\/style>",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "padding_top": 16,
         "padding_bottom": 16
       }
@@ -37,7 +37,7 @@
       ],
       "settings": {
         "custom_liquid": "{% assign parts = product.title | split: '_' %}\n\n<div class=\"page-width\">\n  {% if parts[0] == \"[Pre-Order]\" %}\n    <h2>{{ parts[0] }} {{ parts[1] }}<\/h2>\n    <h1>{{ parts[2] }}<\/h1>\n  {% else %}\n    <h2>{{ parts[0] }}<\/h2>\n    <h1>{{ parts[1] }}<\/h1>\n  {% endif %}\n<\/div>",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "padding_top": 0,
         "padding_bottom": 0
       }
