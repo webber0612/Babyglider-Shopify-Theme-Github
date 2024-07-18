@@ -215,6 +215,7 @@
       "block_order": [
         "heading_rcNpqF"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "left",
         "content_alignment": "left",
@@ -251,6 +252,7 @@
         "featured_collection_yPaBBb",
         "featured_collection_NbD8EW"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
