@@ -3606,3 +3606,6 @@ details-disclosure>details {
   display: none; 
 }
 
+.gPreorderSellingPlanWrapper .gPreorderSellingPlanNameWrapper .gPreorderSellingPlanPrice {
+  font-size: 2.5rem !important;
+}
