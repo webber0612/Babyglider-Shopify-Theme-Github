@@ -644,10 +644,10 @@ a.product__text {
   overflow: auto;
 }
 
-.product-media-modal__content > *:not(.active),
+/* .product-media-modal__content > *:not(.active),
 .product__media-list .deferred-media {
   display: none;
-}
+} */
 
 @media (min-width: 768px) { /* 针对平板和桌面设备 */
   .product-media-modal__content img {
@@ -673,22 +673,9 @@ a.product__text {
   }
 }
 
-/* @media screen and (max-width: 749px) {
+@media screen and (max-width: 749px) {
   .product--thumbnail .is-active .product__modal-opener:not(.product__modal-opener--image),
   .product--thumbnail_slider .is-active .product__modal-opener:not(.product__modal-opener--image) {
-    display: none;
-  }
-
-  .product--thumbnail .is-active .deferred-media,
-  .product--thumbnail_slider .is-active .deferred-media {
-    display: block;
-    width: 100%;
-  }
-} */
-
-@media screen and (max-width: 749px) {
-  .product--thumbnail .product__modal-opener:not(.product__modal-opener--image),
-  .product--thumbnail_slider  .product__modal-opener:not(.product__modal-opener--image) {
     display: none;
   }
 
