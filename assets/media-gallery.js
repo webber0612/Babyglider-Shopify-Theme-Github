@@ -34,6 +34,7 @@ if (!customElements.get('media-gallery')) {
           element.classList.remove('is-active');
         });
         activeMedia.classList.add('is-active');
+        activeMedia.style.objectFit = 'cover'; // Add this line
 
         if (prepend) {
           activeMedia.parentElement.prepend(activeMedia);
